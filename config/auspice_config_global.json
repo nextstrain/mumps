@@ -35,7 +35,8 @@
     "region"
   ],
   "defaults": {
-    "mapTriplicate": true
+    "mapTriplicate": true,
+    "colorBy": "country"
   },
   "maintainer": [
     "Louise Moncla",

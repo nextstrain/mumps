@@ -1,15 +1,19 @@
+GEO = ["global","na"]
+
 rule all:
     input:
-        auspice_tree = "auspice/mumps_tree.json",
-        auspice_meta = "auspice/mumps_meta.json"
+        auspice_tree = expand("auspice/mumps_{geo}_tree.json", geo=GEO),
+        auspice_meta = expand("auspice/mumps_{geo}_meta.json", geo=GEO)
+
 
 rule files:
     params:
         input_fasta = "data/mumps.fasta",
-        dropped_strains = "config/dropped_strains.txt",
+        dropped_strains = "config/dropped_strains_{geo}.txt",
+        included_strains = "config/include_strains_{geo}.txt",
         reference = "config/mumps_reference.gb",
         colors = "config/colors.tsv",
-        auspice_config = "config/auspice_config.json"
+        auspice_config = "config/auspice_config_{geo}.json"
 
 files = rules.files.params
 
@@ -21,7 +25,7 @@ rule download:
         fasta_fields = "strain virus accession collection_date region country division location source locus authors url title journal puburl MuV_genotype"
     shell:
         """
-        env PYTHONPATH=../fauna \
+        env PYTHONPATH=../../fauna \
             python2 ../fauna/vdb/download.py \
                 --database vdb \
                 --virus mumps \
@@ -49,6 +53,18 @@ rule parse:
             --fields {params.fasta_fields}
         """
 
+def _get_seqs_per_group_by_wildcards(wildcards):
+    seqs_per_group_dict = {"global":5, "na":100}
+    seqs_per_group = seqs_per_group_dict[wildcards.geo]
+    return(seqs_per_group)
+
+def _get_seqs_to_exclude_by_wildcards(wildcards):
+    if wildcards.geo == "na":
+        seqs_to_exclude = "--exclude-where region=japan_korea region=africa region=europe region=west_asia region=south_asia region=china region=?"
+    else:
+        seqs_to_exclude = ""
+    return(seqs_to_exclude)
+
 rule filter:
     message:
         """
@@ -59,12 +75,17 @@ rule filter:
     input:
         sequences = rules.parse.output.sequences,
         metadata = rules.parse.output.metadata,
-        exclude = files.dropped_strains
+        exclude = files.dropped_strains,
+        include = files.included_strains
     output:
-        sequences = "results/filtered.fasta"
+        sequences = "results/filtered_{geo}.fasta"
     params:
-        group_by = "country year month",
-        sequences_per_group = 5
+        group_by = "country year month MuV_genotype division",
+        sequences_per_group = _get_seqs_per_group_by_wildcards,
+        min_length = 10000,
+        exclude_where = _get_seqs_to_exclude_by_wildcards,
+        min_date = 2008
+
     shell:
         """
         augur filter \
@@ -73,7 +94,11 @@ rule filter:
             --exclude {input.exclude} \
             --output {output.sequences} \
             --group-by {params.group_by} \
-            --sequences-per-group {params.sequences_per_group}
+            --sequences-per-group {params.sequences_per_group} \
+            --min-length {params.min_length} \
+            {params.exclude_where} \
+            --include {input.include} \
+            --min-date {params.min_date}
         """
 
 rule align:
@@ -86,7 +111,7 @@ rule align:
         sequences = rules.filter.output.sequences,
         reference = files.reference
     output:
-        alignment = "results/aligned.fasta"
+        alignment = "results/aligned_{geo}.fasta"
     shell:
         """
         augur align \
@@ -101,13 +126,20 @@ rule tree:
     input:
         alignment = rules.align.output.alignment
     output:
-        tree = "results/tree_raw.nwk"
+        tree = "results/tree-raw_{geo}.nwk"
     shell:
         """
         augur tree \
             --alignment {input.alignment} \
             --output {output.tree}
         """
+
+def _get_clock_filter_by_wildcards(wildcards):
+    if wildcards.geo == "na":
+        clock_filter = "--clock-filter-iqd 4"
+    else:
+        clock_filter = ""
+    return(clock_filter)
 
 rule refine:
     message:
@@ -123,12 +155,12 @@ rule refine:
         alignment = rules.align.output,
         metadata = rules.parse.output.metadata
     output:
-        tree = "results/tree.nwk",
-        node_data = "results/branch_lengths.json"
+        tree = "results/tree_{geo}.nwk",
+        node_data = "results/branch_lengths_{geo}.json"
     params:
         coalescent = "opt",
         date_inference = "marginal",
-        clock_filter_iqd = 4
+        clock_filter_iqd = _get_clock_filter_by_wildcards
     shell:
         """
         augur refine \
@@ -141,7 +173,7 @@ rule refine:
             --coalescent {params.coalescent} \
             --date-confidence \
             --date-inference {params.date_inference} \
-            --clock-filter-iqd {params.clock_filter_iqd}
+            {params.clock_filter_iqd}
         """
 
 rule ancestral:
@@ -150,7 +182,7 @@ rule ancestral:
         tree = rules.refine.output.tree,
         alignment = rules.align.output
     output:
-        node_data = "results/nt_muts.json"
+        node_data = "results/nt_muts_{geo}.json"
     params:
         inference = "joint"
     shell:
@@ -169,7 +201,7 @@ rule translate:
         node_data = rules.ancestral.output.node_data,
         reference = files.reference
     output:
-        node_data = "results/aa_muts.json"
+        node_data = "results/aa_muts_{geo}.json"
     shell:
         """
         augur translate \
@@ -179,15 +211,22 @@ rule translate:
             --output {output.node_data} \
         """
 
+def _get_traits_by_wildcards(wildcards):
+    if wildcards.geo == "na":
+        traits = ["country", "division"]
+    else:
+        traits = ["region","country"]
+    return(traits)
+
 rule traits:
     message: "Inferring ancestral traits for {params.columns!s}"
     input:
         tree = rules.refine.output.tree,
         metadata = rules.parse.output.metadata
     output:
-        node_data = "results/traits.json",
+        node_data = "results/traits_{geo}.json",
     params:
-        columns = "region"
+        columns = _get_traits_by_wildcards
     shell:
         """
         augur traits \
@@ -210,8 +249,8 @@ rule export:
         colors = files.colors,
         auspice_config = files.auspice_config
     output:
-        auspice_tree = rules.all.input.auspice_tree,
-        auspice_meta = rules.all.input.auspice_meta
+        auspice_tree = "auspice/mumps_{geo}_tree.json",
+        auspice_meta = "auspice/mumps_{geo}_meta.json"
     shell:
         """
         augur export \
