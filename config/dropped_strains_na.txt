@@ -33,3 +33,7 @@ Washington.USA/2017277/12.17/3/G
 Urabe
 RW154.USA/0.70s/K
 No_designation_vaccine_related/A
+Dunedin.NZL/32.17/G
+NewPlymouth.NZL/30.17/G
+MountIsa.AUS/10.17/G
+Rockhampton.AUS/41.16/G

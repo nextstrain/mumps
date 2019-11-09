@@ -214,7 +214,7 @@ def _get_traits_by_wildcards(wildcards):
     if wildcards.geo == "na":
         traits = ["country", "division"]
     else:
-        traits = ["region","country"]
+        traits = ["region"]
     return(traits)
 
 rule traits:
@@ -252,7 +252,7 @@ rule export:
         auspice_meta = "auspice/mumps_{geo}_meta.json"
     shell:
         """
-        augur export \
+        augur export v1 \
             --tree {input.tree} \
             --metadata {input.metadata} \
             --node-data {input.branch_lengths} {input.traits} {input.nt_muts} {input.aa_muts} \
@@ -265,7 +265,6 @@ rule export:
 rule clean:
     message: "Removing directories: {params}"
     params:
-        "data "
         "results ",
         "auspice"
     shell:

@@ -43,7 +43,6 @@
   ],
   "filters": [
     "division",
-    "region",
     "authors",
     "MuV_genotype"
   ]
