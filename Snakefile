@@ -2,9 +2,7 @@ GEO = ["global","na"]
 
 rule all:
     input:
-        auspice_tree = expand("auspice/mumps_{geo}_tree.json", geo=GEO),
-        auspice_meta = expand("auspice/mumps_{geo}_meta.json", geo=GEO)
-
+        auspice_json = expand("auspice/mumps_{geo}.json", geo=GEO)
 
 rule files:
     params:
@@ -42,14 +40,16 @@ rule parse:
         sequences = "results/sequences.fasta",
         metadata = "results/metadata.tsv"
     params:
-        fasta_fields = "strain virus accession date region country division city db segment authors url title journal paper_url MuV_genotype"
+        fasta_fields = "strain virus accession date region country division city db segment authors url title journal paper_url MuV_genotype",
+        prettify_fields = "region country division city"
     shell:
         """
         augur parse \
             --sequences {input.sequences} \
             --output-sequences {output.sequences} \
             --output-metadata {output.metadata} \
-            --fields {params.fasta_fields}
+            --fields {params.fasta_fields} \
+            --prettify-fields {params.prettify_fields}
         """
 
 def _get_seqs_per_group_by_wildcards(wildcards):
@@ -248,18 +248,16 @@ rule export:
         colors = files.colors,
         auspice_config = files.auspice_config
     output:
-        auspice_tree = "auspice/mumps_{geo}_tree.json",
-        auspice_meta = "auspice/mumps_{geo}_meta.json"
+        auspice_json = "auspice/mumps_{geo}.json"
     shell:
         """
-        augur export v1 \
+        augur export v2 \
             --tree {input.tree} \
             --metadata {input.metadata} \
             --node-data {input.branch_lengths} {input.traits} {input.nt_muts} {input.aa_muts} \
             --colors {input.colors} \
             --auspice-config {input.auspice_config} \
-            --output-tree {output.auspice_tree} \
-            --output-meta {output.auspice_meta}
+            --output {output.auspice_json}
         """
 
 rule clean:
