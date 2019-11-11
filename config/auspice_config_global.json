@@ -35,10 +35,10 @@
     "color_by": "country"
   },
   "maintainers": [
-    ["Louise Moncla", "http://bedford.io/team/louise-moncla/"]
+    {"name": "Louise Moncla", "url": "http://bedford.io/team/louise-moncla/"}
   ],
   "filters": [
-    "MuV_genotype",    
+    "MuV_genotype",
     "country",
     "region",
     "author"
