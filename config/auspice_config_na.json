@@ -1,5 +1,9 @@
 {
   "title": "Real-time tracking of mumps virus evolution",
+  "maintainers": [
+    {"name": "Louise Moncla", "url": "http://bedford.io/team/louise-moncla/"}
+  ],
+  "build_url": "https://github.com/nextstrain/mumps",
   "colorings": [
     {
       "key": "gt",
@@ -34,9 +38,6 @@
     "map_triplicate": true,
     "color_by": "division"
   },
-  "maintainers": [
-    {"name": "Louise Moncla", "url": "http://bedford.io/team/louise-moncla/"}
-  ],
   "filters": [
     "division",
     "author"
