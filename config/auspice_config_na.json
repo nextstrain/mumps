@@ -1,49 +1,45 @@
 {
   "title": "Real-time tracking of mumps virus evolution",
-  "color_options": {
-    "gt": {
-      "menuItem": "genotype",
-      "legendTitle": "Genotype",
-      "type": "discrete",
-      "key": "genotype"
+  "maintainers": [
+    {"name": "Louise Moncla", "url": "http://bedford.io/team/louise-moncla/"}
+  ],
+  "build_url": "https://github.com/nextstrain/mumps",
+  "colorings": [
+    {
+      "key": "gt",
+      "title": "Genotype",
+      "type": "categorical"
     },
-    "num_date": {
-      "menuItem": "date",
-      "legendTitle": "Sampling date",
-      "type": "continuous",
-      "key": "num_date"
+    {
+      "key": "num_date",
+      "title": "Date",
+      "type": "continuous"
     },
-    "authors": {
-      "key":"authors",
-      "legendTitle":"Authors",
-      "menuItem":"authors",
-      "type":"discrete"
+    {
+      "key": "author",
+      "title": "Author",
+      "type": "categorical"
     },
-    "MuV_genotype": {
-      "key":"MuV_genotype",
-      "legendTitle":"MuV genotype",
-      "menuItem":"MuV genotype",
-      "type":"discrete"
+    {
+      "key": "MuV_genotype",
+      "title": "MuV genotype",
+      "type": "categorical"
     },
-    "country": {
-    },
-    "division": {
+    {
+      "key": "division",
+      "title": "Division",
+      "type": "categorical"
     }
-  },
-  "geo": [
+  ],
+  "geo_resolutions": [
     "division"
   ],
-  "defaults": {
-    "mapTriplicate": true,
-    "colorBy": "division"
+  "display_defaults": {
+    "map_triplicate": true,
+    "color_by": "division"
   },
-  "maintainer": [
-    "Louise Moncla",
-    "http://bedford.io/team/louise-moncla/"
-  ],
   "filters": [
     "division",
-    "authors",
-    "MuV_genotype"
+    "author"
   ]
 }
