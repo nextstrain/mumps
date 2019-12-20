@@ -1,4 +1,4 @@
-GEO = ["global","na"]
+GEO = ["na","global"]
 
 rule all:
     input:
@@ -11,6 +11,7 @@ rule files:
         included_strains = "config/include_strains_{geo}.txt",
         reference = "config/mumps_reference.gb",
         colors = "config/colors.tsv",
+        lat_longs = "config/mumps_lat_longs.tsv",
         auspice_config = "config/auspice_config_{geo}.json",
         description = "config/description.md"
 
@@ -60,10 +61,17 @@ def _get_seqs_per_group_by_wildcards(wildcards):
 
 def _get_seqs_to_exclude_by_wildcards(wildcards):
     if wildcards.geo == "na":
-        seqs_to_exclude = "--exclude-where region=japan_korea region=africa region=europe region=west_asia region=south_asia region=china region=?"
+        seqs_to_exclude = "--exclude-where region!='north america'"
     else:
         seqs_to_exclude = ""
     return(seqs_to_exclude)
+
+def _get_min_date_by_wildcards(wildcards):
+    if wildcards.geo == "na":
+        min_date = "2006"
+    else:
+        min_date = "1950"
+    return(min_date)
 
 rule filter:
     message:
@@ -84,7 +92,7 @@ rule filter:
         sequences_per_group = _get_seqs_per_group_by_wildcards,
         min_length = 10000,
         exclude_where = _get_seqs_to_exclude_by_wildcards,
-        min_date = 2008
+        min_date = _get_min_date_by_wildcards
 
     shell:
         """
@@ -247,6 +255,7 @@ rule export:
         nt_muts = rules.ancestral.output.node_data,
         aa_muts = rules.translate.output.node_data,
         colors = files.colors,
+        lat_longs = files.lat_longs,
         auspice_config = files.auspice_config,
         description = files.description
     output:
@@ -258,6 +267,7 @@ rule export:
             --metadata {input.metadata} \
             --node-data {input.branch_lengths} {input.traits} {input.nt_muts} {input.aa_muts} \
             --colors {input.colors} \
+            --lat-longs {input.lat_longs} \
             --auspice-config {input.auspice_config} \
             --description {input.description} \
             --output {output.auspice_json}
