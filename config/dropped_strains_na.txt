@@ -43,7 +43,7 @@ Osmanabad.IND/10.12/17/C
 31170263
 31170187
 California.USA/50.07/1  # divergent
-Wisconsin.USA/06VI026426/16.06/2/A 
+Wisconsin.USA/15.06/4/A
 Washington.USA/2017277/12.17/3/G
 Washington.USA/2017401/28.17/G
 Washington.USA/2017392/14.17/2/G  # divergent from 2016/2017 outbreak

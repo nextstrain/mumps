@@ -2,7 +2,9 @@ GEO = ["na","global"]
 
 rule all:
     input:
-        auspice_json = expand("auspice/mumps_{geo}.json", geo=GEO)
+        auspice_json = expand("auspice/mumps_{geo}.json", geo=GEO),
+        auspice_tree = expand("auspice/mumps_{geo}_tree.json", geo=GEO),
+        auspice_meta = expand("auspice/mumps_{geo}_meta.json", geo=GEO)
 
 rule files:
     params:
@@ -13,6 +15,7 @@ rule files:
         colors = "config/colors.tsv",
         lat_longs = "config/mumps_lat_longs.tsv",
         auspice_config = "config/auspice_config_{geo}.json",
+        auspice_config_v1 = "config/auspice_config_v1_{geo}.json",
         description = "config/description.md"
 
 files = rules.files.params
@@ -61,7 +64,7 @@ def _get_seqs_per_group_by_wildcards(wildcards):
 
 def _get_seqs_to_exclude_by_wildcards(wildcards):
     if wildcards.geo == "na":
-        seqs_to_exclude = "--exclude-where region!='north america'"
+        seqs_to_exclude = "--exclude-where region!='north america' MuV_genotype!='G'"
     else:
         seqs_to_exclude = ""
     return(seqs_to_exclude)
@@ -90,7 +93,7 @@ rule filter:
     params:
         group_by = "country year month MuV_genotype division",
         sequences_per_group = _get_seqs_per_group_by_wildcards,
-        min_length = 10000,
+        min_length = 8000,
         exclude_where = _get_seqs_to_exclude_by_wildcards,
         min_date = _get_min_date_by_wildcards
 
@@ -271,6 +274,34 @@ rule export:
             --auspice-config {input.auspice_config} \
             --description {input.description} \
             --output {output.auspice_json}
+        """
+
+rule export_v1:
+    message: "Exporting data files for for auspice"
+    input:
+        tree = rules.refine.output.tree,
+        metadata = rules.parse.output.metadata,
+        branch_lengths = rules.refine.output.node_data,
+        traits = rules.traits.output.node_data,
+        nt_muts = rules.ancestral.output.node_data,
+        aa_muts = rules.translate.output.node_data,
+        colors = files.colors,
+        lat_longs = files.lat_longs,
+        auspice_config = files.auspice_config_v1
+    output:
+        auspice_tree = "auspice/mumps_{geo}_tree.json",
+        auspice_meta = "auspice/mumps_{geo}_meta.json"
+    shell:
+        """
+        augur export v1 \
+            --tree {input.tree} \
+            --metadata {input.metadata} \
+            --node-data {input.branch_lengths} {input.traits} {input.nt_muts} {input.aa_muts} \
+            --colors {input.colors} \
+            --lat-longs {input.lat_longs} \
+            --auspice-config {input.auspice_config} \
+            --output-tree {output.auspice_tree} \
+            --output-meta {output.auspice_meta}
         """
 
 rule clean:
