@@ -10,4 +10,3 @@ Washington.USA/2017379/5.17/11/G
 Washington.USA/2017386/11.17/4/G 
 Washington.USA/2017391/14.17/G
 California.USA/50.07/1 
-Washington.USA/2017394/18.17/G
