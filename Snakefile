@@ -273,6 +273,7 @@ rule export:
             --lat-longs {input.lat_longs} \
             --auspice-config {input.auspice_config} \
             --description {input.description} \
+            --include-root-sequence \
             --output {output.auspice_json}
         """
 
