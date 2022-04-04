@@ -1,5 +1,7 @@
 # nextstrain.org/mumps
 
+[![Build Status](https://github.com/nextstrain/mumps/actions/workflows/ci.yaml/badge.svg?branch=master)](https://github.com/nextstrain/mumps/actions/workflows/ci.yaml)
+
 This is the [Nextstrain](https://nextstrain.org) build for mumps virus, visible at
 [nextstrain.org/mumps](https://nextstrain.org/mumps).
 
