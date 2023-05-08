@@ -84,8 +84,8 @@ rule filter:
           - excluding strains in {input.exclude}
         """
     input:
-        sequences = rules.parse.output.sequences,
-        metadata = rules.parse.output.metadata,
+        sequences = "results/sequences.fasta",
+        metadata = "results/metadata.tsv",
         exclude = files.dropped_strains,
         include = files.included_strains
     output:
@@ -119,7 +119,7 @@ rule align:
           - filling gaps with N
         """
     input:
-        sequences = rules.filter.output.sequences,
+        sequences = "results/filtered_{geo}.fasta",
         reference = files.reference
     output:
         alignment = "results/aligned_{geo}.fasta"
@@ -135,7 +135,7 @@ rule align:
 rule tree:
     message: "Building tree"
     input:
-        alignment = rules.align.output.alignment
+        alignment = "results/aligned_{geo}.fasta"
     output:
         tree = "results/tree-raw_{geo}.nwk"
     shell:
@@ -162,9 +162,9 @@ rule refine:
           - filter tips more than {params.clock_filter_iqd} IQDs from clock expectation
         """
     input:
-        tree = rules.tree.output.tree,
-        alignment = rules.align.output,
-        metadata = rules.parse.output.metadata
+        tree = "results/tree-raw_{geo}.nwk",
+        alignment = "results/aligned_{geo}.fasta",
+        metadata = "results/metadata.tsv",
     output:
         tree = "results/tree_{geo}.nwk",
         node_data = "results/branch_lengths_{geo}.json"
@@ -190,8 +190,8 @@ rule refine:
 rule ancestral:
     message: "Reconstructing ancestral sequences and mutations"
     input:
-        tree = rules.refine.output.tree,
-        alignment = rules.align.output
+        tree = "results/tree_{geo}.nwk",
+        alignment = "results/aligned_{geo}.fasta",
     output:
         node_data = "results/nt_muts_{geo}.json"
     params:
@@ -208,8 +208,8 @@ rule ancestral:
 rule translate:
     message: "Translating amino acid sequences"
     input:
-        tree = rules.refine.output.tree,
-        node_data = rules.ancestral.output.node_data,
+        tree = "results/tree_{geo}.nwk",
+        node_data = "results/nt_muts_{geo}.json",
         reference = files.reference
     output:
         node_data = "results/aa_muts_{geo}.json"
@@ -232,8 +232,8 @@ def _get_traits_by_wildcards(wildcards):
 rule traits:
     message: "Inferring ancestral traits for {params.columns!s}"
     input:
-        tree = rules.refine.output.tree,
-        metadata = rules.parse.output.metadata
+        tree = "results/tree_{geo}.nwk",
+        metadata = "results/metadata.tsv",
     output:
         node_data = "results/traits_{geo}.json",
     params:
@@ -251,12 +251,12 @@ rule traits:
 rule export:
     message: "Exporting data files for for auspice"
     input:
-        tree = rules.refine.output.tree,
-        metadata = rules.parse.output.metadata,
-        branch_lengths = rules.refine.output.node_data,
-        traits = rules.traits.output.node_data,
-        nt_muts = rules.ancestral.output.node_data,
-        aa_muts = rules.translate.output.node_data,
+        tree = "results/tree_{geo}.nwk",
+        metadata = "results/metadata.tsv",
+        branch_lengths = "results/branch_lengths_{geo}.json",
+        traits = "results/traits_{geo}.json",
+        nt_muts = "results/nt_muts_{geo}.json",
+        aa_muts = "results/aa_muts_{geo}.json",
         colors = files.colors,
         lat_longs = files.lat_longs,
         auspice_config = files.auspice_config,
@@ -280,12 +280,12 @@ rule export:
 rule export_v1:
     message: "Exporting data files for for auspice"
     input:
-        tree = rules.refine.output.tree,
-        metadata = rules.parse.output.metadata,
-        branch_lengths = rules.refine.output.node_data,
-        traits = rules.traits.output.node_data,
-        nt_muts = rules.ancestral.output.node_data,
-        aa_muts = rules.translate.output.node_data,
+        tree = "results/tree_{geo}.nwk",
+        metadata = "results/metadata.tsv",
+        branch_lengths = "results/branch_lengths_{geo}.json",
+        traits = "results/traits_{geo}.json",
+        nt_muts = "results/nt_muts_{geo}.json",
+        aa_muts = "results/aa_muts_{geo}.json",
         colors = files.colors,
         lat_longs = files.lat_longs,
         auspice_config = files.auspice_config_v1
