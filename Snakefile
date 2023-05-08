@@ -21,7 +21,7 @@ rule files:
 files = rules.files.params
 
 rule download:
-    message: "Downloading sequences from fauna"
+    """Downloading sequences from fauna"""
     output:
         sequences = "data/mumps.fasta"
     params:
@@ -38,7 +38,7 @@ rule download:
         """
 
 rule parse:
-    message: "Parsing fasta into sequences and metadata"
+    """Parsing fasta into sequences and metadata"""
     input:
         sequences = files.input_fasta
     output:
@@ -77,12 +77,11 @@ def _get_min_date_by_wildcards(wildcards):
     return(min_date)
 
 rule filter:
-    message:
-        """
-        Filtering to
-          - {params.sequences_per_group} sequence(s) per {params.group_by!s}
-          - excluding strains in {input.exclude}
-        """
+    """
+    Filtering to
+      - {params.sequences_per_group} sequence(s) per {params.group_by!s}
+      - excluding strains in {input.exclude}
+    """
     input:
         sequences = "results/sequences.fasta",
         metadata = "results/metadata.tsv",
@@ -113,11 +112,10 @@ rule filter:
         """
 
 rule align:
-    message:
-        """
-        Aligning sequences to {input.reference}
-          - filling gaps with N
-        """
+    """
+    Aligning sequences to {input.reference}
+      - filling gaps with N
+    """
     input:
         sequences = "results/filtered_{geo}.fasta",
         reference = files.reference
@@ -133,7 +131,7 @@ rule align:
         """
 
 rule tree:
-    message: "Building tree"
+    """Building tree"""
     input:
         alignment = "results/aligned_{geo}.fasta"
     output:
@@ -153,14 +151,13 @@ def _get_clock_filter_by_wildcards(wildcards):
     return(clock_filter)
 
 rule refine:
-    message:
-        """
-        Refining tree
-          - estimate timetree
-          - use {params.coalescent} coalescent timescale
-          - estimate {params.date_inference} node dates
-          - filter tips more than {params.clock_filter_iqd} IQDs from clock expectation
-        """
+    """
+    Refining tree
+      - estimate timetree
+      - use {params.coalescent} coalescent timescale
+      - estimate {params.date_inference} node dates
+      - filter tips more than {params.clock_filter_iqd} IQDs from clock expectation
+    """
     input:
         tree = "results/tree-raw_{geo}.nwk",
         alignment = "results/aligned_{geo}.fasta",
@@ -188,7 +185,7 @@ rule refine:
         """
 
 rule ancestral:
-    message: "Reconstructing ancestral sequences and mutations"
+    """Reconstructing ancestral sequences and mutations"""
     input:
         tree = "results/tree_{geo}.nwk",
         alignment = "results/aligned_{geo}.fasta",
@@ -206,7 +203,7 @@ rule ancestral:
         """
 
 rule translate:
-    message: "Translating amino acid sequences"
+    """Translating amino acid sequences"""
     input:
         tree = "results/tree_{geo}.nwk",
         node_data = "results/nt_muts_{geo}.json",
@@ -230,7 +227,7 @@ def _get_traits_by_wildcards(wildcards):
     return(traits)
 
 rule traits:
-    message: "Inferring ancestral traits for {params.columns!s}"
+    """Inferring ancestral traits for {params.columns!s}"""
     input:
         tree = "results/tree_{geo}.nwk",
         metadata = "results/metadata.tsv",
@@ -249,7 +246,7 @@ rule traits:
         """
 
 rule export:
-    message: "Exporting data files for for auspice"
+    """Exporting data files for for auspice"""
     input:
         tree = "results/tree_{geo}.nwk",
         metadata = "results/metadata.tsv",
@@ -278,7 +275,7 @@ rule export:
         """
 
 rule export_v1:
-    message: "Exporting data files for for auspice"
+    """Exporting data files for for auspice"""
     input:
         tree = "results/tree_{geo}.nwk",
         metadata = "results/metadata.tsv",
@@ -306,7 +303,7 @@ rule export_v1:
         """
 
 rule clean:
-    message: "Removing directories: {params}"
+    """Removing directories: {params}"""
     params:
         "results ",
         "auspice"
