@@ -9,20 +9,21 @@ region	europe	#E39B39
 region	south america	#E56C2F
 region	north america	#DC2F24
 
-country	china	#511EA8
-country	mongolia	#403DC5
-country	usa	#4063CF
-country	australia	#4785C7
-country	russia	#559EB1
-country	japan	#67AF94
-country	south korea	#7EB877
-country	new zealand	#98BD5E
-country	croatia	#B4BD4C
-country	gabon	#CDB642
-country	germany	#DFA53B
-country	canada	#E68735
-country	india	#E35D2D
-country	united kingdom	#DC2F24
+country	india	#511EA8
+country	china	#403AC4
+country	mongolia	#3F5ED0
+country	russia	#457FCB
+country	japan	#5098B9
+country	south korea	#60AA9F
+country	australia	#73B583
+country	new zealand	#8BBB6A
+country	gabon	#A4BE56
+country	croatia	#BDBB48
+country	germany	#D3B240
+country	netherlands	#E19F3A
+country	united kingdom	#E68234
+country	usa	#E25A2C
+country	canada	#DC2F24
 
 division	wisconsin	#290F54
 division	north carolina	#3D167E	
