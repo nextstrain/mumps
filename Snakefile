@@ -3,8 +3,6 @@ GEO = ["na","global"]
 rule all:
     input:
         auspice_json = expand("auspice/mumps_{geo}.json", geo=GEO),
-        auspice_tree = expand("auspice/mumps_{geo}_tree.json", geo=GEO),
-        auspice_meta = expand("auspice/mumps_{geo}_meta.json", geo=GEO)
 
 rule files:
     params:
@@ -272,34 +270,6 @@ rule export:
             --description {input.description} \
             --include-root-sequence \
             --output {output.auspice_json}
-        """
-
-rule export_v1:
-    """Exporting data files for for auspice"""
-    input:
-        tree = "results/tree_{geo}.nwk",
-        metadata = "results/metadata.tsv",
-        branch_lengths = "results/branch_lengths_{geo}.json",
-        traits = "results/traits_{geo}.json",
-        nt_muts = "results/nt_muts_{geo}.json",
-        aa_muts = "results/aa_muts_{geo}.json",
-        colors = files.colors,
-        lat_longs = files.lat_longs,
-        auspice_config = files.auspice_config_v1
-    output:
-        auspice_tree = "auspice/mumps_{geo}_tree.json",
-        auspice_meta = "auspice/mumps_{geo}_meta.json"
-    shell:
-        """
-        augur export v1 \
-            --tree {input.tree} \
-            --metadata {input.metadata} \
-            --node-data {input.branch_lengths} {input.traits} {input.nt_muts} {input.aa_muts} \
-            --colors {input.colors} \
-            --lat-longs {input.lat_longs} \
-            --auspice-config {input.auspice_config} \
-            --output-tree {output.auspice_tree} \
-            --output-meta {output.auspice_meta}
         """
 
 rule clean:
