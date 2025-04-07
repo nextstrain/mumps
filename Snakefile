@@ -18,67 +18,6 @@ rule files:
 
 files = rules.files.params
 
-rule ancestral:
-    """Reconstructing ancestral sequences and mutations"""
-    input:
-        tree = "results/tree_{geo}.nwk",
-        alignment = "results/aligned_{geo}.fasta",
-    output:
-        node_data = "results/nt_muts_{geo}.json"
-    params:
-        inference = "joint"
-    shell:
-        """
-        augur ancestral \
-            --tree {input.tree} \
-            --alignment {input.alignment} \
-            --output-node-data {output.node_data} \
-            --inference {params.inference}
-        """
-
-rule translate:
-    """Translating amino acid sequences"""
-    input:
-        tree = "results/tree_{geo}.nwk",
-        node_data = "results/nt_muts_{geo}.json",
-        reference = files.reference
-    output:
-        node_data = "results/aa_muts_{geo}.json"
-    shell:
-        """
-        augur translate \
-            --tree {input.tree} \
-            --ancestral-sequences {input.node_data} \
-            --reference-sequence {input.reference} \
-            --output-node-data {output.node_data} \
-        """
-
-def _get_traits_by_wildcards(wildcards):
-    if wildcards.geo == "na":
-        traits = ["country", "division"]
-    else:
-        traits = ["region"]
-    return(traits)
-
-rule traits:
-    """Inferring ancestral traits for {params.columns!s}"""
-    input:
-        tree = "results/tree_{geo}.nwk",
-        metadata = "results/metadata.tsv",
-    output:
-        node_data = "results/traits_{geo}.json",
-    params:
-        columns = _get_traits_by_wildcards
-    shell:
-        """
-        augur traits \
-            --tree {input.tree} \
-            --metadata {input.metadata} \
-            --output-node-data {output.node_data} \
-            --columns {params.columns} \
-            --confidence
-        """
-
 rule export:
     """Exporting data files for for auspice"""
     input:

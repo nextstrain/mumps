@@ -16,3 +16,11 @@ filter:
 refine:
   na: "--clock-filter-iqd 4"
   global: ""
+
+ancestral:
+  inference: "joint"
+
+traits:
+  na: country division
+  global: region
+  sampling_bias_correction: 3
