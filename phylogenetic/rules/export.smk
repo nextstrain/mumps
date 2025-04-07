@@ -24,3 +24,39 @@ This part of the workflow usually includes the following steps:
 
 See Augur's usage docs for these commands for more details.
 """
+
+rule export:
+    """Exporting data files for for auspice"""
+    input:
+        tree = "results/{build}/tree.nwk",
+        metadata = "data/metadata.tsv",
+        branch_lengths = "results/{build}/branch_lengths.json",
+        traits = "results/{build}/traits.json",
+        nt_muts = "results/{build}/nt_muts.json",
+        aa_muts = "results/{build}/aa_muts.json",
+        colors = config['export']['colors'],
+        lat_longs = config['export']['lat_longs'],
+        auspice_config = config['export']['auspice_config'],
+        description = config['export']['description'],
+    output:
+        auspice_json = "auspice/mumps_{build}.json",
+    log:
+        "logs/{build}/export.txt",
+    benchmark:
+        "benchmarks/{build}/export.txt",
+    params:
+        strain_id = config.get("strain_id_field", "strain"),
+    shell:
+        r"""
+        augur export v2 \
+            --tree {input.tree:q} \
+            --metadata {input.metadata:q} \
+            --metadata-id-columns {params.strain_id:q} \
+            --node-data {input.branch_lengths:q} {input.traits:q} {input.nt_muts:q} {input.aa_muts:q} \
+            --colors {input.colors:q} \
+            --lat-longs {input.lat_longs:q} \
+            --auspice-config {input.auspice_config:q} \
+            --description {input.description:q} \
+            --include-root-sequence \
+            --output {output.auspice_json:q} | tee {log:q}
+        """
