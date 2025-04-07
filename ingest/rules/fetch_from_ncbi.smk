@@ -124,3 +124,44 @@ rule format_ncbi_datasets_ndjson:
             --duplicate-reporting warn \
             2> {log} > {output.ndjson}
         """
+
+
+###########################################################################
+########################## 2. Fetch from Entrez ###########################
+###########################################################################
+
+
+rule fetch_from_ncbi_entrez:
+    params:
+        term=config["entrez_search_term"],
+    output:
+        genbank="data/genbank.gb",
+    # Allow retries in case of network errors
+    retries: 5
+    benchmark:
+        "benchmarks/fetch_from_ncbi_entrez.txt"
+    shell:
+        """
+        vendored/fetch-from-ncbi-entrez \
+            --term {params.term:q} \
+            --output {output.genbank}
+        """
+
+
+rule parse_genbank_to_ndjson:
+    input:
+        genbank="data/genbank.gb",
+    output:
+        strain_names="data/strain_names.tsv",
+    benchmark:
+        "benchmarks/parse_genbank_to_ndjson.txt"
+    params:
+        annotation="strain"
+    shell:
+        """
+        ./scripts/parse-genbank_annotations.py \
+          --annotation {params.annotation} \
+          --silent-no-match \
+          {input.genbank} \
+        > {output.strain_names}
+        """
