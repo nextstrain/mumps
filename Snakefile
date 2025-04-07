@@ -18,43 +18,6 @@ rule files:
 
 files = rules.files.params
 
-rule download:
-    """Downloading sequences from fauna"""
-    output:
-        sequences = "data/mumps.fasta"
-    params:
-        fasta_fields = "strain virus accession collection_date region country division location source locus authors url title journal puburl MuV_genotype"
-    shell:
-        """
-        python3 ../fauna/vdb/download.py \
-            --database vdb \
-            --virus mumps \
-            --fasta_fields {params.fasta_fields} \
-            --resolve_method choose_genbank \
-            --path $(dirname {output.sequences}) \
-            --fstem $(basename {output.sequences} .fasta)
-        """
-
-rule parse:
-    """Parsing fasta into sequences and metadata"""
-    input:
-        sequences = files.input_fasta
-    output:
-        sequences = "results/sequences.fasta",
-        metadata = "results/metadata.tsv"
-    params:
-        fasta_fields = "strain virus accession date region country division city db segment authors url title journal paper_url MuV_genotype",
-        prettify_fields = "region country division city"
-    shell:
-        """
-        augur parse \
-            --sequences {input.sequences} \
-            --output-sequences {output.sequences} \
-            --output-metadata {output.metadata} \
-            --fields {params.fasta_fields} \
-            --prettify-fields {params.prettify_fields}
-        """
-
 def _get_seqs_per_group_by_wildcards(wildcards):
     seqs_per_group_dict = {"global":5, "na":100}
     seqs_per_group = seqs_per_group_dict[wildcards.geo]
