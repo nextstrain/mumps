@@ -18,60 +18,6 @@ rule files:
 
 files = rules.files.params
 
-rule tree:
-    """Building tree"""
-    input:
-        alignment = "results/aligned_{geo}.fasta"
-    output:
-        tree = "results/tree-raw_{geo}.nwk"
-    shell:
-        """
-        augur tree \
-            --alignment {input.alignment} \
-            --output {output.tree}
-        """
-
-def _get_clock_filter_by_wildcards(wildcards):
-    if wildcards.geo == "na":
-        clock_filter = "--clock-filter-iqd 4"
-    else:
-        clock_filter = ""
-    return(clock_filter)
-
-rule refine:
-    """
-    Refining tree
-      - estimate timetree
-      - use {params.coalescent} coalescent timescale
-      - estimate {params.date_inference} node dates
-      - filter tips more than {params.clock_filter_iqd} IQDs from clock expectation
-    """
-    input:
-        tree = "results/tree-raw_{geo}.nwk",
-        alignment = "results/aligned_{geo}.fasta",
-        metadata = "results/metadata.tsv",
-    output:
-        tree = "results/tree_{geo}.nwk",
-        node_data = "results/branch_lengths_{geo}.json"
-    params:
-        coalescent = "opt",
-        date_inference = "marginal",
-        clock_filter_iqd = _get_clock_filter_by_wildcards
-    shell:
-        """
-        augur refine \
-            --tree {input.tree} \
-            --alignment {input.alignment} \
-            --metadata {input.metadata} \
-            --output-tree {output.tree} \
-            --output-node-data {output.node_data} \
-            --timetree \
-            --coalescent {params.coalescent} \
-            --date-confidence \
-            --date-inference {params.date_inference} \
-            {params.clock_filter_iqd}
-        """
-
 rule ancestral:
     """Reconstructing ancestral sequences and mutations"""
     input:

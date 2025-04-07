@@ -12,3 +12,7 @@ filter:
   specific:
     na: --sequences-per-group 100 --min-date 2006 --exclude-where region!='North America' MuV_genotype!='Mumps virus genotype G'
     global: --sequences-per-group 5 --min-date 1950
+
+refine:
+  na: "--clock-filter-iqd 4"
+  global: ""
