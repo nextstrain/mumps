@@ -18,25 +18,6 @@ rule files:
 
 files = rules.files.params
 
-rule align:
-    """
-    Aligning sequences to {input.reference}
-      - filling gaps with N
-    """
-    input:
-        sequences = "results/filtered_{geo}.fasta",
-        reference = files.reference
-    output:
-        alignment = "results/aligned_{geo}.fasta"
-    shell:
-        """
-        augur align \
-            --sequences {input.sequences} \
-            --reference-sequence {input.reference} \
-            --output {output.alignment} \
-            --fill-gaps
-        """
-
 rule tree:
     """Building tree"""
     input:

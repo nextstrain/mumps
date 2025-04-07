@@ -4,6 +4,7 @@ sequences_url: "https://data.nextstrain.org/files/workflows/mumps/sequences.fast
 metadata_url: "https://data.nextstrain.org/files/workflows/mumps/metadata.tsv.zst"
 
 strain_id_field: "accession"
+reference: "defaults/reference.gb"
 
 filter:
   min_length: 8000
