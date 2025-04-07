@@ -18,60 +18,6 @@ rule files:
 
 files = rules.files.params
 
-def _get_seqs_per_group_by_wildcards(wildcards):
-    seqs_per_group_dict = {"global":5, "na":100}
-    seqs_per_group = seqs_per_group_dict[wildcards.geo]
-    return(seqs_per_group)
-
-def _get_seqs_to_exclude_by_wildcards(wildcards):
-    if wildcards.geo == "na":
-        seqs_to_exclude = "--exclude-where region!='north america' MuV_genotype!='G'"
-    else:
-        seqs_to_exclude = ""
-    return(seqs_to_exclude)
-
-def _get_min_date_by_wildcards(wildcards):
-    if wildcards.geo == "na":
-        min_date = "2006"
-    else:
-        min_date = "1950"
-    return(min_date)
-
-rule filter:
-    """
-    Filtering to
-      - {params.sequences_per_group} sequence(s) per {params.group_by!s}
-      - excluding strains in {input.exclude}
-    """
-    input:
-        sequences = "results/sequences.fasta",
-        metadata = "results/metadata.tsv",
-        exclude = files.dropped_strains,
-        include = files.included_strains
-    output:
-        sequences = "results/filtered_{geo}.fasta"
-    params:
-        group_by = "country year month MuV_genotype division",
-        sequences_per_group = _get_seqs_per_group_by_wildcards,
-        min_length = 8000,
-        exclude_where = _get_seqs_to_exclude_by_wildcards,
-        min_date = _get_min_date_by_wildcards
-
-    shell:
-        """
-        augur filter \
-            --sequences {input.sequences} \
-            --metadata {input.metadata} \
-            --exclude {input.exclude} \
-            --output {output.sequences} \
-            --group-by {params.group_by} \
-            --sequences-per-group {params.sequences_per_group} \
-            --min-length {params.min_length} \
-            {params.exclude_where} \
-            --include {input.include} \
-            --min-date {params.min_date}
-        """
-
 rule align:
     """
     Aligning sequences to {input.reference}

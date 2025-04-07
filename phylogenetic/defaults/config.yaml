@@ -4,3 +4,10 @@ sequences_url: "https://data.nextstrain.org/files/workflows/mumps/sequences.fast
 metadata_url: "https://data.nextstrain.org/files/workflows/mumps/metadata.tsv.zst"
 
 strain_id_field: "accession"
+
+filter:
+  min_length: 8000
+  group_by: country year month MuV_genotype division
+  specific:
+    na: --sequences-per-group 100 --min-date 2006 --exclude-where region!='North America' MuV_genotype!='Mumps virus genotype G'
+    global: --sequences-per-group 5 --min-date 1950

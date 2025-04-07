@@ -49,3 +49,42 @@ rule decompress:
         zstd -d -c {input.sequences} > {output.sequences}
         zstd -d -c {input.metadata} > {output.metadata}
         """
+
+rule filter:
+    """
+    Filtering to
+      - various criteria based on the auspice JSON target
+      - from {params.min_date} onwards
+      - excluding strains in {input.exclude}
+      - including strains in {input.include}
+      - minimum genome length of {params.min_length} (50% of Zika virus genome)
+    """
+    input:
+        sequences = "data/sequences.fasta",
+        metadata = "data/metadata.tsv",
+        exclude = "defaults/{build}/exclude.txt",
+        include = "defaults/{build}/include.txt"
+    output:
+        sequences = "results/{build}/filtered.fasta"
+    log:
+        "logs/{build}/filtered.txt",
+    benchmark:
+        "benchmarks/{build}/filtered.txt",
+    params:
+        min_length = config['filter']['min_length'],
+        group_by = config['filter']['group_by'],
+        filter_params = lambda wildcard: config['filter']['specific'][wildcard.build],
+        strain_id = config.get("strain_id_field", "strain"),
+    shell:
+        r"""
+        augur filter \
+            --sequences {input.sequences:q} \
+            --metadata {input.metadata:q} \
+            --metadata-id-columns {params.strain_id:q} \
+            --exclude {input.exclude:q} \
+            --include {input.include:q} \
+            --output {output.sequences:q} \
+            --min-length {params.min_length:q} \
+            --group-by {params.group_by} \
+            {params.filter_params} 2>&1 | tee {log:q}
+        """
