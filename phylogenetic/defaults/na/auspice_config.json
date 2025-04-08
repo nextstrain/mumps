@@ -41,5 +41,9 @@
   "filters": [
     "division",
     "author"
+  ],
+  "metadata_columns": [
+    "strain",
+    "host"
   ]
 }

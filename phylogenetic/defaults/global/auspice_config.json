@@ -49,5 +49,9 @@
     "country",
     "region",
     "author"
+  ],
+  "metadata_columns": [
+    "strain",
+    "host"
   ]
 }
