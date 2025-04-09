@@ -40,7 +40,7 @@ curate:
   field_map:
     accession: accession
     accession_version: accession_version
-    isolate-lineage: strain
+    isolate-lineage: isolate
     geo-region: region
     geo-location: location
     isolate-collection-date: date
@@ -59,7 +59,7 @@ curate:
   # Currently accepts any characters because we do not have a clear standard for strain names across pathogens
   strain_regex: "^.+$"
   # Back up strain name field to use if "strain" doesn"t match regex above
-  strain_backup_fields: ["accession"]
+  strain_backup_fields: ["isolate", "accession"]
   # List of date fields to standardize to ISO format YYYY-MM-DD
   date_fields: ["date", "date_released", "date_updated"]
   # List of expected date formats that are present in the date fields provided above
@@ -100,6 +100,7 @@ curate:
     "accession",
     "accession_version",
     "strain",
+    "isolate",
     "date",
     "region",
     "country",
