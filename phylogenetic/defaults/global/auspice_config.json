@@ -52,6 +52,7 @@
   ],
   "metadata_columns": [
     "strain",
+    "isolate",
     "host"
   ]
 }
