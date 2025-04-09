@@ -53,7 +53,7 @@ curate:
     submitter-names: full_authors
     submitter-affiliation: institution
     submitter-country: submitter_country
-    virus-name: MuV_genotype
+    virus-name: genotype
     virus-tax-id: taxon_id
   # Standardized strain name regex
   # Currently accepts any characters because we do not have a clear standard for strain names across pathogens
@@ -114,6 +114,7 @@ curate:
     "full_authors",
     "institution",
     "url",
+    "genotype",
     "MuV_genotype",
     "taxon_id"
   ]

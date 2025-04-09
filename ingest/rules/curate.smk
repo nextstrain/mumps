@@ -32,6 +32,7 @@ rule curate:
         sequences_ndjson="data/ncbi.ndjson",
         geolocation_rules=config["curate"]["local_geolocation_rules"],
         annotations=config["curate"]["annotations"],
+        manual_mapping="defaults/MuV_genotype_map.tsv",
     output:
         metadata="data/all_metadata.tsv",
         sequences="results/sequences.fasta",
@@ -79,6 +80,11 @@ rule curate:
                 --abbr-authors-field {params.abbr_authors_field} \
             | augur curate apply-geolocation-rules \
                 --geolocation-rules {input.geolocation_rules} \
+            | ./scripts/map-new-fields \
+                --map-tsv {input.manual_mapping} \
+                --map-id taxon_id \
+                --metadata-id taxon_id \
+                --map-fields MuV_genotype \
             | augur curate apply-record-annotations \
                 --annotations {input.annotations} \
                 --id-field {params.annotations_id} \
