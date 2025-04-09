@@ -28,7 +28,7 @@ rule get_nextclade_dataset:
     params:
         dataset_name=DATASET_NAME
     shell:
-        """
+        r"""
         nextclade3 dataset get \
             --name={params.dataset_name:q} \
             --output-zip={output.dataset} \
@@ -49,7 +49,7 @@ rule run_nextclade:
         # https://github.com/snakemake/snakemake/blob/384d0066c512b0429719085f2cf886fdb97fd80a/snakemake/rules.py#L997-L1000
         translations=lambda w: "results/translations/{cds}.fasta",
     shell:
-        """
+        r"""
         nextclade3 run \
             {input.sequences} \
             --input-dataset {input.dataset} \
