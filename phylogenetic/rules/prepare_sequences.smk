@@ -65,7 +65,8 @@ rule filter:
         exclude = "defaults/{build}/exclude.txt",
         include = "defaults/{build}/include.txt"
     output:
-        sequences = "results/{build}/filtered.fasta"
+        sequences = "results/{build}/filtered.fasta",
+        metadata = "results/{build}/metadata.tsv",
     log:
         "logs/{build}/filtered.txt",
     benchmark:
@@ -84,6 +85,7 @@ rule filter:
             --exclude {input.exclude:q} \
             --include {input.include:q} \
             --output {output.sequences:q} \
+            --output-metadata {output.metadata:q} \
             --min-length {params.min_length:q} \
             --group-by {params.group_by} \
             {params.filter_params} 2>&1 | tee {log:q}

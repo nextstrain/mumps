@@ -25,6 +25,28 @@ This part of the workflow usually includes the following steps:
 See Augur's usage docs for these commands for more details.
 """
 
+rule colors:
+    """Generate color pallete for color by metadata in auspice"""
+    input:
+        color_schemes = config['colors']['color_schemes'],
+        color_orderings = config['colors']['color_orderings'],
+        metadata = "results/{build}/metadata.tsv",
+    output:
+        colors = "results/{build}/colors.tsv"
+    log:
+        "logs/{build}/colors.txt",
+    benchmark:
+        "benchmarks/{build}/colors.txt"
+    shell:
+        r"""
+        python3 scripts/assign-colors.py \
+            --color-schemes {input.color_schemes:q} \
+            --ordering {input.color_orderings:q} \
+            --metadata {input.metadata:q} \
+            --output {output.colors:q} \
+            2>&1 | tee {log}
+        """
+
 rule export:
     """Exporting data files for for auspice"""
     input:
@@ -35,6 +57,7 @@ rule export:
         nt_muts = "results/{build}/nt_muts.json",
         aa_muts = "results/{build}/aa_muts.json",
         lat_longs = config['export']['lat_longs'],
+        colors = "results/{build}/colors.tsv",
         auspice_config = config['export']['auspice_config'],
         description = config['export']['description'],
     output:
@@ -53,6 +76,7 @@ rule export:
             --metadata-id-columns {params.strain_id:q} \
             --node-data {input.branch_lengths:q} {input.traits:q} {input.nt_muts:q} {input.aa_muts:q} \
             --lat-longs {input.lat_longs:q} \
+            --colors {input.colors:q} \
             --auspice-config {input.auspice_config:q} \
             --description {input.description:q} \
             --include-root-sequence \

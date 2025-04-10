@@ -25,6 +25,10 @@ traits:
   global: region
   sampling_bias_correction: 3
 
+colors:
+  color_schemes: "defaults/color_schemes.tsv"
+  color_orderings: "defaults/color_orderings.tsv"
+
 export:
   lat_longs: "defaults/lat_longs.tsv"
   auspice_config: "defaults/{build}/auspice_config.json"
