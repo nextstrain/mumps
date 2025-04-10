@@ -26,12 +26,18 @@
       "type": "categorical"
     },
     {
+      "key": "country",
+      "title": "Country",
+      "type": "categorical"
+    },
+    {
       "key": "division",
       "title": "Division",
       "type": "categorical"
     }
   ],
   "geo_resolutions": [
+    "country",
     "division"
   ],
   "display_defaults": {
