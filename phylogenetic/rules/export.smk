@@ -34,7 +34,6 @@ rule export:
         traits = "results/{build}/traits.json",
         nt_muts = "results/{build}/nt_muts.json",
         aa_muts = "results/{build}/aa_muts.json",
-        colors = config['export']['colors'],
         lat_longs = config['export']['lat_longs'],
         auspice_config = config['export']['auspice_config'],
         description = config['export']['description'],
@@ -53,7 +52,6 @@ rule export:
             --metadata {input.metadata:q} \
             --metadata-id-columns {params.strain_id:q} \
             --node-data {input.branch_lengths:q} {input.traits:q} {input.nt_muts:q} {input.aa_muts:q} \
-            --colors {input.colors:q} \
             --lat-longs {input.lat_longs:q} \
             --auspice-config {input.auspice_config:q} \
             --description {input.description:q} \

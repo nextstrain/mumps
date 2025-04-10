@@ -26,7 +26,6 @@ traits:
   sampling_bias_correction: 3
 
 export:
-  colors: "defaults/colors.tsv"
   lat_longs: "defaults/lat_longs.tsv"
   auspice_config: "defaults/{build}/auspice_config.json"
   description: "defaults/description.md"
