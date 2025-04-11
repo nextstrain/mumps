@@ -48,7 +48,9 @@
   ],
   "display_defaults": {
     "map_triplicate": true,
-    "color_by": "division"
+    "color_by": "division",
+    "tip_label": "strain"
+
   },
   "filters": [
     "division",

@@ -48,7 +48,8 @@
   ],
   "display_defaults": {
     "map_triplicate": true,
-    "color_by": "country"
+    "color_by": "country",
+    "tip_label": "strain"
   },
   "filters": [
     "MuV_genotype",
