@@ -87,6 +87,7 @@ curate:
   # Path to the manual annotations file
   # The path should be relative to the ingest directory
   annotations: "defaults/annotations.tsv"
+  annotations_strains: "defaults/annotations_strains.tsv"
   # The ID field in the metadata to use to merge the manual annotations
   annotations_id: "accession"
   # The ID field in the metadata to use as the sequence id in the output FASTA file

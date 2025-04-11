@@ -31,6 +31,7 @@ rule curate:
     input:
         sequences_ndjson="data/ncbi.ndjson",
         geolocation_rules=config["curate"]["local_geolocation_rules"],
+        annotations_strains=config["curate"]["annotations_strains"],
         annotations=config["curate"]["annotations"],
         manual_mapping="defaults/MuV_genotype_map.tsv",
     output:
@@ -65,6 +66,9 @@ rule curate:
             | augur curate transform-strain-name \
                 --strain-regex {params.strain_regex} \
                 --backup-fields {params.strain_backup_fields} \
+            | augur curate apply-record-annotations \
+                --annotations {input.annotations_strains} \
+                --id-field {params.annotations_id} \
             | augur curate format-dates \
                 --date-fields {params.date_fields} \
                 --expected-date-formats {params.expected_date_formats} \
@@ -85,6 +89,7 @@ rule curate:
                 --map-id taxon_id \
                 --metadata-id taxon_id \
                 --map-fields MuV_genotype \
+            | ./scripts/parse-fields-from-mumps-strain.py \
             | augur curate apply-record-annotations \
                 --annotations {input.annotations} \
                 --id-field {params.annotations_id} \
