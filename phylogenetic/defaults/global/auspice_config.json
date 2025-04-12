@@ -61,5 +61,24 @@
     "strain",
     "isolate",
     "host"
-  ]
+  ],
+  "extensions": {
+    "nextclade": {
+      "clade_node_attrs": [
+        {
+          "name": "MuV_genotype",
+          "displayName": "MuV Genotype",
+          "description": "Mumps genotype"
+        }
+      ],
+      "pathogen": {
+        "schemaVersion":"3.0.0",
+        "attributes": {
+          "name": "Mumps virus global tree",
+          "reference name": "Reconstructed ancestor from global tree",
+          "reference accession": "none"
+        }
+      }
+    }
+  }
 }
