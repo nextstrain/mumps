@@ -10,8 +10,8 @@ filter:
   min_length: 8000
   group_by: country year month MuV_genotype division
   specific:
-    north-america: --sequences-per-group 100 --min-date 2006 --query "region=='North America' & (MuV_genotype=='G')"
-    global: --sequences-per-group 5 --min-date 1950
+    north-america: --subsample-max-sequences 4000 --min-date 2006 --query "region=='North America' & (MuV_genotype=='G')"
+    global: --subsample-max-sequences 4000 --min-date 1950
 
 refine:
   north-america: "--clock-filter-iqd 4"
