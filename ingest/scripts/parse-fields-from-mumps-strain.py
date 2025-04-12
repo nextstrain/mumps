@@ -1,6 +1,6 @@
 #! /usr/bin/env python3
 """
-From stdin and if division or MuV_genotype is empty, attempt to parse division or genotype from mumps strain name.
+From stdin and if division or MuV_genotype or date is empty, attempt to parse them from the mumps strain name.
 
 Outputs the modified record to stdout.
 """
@@ -19,7 +19,7 @@ COUNTRY_CODES = [
 
 def parse_args():
     parser = argparse.ArgumentParser(
-        description="If division or MuV_genotype is empty, attempt to parse division and MuV_genotype from strain name.",
+        description="If division or MuV_genotype or date is empty, attempt to parse them from the mumps strain name.",
         formatter_class=argparse.ArgumentDefaultsHelpFormatter
     )
     parser.add_argument("--strain-field", default='strain',
@@ -28,6 +28,8 @@ def parse_args():
         help="Division field to which the parsed division should be saved.")
     parser.add_argument("--genotype-field", default='MuV_genotype',
         help="MuV_genotype field to which the parsed genotype should be saved.")
+    parser.add_argument("--date-field", default='date',
+        help="Date field to which the parsed year should be saved.")
 
     return parser.parse_args()
 
@@ -74,6 +76,26 @@ def _parse_genotype_from_strain(record, strain_field):
 
     return genotype_field
 
+def _parse_date_from_strain(record, strain_field):
+    strain = record.get(strain_field, '')
+    date_field = 'XXXX-XX-XX'
+
+    # Expand pattern with list of country codes
+    pattern = rf"MuV[siS]/[^/]+\.({'|'.join(COUNTRY_CODES)})/[0-9]{{1,2}}\.([0-9]{{2}})"
+    # Examples:
+    # Parse year '2017' from 'MuVs/Manitoba.CAN/17.17/5[G]'
+    # Parse year '2006' from 'MuVs/14778.SWE/0.06[G]
+    if re.match(pattern, strain):
+        match = re.match(pattern, strain)
+        year_suffix = int(match.group(2))
+        # TODO: The 30 threshhold will need to be revisited in year 2030
+        if year_suffix > 30:
+            date_field = f"19{year_suffix:02d}-XX-XX"
+        else:
+            date_field = f"20{year_suffix:02d}-XX-XX"
+
+    return date_field
+
 def main():
     args = parse_args()
 
@@ -83,6 +105,8 @@ def main():
             record[args.division_field] = _parse_division_from_strain(record, args.strain_field)
         if not record[args.genotype_field]:
             record[args.genotype_field] = _parse_genotype_from_strain(record, args.strain_field)
+        if record[args.date_field] == "XXXX-XX-XX":
+            record[args.date_field] = _parse_date_from_strain(record, args.strain_field)
 
         stdout.write(json.dumps(record) + "\n")
 
