@@ -33,3 +33,11 @@ export:
   lat_longs: "defaults/lat_longs.tsv"
   auspice_config: "defaults/{build}/auspice_config.json"
   description: "defaults/description.md"
+
+tip_frequencies:
+  # 2006 since there is an increase in mumps samples at that time
+  min_date: "2006-01-01"
+  max_date: "12M"
+  # Quarterly narrow_bandwidth or every 3 months (3 /12.0 = 0.25)
+  narrow_bandwidth: 0.25
+  proportion_wide: 0.0

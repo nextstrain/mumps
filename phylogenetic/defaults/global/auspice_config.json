@@ -46,6 +46,12 @@
     "country",
     "region"
   ],
+  "panels": [
+    "tree",
+    "map",
+    "entropy",
+    "frequencies"
+  ],
   "display_defaults": {
     "map_triplicate": true,
     "color_by": "country",

@@ -21,6 +21,7 @@ wildcard_constraints:
 rule all:
     input:
         auspice_json=expand("auspice/mumps_{build}.json", build=builds),
+        tip_frequencies_json= expand("auspice/mumps_{build}_tip-frequencies.json", build=builds),
 
 
 # These rules are imported in the order that they are expected to run.

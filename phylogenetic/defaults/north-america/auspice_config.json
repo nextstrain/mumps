@@ -46,6 +46,12 @@
     "country",
     "division"
   ],
+  "panels": [
+    "tree",
+    "map",
+    "entropy",
+    "frequencies"
+  ],
   "display_defaults": {
     "map_triplicate": true,
     "color_by": "division",
