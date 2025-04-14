@@ -38,30 +38,29 @@ def _parse_division_from_strain(record, strain_field):
     division_field = ''
 
     # Expand pattern with list of country codes
-    pattern = rf"MuV[siS]/([^/0-9.]+)\.({'|'.join(COUNTRY_CODES)})/[0-9]{{1,2}}\.[0-9]{{2}}"
+    pattern = re.compile(rf"MuV[siS]/([^/0-9.]+)\.({'|'.join(COUNTRY_CODES)})/[0-9]{{1,2}}\.[0-9]{{2}}")
     # Examples:
     # Parse division 'Manitoba' from 'MuVs/Manitoba.CAN/17.17/5[G]'
     # Parse division 'Ontario' from 'MuVi/Ontario.CAN/12.17/3[G]'
     # Parse division 'Boras' from 'MuVs/Boras.SWE/2.20[G]'
     # Avoid parsing: '14778' from 'MuVs/14778.SWE/0.06[G]
-    if re.match(pattern, strain):
-        match = re.match(pattern, strain)
+    if match:= pattern.match(strain):
         division_field = match.group(1)
 
     # Parse "NewYork" from 'MuVs/NewYork.USA/2019/38854'
     # MuVs/NewYork.USA/2017/51025
-    if re.match(r'MuV[siS]/([^/0-9.]+)\.USA/', strain):
-        match = re.match(r'MuV[siS]/([^/0-9.]+)\.USA/', strain)
+    pattern_usa_division = re.compile(r'MuV[siS]/([^/0-9.]+)\.USA/')
+    if match := pattern_usa_division.match(strain):
         division_field = match.group(1)
 
     # Parse "Indiana" from 'MuVs/Indiana_USA/201738605'
-    if re.match(r'MuV[siS]/([^/0-9.]+)_USA/', strain):
-        match = re.match(r'MuV[siS]/([^/0-9.]+)_USA/', strain)
+    pattern_usa_with_underscores = re.compile(r'MuV[siS]/([^/0-9.]+)_USA/')
+    if match:= pattern_usa_with_underscores.match(strain):
         division_field = match.group(1)
 
     # Parse "Okinawa" from "MuVi/Okinawa50.JPN/29.15[G]"
-    if re.match(r'MuV[siS]/([^/0-9.]+)[0-9]+\.JPN/', strain):
-        match = re.match(r'MuV[siS]/([^/0-9.]+)[0-9]+\.JPN/', strain)
+    pattern_japan_with_digits = re.compile(r'MuV[siS]/([^/0-9.]+)[0-9]+\.JPN/')
+    if match:= pattern_japan_with_digits.match(strain):
         division_field = match.group(1)
 
     return division_field
@@ -70,8 +69,8 @@ def _parse_genotype_from_strain(record, strain_field):
     strain = record.get(strain_field, '')
     genotype_field = ''
 
-    if re.search(r'\[([A-Z])\]$', strain):
-        match = re.search(r'\[([A-Z])\]$', strain)
+    pattern_genotype = re.compile(r'\[([A-Z])\]$')
+    if match:= pattern_genotype.search(strain):
         genotype_field = match.group(1)
 
     return genotype_field
@@ -81,12 +80,11 @@ def _parse_date_from_strain(record, strain_field):
     date_field = 'XXXX-XX-XX'
 
     # Expand pattern with list of country codes
-    pattern = rf"MuV[siS]/[^/]+\.({'|'.join(COUNTRY_CODES)})/[0-9]{{1,2}}\.([0-9]{{2}})"
+    pattern_year = re.compile(rf"MuV[siS]/[^/]+\.({'|'.join(COUNTRY_CODES)})/[0-9]{{1,2}}\.([0-9]{{2}})")
     # Examples:
     # Parse year '2017' from 'MuVs/Manitoba.CAN/17.17/5[G]'
     # Parse year '2006' from 'MuVs/14778.SWE/0.06[G]
-    if re.match(pattern, strain):
-        match = re.match(pattern, strain)
+    if match:= pattern_year.match(strain):
         year_suffix = int(match.group(2))
         # TODO: The 30 threshhold will need to be revisited in year 2030
         if year_suffix > 30:
