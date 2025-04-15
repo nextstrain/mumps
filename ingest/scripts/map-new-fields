@@ -47,7 +47,7 @@ def main():
             for col in args.map_fields:
                 record[col] = ''
 
-        stdout.write(json.dumps(record) + '\n')
+        stdout.write(json.dumps(record, allow_nan=False) + '\n')
 
 if __name__ == "__main__":
     main()
