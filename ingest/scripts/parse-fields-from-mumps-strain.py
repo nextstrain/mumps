@@ -12,9 +12,9 @@ import re
 
 # General list of country codes
 COUNTRY_CODES = [
-    'BIH', 'BRA', 'CAN', 'CHN', 'ES', 'ESP', 'ESP', 'GBR', 'IND', 'INDIA',
-    'IRQ', 'ITA', 'JPN', 'KOR', 'MEX', 'NLD', 'NLD', 'NOR', 'PAK', 'RUS',
-    'SRB', 'SWE', 'TWN', 'TWN', 'USA', 'VNM'
+    'BIH', 'BRA', 'CAN', 'CHN', 'ES', 'ESP', 'GBR', 'IND', 'INDIA',
+    'IRQ', 'ITA', 'JPN', 'KOR', 'MEX', 'NLD', 'NOR', 'PAK', 'RUS',
+    'SRB', 'SWE', 'TWN', 'USA', 'VNM'
 ]
 
 def parse_args():
