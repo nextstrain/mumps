@@ -69,8 +69,12 @@ def _parse_genotype_from_strain(record, strain_field):
     strain = record.get(strain_field, '')
     genotype_field = ''
 
-    pattern_genotype = re.compile(r'\[([A-Z])\]$')
+    pattern_genotype = re.compile(r'\[([A-Z][0-9]?)\]$')
+    pattern_genotype_slash = re.compile(r'\[([A-Z][0-9]?/[A-Z][0-9]?)\]$')
+
     if match:= pattern_genotype.search(strain):
+        genotype_field = match.group(1)
+    elif match:= pattern_genotype_slash.search(strain):
         genotype_field = match.group(1)
 
     return genotype_field
