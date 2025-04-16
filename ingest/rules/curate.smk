@@ -82,14 +82,14 @@ rule curate:
                 --authors-field {params.authors_field} \
                 --default-value {params.authors_default_value} \
                 --abbr-authors-field {params.abbr_authors_field} \
-            | augur curate apply-geolocation-rules \
-                --geolocation-rules {input.geolocation_rules} \
             | ./scripts/map-new-fields \
                 --map-tsv {input.manual_mapping} \
                 --map-id taxon_id \
                 --metadata-id taxon_id \
                 --map-fields MuV_genotype \
             | ./scripts/parse-fields-from-mumps-strain.py \
+            | augur curate apply-geolocation-rules \
+                --geolocation-rules {input.geolocation_rules} \
             | augur curate apply-record-annotations \
                 --annotations {input.annotations} \
                 --id-field {params.annotations_id} \
