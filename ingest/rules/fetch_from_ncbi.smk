@@ -106,7 +106,7 @@ rule format_ncbi_dataset_report:
 rule format_ncbi_datasets_ndjson:
     input:
         ncbi_dataset_sequences="data/ncbi_dataset_sequences.fasta",
-        ncbi_dataset_tsv="data/ncbi_dataset_report.tsv",
+        ncbi_dataset_tsv="data/ncbi_dataset_report_with_strain.tsv",
     output:
         ndjson="data/ncbi.ndjson",
     log:
@@ -123,4 +123,64 @@ rule format_ncbi_datasets_ndjson:
             --unmatched-reporting warn \
             --duplicate-reporting warn \
             2> {log} > {output.ndjson}
+        """
+
+
+###########################################################################
+########################## 2. Fetch from Entrez ###########################
+###########################################################################
+
+
+rule fetch_genbank_files:
+    input:
+        metadata="data/ncbi_dataset_report.tsv",
+    output:
+        genbank="data/genbank.gb",
+        genbank_ids="data/genbank.ids",
+    benchmark:
+        "benchmarks/fetch_genbank_files.txt",
+    shell:
+        """
+        csvtk cut -t -f accession {input.metadata} \
+        | csvtk -t del-header \
+        > {output.genbank_ids}
+
+        ./scripts/batchFetchGB.sh {output.genbank_ids} > {output.genbank}
+        """
+
+rule parse_strain_from_genbank:
+    input:
+        genbank="data/genbank.gb",
+    output:
+        strain_names="data/strain_names.tsv",
+    benchmark:
+        "benchmarks/parse_strain_from_genbank.txt",
+    params:
+        annotation="strain",
+    shell:
+        r"""
+        ./scripts/parse-genbank-annotations.py \
+          --annotation {params.annotation} \
+          --silent-no-match \
+          {input.genbank:q} \
+        > {output.strain_names:q}
+        """
+
+rule merge_strain_name:
+    input:
+        metadata="data/ncbi_dataset_report.tsv",
+        strain_names="data/strain_names.tsv",
+    output:
+        merged_metadata="data/ncbi_dataset_report_with_strain.tsv",
+    benchmark:
+        "benchmarks/merge_strain_name.txt",
+    params:
+        metadata_id='accession',
+        strain_name_id='accession',
+    shell:
+        r"""
+        augur merge \
+        --metadata a={input.metadata:q} b={input.strain_names:q} \
+        --metadata-id-columns a={params.metadata_id:q} b={params.strain_name_id:q} \
+        --output-metadata {output.merged_metadata:q}
         """
