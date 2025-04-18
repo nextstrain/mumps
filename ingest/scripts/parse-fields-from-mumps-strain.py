@@ -59,7 +59,7 @@ def _parse_division_from_strain(record, strain_field):
         division_field = match.group(1)
 
     # Parse "Okinawa" from "MuVi/Okinawa50.JPN/29.15[G]"
-    pattern_japan_with_digits = re.compile(r'MuV[siS]/([^/0-9.]+)[0-9]+\.JPN/')
+    pattern_japan_with_digits = re.compile(r'MuV[siS]/([^/0-9.#]+)[#]?[A-Z]?[0-9]+\.JPN/')
     if match:= pattern_japan_with_digits.match(strain):
         division_field = match.group(1)
 
