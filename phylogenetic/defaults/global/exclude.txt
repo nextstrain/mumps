@@ -1,0 +1,6 @@
+# Format: <GenBank accession> [# <strain name> <reason>]
+WA0268502_buccal/Washington.USA/16
+JN635498 # Split.CRO/05.11/G
+EU370206 # 9218/Zg98
+KF481689 # Zagreb.HRV/28.12/G
+EU370207 # Du/CRO05

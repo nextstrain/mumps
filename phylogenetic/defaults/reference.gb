@@ -1,7 +1,7 @@
-LOCUS       KM597072               15263 bp    cRNA    linear   VRL 04-FEB-2015
+LOCUS       KM597072_REF               15263 bp    cRNA    linear   VRL 04-FEB-2015
 DEFINITION  Mumps virus genotype G strain MuV/Gabon/13/2[G], complete genome.
-ACCESSION   KM597072
-VERSION     KM597072.1
+ACCESSION   KM597072_REF
+VERSION     KM597072_REF.1
 KEYWORDS    .
 SOURCE      Mumps virus genotype G
   ORGANISM  Mumps virus genotype G
@@ -199,7 +199,7 @@ FEATURES             Location/Qualifiers
                      NTILRLIVERILMYTVRNWCILPTQTRLTLRQSIELGEFRLRDVITPMEILKLSPNRK
                      YLKSALNQSTFNHLMGETSDILLNRAYQKRIWKAIGCVIYCFGLLTPDVEDSERIDID
                      NDIPDYDIHGDII"
-ORIGIN      
+ORIGIN
         1 gaagtggtgt tttgcgattt cgaggccggg ctcgatcctc acctttcatt gtcgataggg
        61 gacattttga cactaccttg aaaatgtcgt ccgtgctcaa agcatttgag cgattcacga
       121 tagaacagga acttcaagac aggggtgagg agggttcaat tccgccggag actttaaagt
@@ -456,4 +456,3 @@ ORIGIN
     15181 gcacgataca tcaccaaaag gtgccacacc agtatccaaa ctcctctaga ccgcacacga
     15241 cctcgaacaa tcacaaccac atc
 //
-

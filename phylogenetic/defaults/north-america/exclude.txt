@@ -1,0 +1,55 @@
+# Format: <GenBank accession> [# <strain name> <reason>]
+KY006858 # Ontario.CAN/13.10/G
+KY006857 # Ontario.CAN/04.10/G
+MF965284 # Massachusetts.USA/37.16/1/G
+BritishColumbia.CAN/50.16/H
+BritishColumbia.CAN/22.16/1/G
+JX287388 # Mass.USA/4.10
+KY969483 # Virginia.USA/10.12/H
+BritishColumbia.CAN/33.16/3/G
+BritishColumbia.CAN/33.16/1/G
+BritishColumbia.CAN/9.17/A
+BritishColumbia.CAN/28.16/3/G
+WA0268502_buccal/Washington.USA/16
+BritishColumbia.CAN/34.16/2/F
+MG986430 # Massachusetts.USA/24.17/5/K
+MG986383 # Massachusetts.USA/11.17/G
+MG986422 # Massachusetts.USA/7.17/G
+MG986468 # Massachusetts.USA/9.17/G
+MG986424 # Massachusetts.USA/10.17/G
+MG986438 # Massachusetts.USA/10.17/2/G
+MG986415 # Massachusetts.USA/7.17/2/G
+MG986396 # Massachusetts.USA/13.17/G
+MG986425 # Massachusetts.USA/12.17/G
+MG986466 # Georgia.USA/2.17/G
+MG986414 # Massachusetts.USA/5.17/G
+MG986384 # Massachusetts.USA/18.17/G
+MG986405 # Massachusetts.USA/22.17/7/G
+MG986444 # Massachusetts.USA/23.17/2/G
+MG986412 # Massachusetts.USA/19.17/2/G
+MK033748 # Ontario.CAN/09.17/5/C
+MK033756 # Ontario.CAN/08.17/1/G
+FJ375177 # Urabe
+KF878080 # RW154.USA/0.70s/K
+No_designation_vaccine_related/A
+MG765427 # Dunedin.NZL/32.17/G
+MG765426 # NewPlymouth.NZL/30.17/G
+MH638235 # MountIsa.AUS/10.17/G
+MH638234 # Rockhampton.AUS/41.16/G
+KF738114 # Pune.IND/07.12/G
+KF843894 # Osmanabad.IND/10.12/17/C
+LC325484 # 31170186
+LC325482 # 31170132
+LC325487 # 31170254
+LC325488 # 31170263
+LC325485 # 31170187
+JX287386 # California.USA/50.07/1  # divergent
+MT859584 # Washington.USA/12.17/FH78/G
+MT859657 # Washington.USA/28.17/FH151/G
+MT859651 # Washington.USA/14.17/FH145/G  # divergent from 2016/2017 outbreak
+MT859648 # Washington.USA/8.17/FH142/G  # divergent from 2016/2017 outbreak
+MT859522 # Washington.USA/9.17/FH16/G  # divergent and related to new zealand viruses
+MT859606 # Washington.USA/19.17/FH100/G  # divergent and related to new zealand viruses
+MT859610 # Washington.USA/5.17/FH104/G  # divergent and related to new zealand viruses
+MT859601 # Washington.USA/11.17/FH95/G  # divergent and related to new zealand viruses
+MT859604 # Washington.USA/14.17/FH98/G  # divergent and related to new zealand viruses
