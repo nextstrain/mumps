@@ -148,21 +148,20 @@ rule fetch_genbank_files:
         ./scripts/batchFetchGB.sh {output.genbank_ids} > {output.genbank}
         """
 
-
-rule parse_genbank_to_ndjson:
+rule parse_strain_from_genbank:
     input:
         genbank="data/genbank.gb",
     output:
         strain_names="data/strain_names.tsv",
     benchmark:
-        "benchmarks/parse_genbank_to_ndjson.txt"
+        "benchmarks/parse_strain_from_genbank.txt",
     params:
-        annotation="strain"
+        annotation="strain",
     shell:
-        """
-        ./scripts/parse-genbank_annotations.py \
+        r"""
+        ./scripts/parse-genbank-annotations.py \
           --annotation {params.annotation} \
           --silent-no-match \
-          {input.genbank} \
-        > {output.strain_names}
+          {input.genbank:q} \
+        > {output.strain_names:q}
         """
