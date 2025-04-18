@@ -106,7 +106,7 @@ rule format_ncbi_dataset_report:
 rule format_ncbi_datasets_ndjson:
     input:
         ncbi_dataset_sequences="data/ncbi_dataset_sequences.fasta",
-        ncbi_dataset_tsv="data/ncbi_dataset_report.tsv",
+        ncbi_dataset_tsv="data/ncbi_dataset_report_with_strain.tsv",
     output:
         ndjson="data/ncbi.ndjson",
     log:
@@ -164,4 +164,23 @@ rule parse_strain_from_genbank:
           --silent-no-match \
           {input.genbank:q} \
         > {output.strain_names:q}
+        """
+
+rule merge_strain_name:
+    input:
+        metadata="data/ncbi_dataset_report.tsv",
+        strain_names="data/strain_names.tsv",
+    output:
+        merged_metadata="data/ncbi_dataset_report_with_strain.tsv",
+    benchmark:
+        "benchmarks/merge_strain_name.txt",
+    params:
+        metadata_id='accession',
+        strain_name_id='accession',
+    shell:
+        r"""
+        augur merge \
+        --metadata a={input.metadata:q} b={input.strain_names:q} \
+        --metadata-id-columns a={params.metadata_id:q} b={params.strain_name_id:q} \
+        --output-metadata {output.merged_metadata:q}
         """
