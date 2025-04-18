@@ -131,20 +131,21 @@ rule format_ncbi_datasets_ndjson:
 ###########################################################################
 
 
-rule fetch_from_ncbi_entrez:
-    params:
-        term=config["entrez_search_term"],
+rule fetch_genbank_files:
+    input:
+        metadata="data/ncbi_dataset_report.tsv",
     output:
         genbank="data/genbank.gb",
-    # Allow retries in case of network errors
-    retries: 5
+        genbank_ids="data/genbank.ids",
     benchmark:
-        "benchmarks/fetch_from_ncbi_entrez.txt"
+        "benchmarks/fetch_genbank_files.txt",
     shell:
         """
-        vendored/fetch-from-ncbi-entrez \
-            --term {params.term:q} \
-            --output {output.genbank}
+        csvtk cut -t -f accession {input.metadata} \
+        | csvtk -t del-header \
+        > {output.genbank_ids}
+
+        ./scripts/batchFetchGB.sh {output.genbank_ids} > {output.genbank}
         """
 
 
