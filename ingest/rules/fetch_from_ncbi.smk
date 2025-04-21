@@ -139,13 +139,18 @@ rule fetch_genbank_files:
         genbank_ids="data/genbank.ids",
     benchmark:
         "benchmarks/fetch_genbank_files.txt",
+    params:
+        batch=100
     shell:
-        """
+        r"""
         csvtk cut -t -f accession {input.metadata} \
         | csvtk -t del-header \
         > {output.genbank_ids}
 
-        ./scripts/batchFetchGB.sh {output.genbank_ids} > {output.genbank}
+        ./scripts/batch-fetch-genbank-records.py \
+          --ids {output.genbank_ids} \
+          --output-genbank {output.genbank} \
+          --batchsize {params.batch}
         """
 
 rule parse_strain_from_genbank:
