@@ -5,7 +5,7 @@
 # do not have to dig through the workflows to figure out the default values
 
 # Required to fetch from Entrez
-entrez_search_term: "mumps+virus"
+entrez_search_term: "Mumps+orthorubulavirus[Organism]"
 
 # Required to fetch from NCBI Datasets
 ncbi_taxon_id: "2560602"

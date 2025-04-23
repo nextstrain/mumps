@@ -130,27 +130,20 @@ rule format_ncbi_datasets_ndjson:
 ########################## 2. Fetch from Entrez ###########################
 ###########################################################################
 
-
-rule fetch_genbank_files:
-    input:
-        metadata="data/ncbi_dataset_report.tsv",
+rule fetch_from_ncbi_entrez:
+    params:
+        term=config["entrez_search_term"],
     output:
         genbank="data/genbank.gb",
-        genbank_ids="data/genbank.ids",
+    # Allow retries in case of network errors
+    retries: 5
     benchmark:
-        "benchmarks/fetch_genbank_files.txt",
-    params:
-        batch=100
+        "benchmarks/fetch_from_ncbi_entrez.txt"
     shell:
-        r"""
-        csvtk cut -t -f accession {input.metadata} \
-        | csvtk -t del-header \
-        > {output.genbank_ids}
-
-        ./scripts/batch-fetch-genbank-records.py \
-          --ids {output.genbank_ids} \
-          --output-genbank {output.genbank} \
-          --batchsize {params.batch}
+        """
+        vendored/fetch-from-ncbi-entrez \
+            --term {params.term:q} \
+            --output {output.genbank}
         """
 
 rule parse_strain_from_genbank:
