@@ -222,6 +222,76 @@ region	Europe
 region	South America
 region	North America
 
+################
+
+# Canadian Provences
+division	Alberta
+division	British Columbia
+division	Manitoba
+division	New Brunswick
+division	Newfoundland and Labrador
+division	Northwest Territories
+division	Nova Scotia
+division	Nunavut
+division	Ontario
+division	Prince Edward Island
+division	Quebec
+division	Saskatchewan
+division	Yukon
+
+# USA States
+division	Alaska
+division	Alabama
+division	Arkansas
+division	Arizona
+division	California
+division	Colorado
+division	Connecticut
+division	Delaware
+division	Florida
+division	Georgia
+division	Hawaii
+division	Iowa
+division	Idaho
+division	Illinois
+division	Indiana
+division	Kansas
+division	Kentucky
+division	Louisiana
+division	Massachusetts
+division	Maryland
+division	Maine
+division	Michigan
+division	Minnesota
+division	Missouri
+division	Mississippi
+division	Montana
+division	North Carolina
+division	North Dakota
+division	Nebraska
+division	New Hampshire
+division	New Jersey
+division	New Mexico
+division	Nevada
+division	New York
+division	Ohio
+division	Oklahoma
+division	Oregon
+division	Pennsylvania
+division	Puerto Rico
+division	Rhode Island
+division	South Carolina
+division	South Dakota
+division	Tennessee
+division	Texas
+division	Utah
+division	Virginia
+division	Vermont
+division	Washington
+division	Wisconsin
+division	West Virginia
+division	Wyoming
+
 # ################
 
 MuV_genotype	A
