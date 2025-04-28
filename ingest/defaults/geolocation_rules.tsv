@@ -4,3 +4,8 @@
 # If creating a general rule, then the raw field value can be substituted with '*'
 # Lines starting with '#' will be ignored as comments.
 # Trailing '#' will be ignored as comments.
+North America/USA/NorthCarolina/*	North America/USA/North Carolina/*
+North America/Canada/BritishColumbia/*	North America/Canada/British Columbia/*
+North America/Canada/NewBrunswick/*	North America/Canada/New Brunswick/*
+North America/Canada/NovaScotia/*	North America/Canada/Nova Scotia/*
+North America/Canada/Newfoundland/*	North America/Canada/Newfoundland and Labrador/*
