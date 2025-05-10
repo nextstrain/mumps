@@ -4,3 +4,57 @@
 # If there are multiple annotations for the same id and field, then the last value is used
 # Lines starting with '#' are treated as comments
 # Any '#' after the field value are treated as comments.
+OQ990823	MuV_genotype	A # Strain name "Jeryl-Lynn" is genotype A
+AF201473	MuV_genotype	A # Strain name "Jeryl-Lynn" is genotype A
+FN431985	MuV_genotype	A # Strain name "Jeryl-Lynn" is genotype A
+HQ416906	MuV_genotype	A # Strain name "Jeryl-Lynn" is genotype A
+HQ416907	MuV_genotype	A # Strain name "Jeryl-Lynn" is genotype A
+JQ946550	MuV_genotype	A # Strain name "Jeryl-Lynn" is genotype A
+JQ946551	MuV_genotype	A # Strain name "Jeryl-Lynn" is genotype A
+JQ946552	MuV_genotype	A # Strain name "Jeryl-Lynn" is genotype A
+JQ946553	MuV_genotype	A # Strain name "Jeryl-Lynn" is genotype A
+JQ946554	MuV_genotype	A # Strain name "Jeryl-Lynn" is genotype A
+AF338106	MuV_genotype	A # Strain name "Jeryl-Lynn" is genotype A
+AF345290	MuV_genotype	A # Strain name "Jeryl-Lynn" is genotype A
+FJ211586	MuV_genotype	A # Strain name "JL1; Jeryl Lynn major component" is genotype A
+GU980052	MuV_genotype	A # Strain name "Enders" is genotype A
+FJ375178	MuV_genotype	B # Urabe is genotype B based on https://pubmed.ncbi.nlm.nih.gov/25424978/
+AB000386	MuV_genotype	B # Strain name "Urabe AM-9-A" is genotype B
+AB000387	MuV_genotype	B # Strain name "Urabe AM-9-B" is genotype B
+AB000388	MuV_genotype	B # Strain name "Urabe AM-9" is genotype B
+FJ375177	MuV_genotype	B # Strain name "Urabe" is genotype B
+AB470486	MuV_genotype	B # Strain name "Hoshino vaccine" derived from "Urabe" is genotype B
+AB744048	MuV_genotype	B # Strain name "Miyahara vaccine lot3" known genotype B
+AB744049	MuV_genotype	B # Strain name "Miyahara parent" known genotype B
+NC_002200	MuV_genotype	B # Strain name "Miyahara" known genotype B
+AB040874	MuV_genotype	B # Strain name "Miyahara" known genotype B
+AB823535	MuV_genotype	B # Strain name "MuVi/Hikaru.JPN/22.97-B"
+AB827968	MuV_genotype	B # Strain name "MuVi/NK-M46.JPN/0.70[B] (Vac)"
+MK033748	MuV_genotype	C # Strain name MuVi/Ontario.CAN/09.17/5[C], was misclassified as G in datasets
+ON783699	MuV_genotype	C # Strain name MuVi/Chennai.IND/49.11/1/C
+ON783700	MuV_genotype	C # Strain name MuVi/Chennai.IND/49.11/2/C
+ON783701	MuV_genotype	C # Strain name MuVi/Chennai.IND/6.13/C
+EU884413	MuV_genotype	F # Note in the genbank entry
+KF170916	MuV_genotype	F # Note in the genbank entry
+KF170917	MuV_genotype	F # Note in the genbank entry
+KF170918	MuV_genotype	F # Note in the genbank entry
+KF170919	MuV_genotype	F # Note in the genbank entry
+JX287385	MuV_genotype	G # Note in the genbank entry
+JX287387	MuV_genotype	G # Note in the genbank entry
+JX287389	MuV_genotype	G # Note in the genbank entry
+JX287390	MuV_genotype	G # Note in the genbank entry
+JX287391	MuV_genotype	G # Note in the genbank entry
+KF481689	MuV_genotype	G # Strain name "MuVi/Zagreb.HRV/28.12(G)"
+JN635498	MuV_genotype	G # Strain name "MuVi/Split.CRO/05.11(G)"
+AB600843	MuV_genotype	H # Based on https://pmc.ncbi.nlm.nih.gov/articles/PMC3122658/
+AB576764	MuV_genotype	H # Based on publication name in genbank entry
+AB600942	MuV_genotype	H # Based on publication name in genbank entry
+AB600942	MuV_genotype	H # Based on publication name in genbank entry
+AY681495	MuV_genotype	H # Strain name "MuVi/Novosibirsk.RUS/10.03-H"
+MG986430	MuV_genotype	K # Note in the genbank entry
+MG986430	MuV_genotype	K # Note in the genbank entry
+JX287386	MuV_genotype	K # Note in the genbank entry
+AY685920	MuV_genotype	N # Strain name "L-Zagreb" known genotype N
+AY685921	MuV_genotype	N # Strain name "L-Zagreb" known genotype N
+JF727651	MuV_genotype	N # Strain name "Leningrad-3" known genotype N
+JF727652	MuV_genotype	N # Strain name "Leningrad-3" known genotype N
