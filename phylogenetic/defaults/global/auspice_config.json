@@ -28,7 +28,12 @@
     },
     {
       "key": "MuV_genotype",
-      "title": "MuV genotype",
+      "title": "MuV genotype (GenBank)",
+      "type": "categorical"
+    },
+    {
+      "key": "MuV_genotype_nextclade",
+      "title": "MuV genotype (Nextclade)",
       "type": "categorical"
     },
     {
