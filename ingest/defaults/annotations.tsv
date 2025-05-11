@@ -58,3 +58,59 @@ AY685920	MuV_genotype	N # Strain name "L-Zagreb" known genotype N
 AY685921	MuV_genotype	N # Strain name "L-Zagreb" known genotype N
 JF727651	MuV_genotype	N # Strain name "Leningrad-3" known genotype N
 JF727652	MuV_genotype	N # Strain name "Leningrad-3" known genotype N
+D00663	MuV_genotype	A # Jin et al, 2005 Genotype A
+D90231	MuV_genotype	A # Jin et al, 2005 Genotype A (End/USA45)
+D90232	MuV_genotype	A # Jin et al, 2005 Genotype A (JL/US63 vaccine)
+X72944	MuV_genotype	A # Jin et al, 2005 Genotype A (Rubini vaccine)
+AX081123	MuV_genotype	A # Jin et al, 2015 Genotype A identical to AF338106
+AX081133	MuV_genotype	A # Jin et al, 2015 Genotype A identical to AF338106
+BD293022	MuV_genotype	A # Jin et al, 2015 Genotype A identical to AF338106
+BD293023	MuV_genotype	A # Jin et al, 2015 Genotype A identical to AF338106
+DI021804	MuV_genotype	A # Jin et al, 2015 Genotype A identical to AF338106
+DI064912	MuV_genotype	A # Jin et al, 2015 Genotype A identical to AF338106
+FJ211584	MuV_genotype	A # Jin et al, 2015 Genotype A identical to AF338106
+EA500331	MuV_genotype	A # Jin et al, 2015 Genotype A identical to AF338106
+BD293024	MuV_genotype	A # Jin et al, 2015 Genotype A identical to AF345290
+DI035997	MuV_genotype	A # Jin et al, 2015 Genotype A identical to AF345290
+EA500333	MuV_genotype	A # Jin et al, 2015 Genotype A identical to AF345290
+AX081134	MuV_genotype	A # Jin et al, 2015 Genotype A identical to FN431985
+EA500331	MuV_genotype	A # Jin et al, 2015 Genotype A identical to AF338106
+EA500333	MuV_genotype	A # Jin et al, 2015 Genotype A identical to AF345290
+D90233	MuV_genotype	B # Jin et al, 2005 Genotype B
+D90236	MuV_genotype	B # Jin et al, 2005 Genotype B
+D90234	MuV_genotype	B # Jin et al, 2005 Genotype B  (Miya vaccine)
+AB003414	MuV_genotype	B # Jin et al, 2005 Genotype B (Hoshino vaccine)
+AF314558	MuV_genotype	B # Jin et al, 2015 Genotype B identical to AB000388
+X63709	MuV_genotype	C # Jin et al, 2005 Genotype C
+X63711	MuV_genotype	C # Jin et al, 2005 Genotype E(C)
+AY669145	MuV_genotype	C # Jin et al, 2015 Genotype C
+EU370206	MuV_genotype	C # WHO 2012 Genotype C SH and HN gene
+AF142766	MuV_genotype	D # Jin et al, 2005 Genotype D
+KF878076 	MuV_genotype	D # Jin et al, 2015 Genotype D
+Z77158	MuV_genotype	F # Jin et al, 2005 Genotype F
+Z77160	MuV_genotype	F # Jin et al, 2005 Genotype F
+EU780221	MuV_genotype	F # WHO 2012 Genotype F SH gene
+DQ649478	MuV_genotype	F # Jin et al, 2015 Genotype F identical to FJ556896
+FJ556896	MuV_genotype	F # Jin et al, 2015 Genotype F
+KF17091	MuV_genotype	F # Jin et al, 2015 Genotype F
+AF142764	MuV_genotype	G # Jin et al, 2005 Genotype G
+AY380075	MuV_genotype	G # Jin et al, 2005 Genotype G
+AF280799	MuV_genotype	G # WHO 2012 Genotype G SH and HN gene
+EU597478	MuV_genotype	G # WHO 2012 Genotype G SH gene
+EU370207	MuV_genotype	G # Jin et al, 2015 Genotype G
+JN012242	MuV_genotype	G # Jin et al, 2015 Genotype G identical to JX287385
+AF142771	MuV_genotype	H # Jin et al, 2005 Genotype H
+AF467767	MuV_genotype	H # Jin et al, 2015 Genotype H
+JX287388	MuV_genotype	H # Jin et al, 2015 Genotype H
+AF180374	MuV_genotype	I # Jin et al, 2005 Genotype I
+D86174	MuV_genotype	I # Jin et al, 2005 Genotype I
+AY309060	MuV_genotype	I # WHO 2012 Genotype I HN gene
+AF142770	MuV_genotype	J # Jin et al, 2005 Genotype J
+AB03417	MuV_genotype	J # Jin et al, 2005 Genotype J
+AB105475	MuV_genotype	J # WHO 2012 Genotype J SH gene
+AF365891	MuV_genotype	K # Jin et al, 2005 Genotype K
+AB105480	MuV_genotype	L # Jin et al, 2005 Genotype L
+AB105483	MuV_genotype	L # Jin et al, 2005 Genotype L
+AJ272363	MuV_genotype	N # Jin et al, 2005 becomes Genotype N
+AY493374	MuV_genotype	N # Jin et al, 2005 becomes Genotype N
+AY508995	MuV_genotype	N # WHO 2012 Genotype N SH and HN gene
