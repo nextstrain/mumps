@@ -47,7 +47,7 @@ JX287391	MuV_genotype	G # Note in the genbank entry
 KF481689	MuV_genotype	G # Strain name "MuVi/Zagreb.HRV/28.12(G)"
 JN635498	MuV_genotype	G # Strain name "MuVi/Split.CRO/05.11(G)"
 AB600843	MuV_genotype	H # Based on https://pmc.ncbi.nlm.nih.gov/articles/PMC3122658/
-AB576764	MuV_genotype	H # Based on publication name in genbank entry
+AB576764	MuV_genotype	B # Jin et al, 2015 Genotype B
 AB600942	MuV_genotype	H # Based on publication name in genbank entry
 AB600942	MuV_genotype	H # Based on publication name in genbank entry
 AY681495	MuV_genotype	H # Strain name "MuVi/Novosibirsk.RUS/10.03-H"
