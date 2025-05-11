@@ -49,11 +49,11 @@ rule decompress:
 rule merge_clade_membership:
     input:
         metadata="data/metadata.tsv",
-        clade_membership="defaults/nextclade_reference_strains.tsv",
+        clade_membership="defaults/{build}/reference_strains.tsv",
     output:
-        merged_metadata="data/metadata_merged.tsv",
+        merged_metadata="data/{build}/metadata_merged.tsv",
     benchmark:
-        "benchmarks/merge_clade_membership.txt",
+        "benchmarks/{build}/merge_clade_membership.txt",
     params:
         metadata_id='accession',
         clade_membership_id='accession',
@@ -63,4 +63,39 @@ rule merge_clade_membership:
         --metadata a={input.metadata:q} b={input.clade_membership:q} \
         --metadata-id-columns a={params.metadata_id:q} b={params.clade_membership_id:q} \
         --output-metadata {output.merged_metadata:q}
+        """
+
+rule filter:
+    """
+    Filtering to
+      - various criteria based on the auspice JSON target
+      - excluding strains in {input.exclude}
+      - including strains in {input.include}
+    """
+    input:
+        sequences = "data/sequences.fasta",
+        metadata = "data/{build}/metadata_merged.tsv",
+        exclude = "defaults/{build}/exclude.txt",
+        include = "defaults/{build}/include.txt",
+    output:
+        sequences = "results/{build}/filtered.fasta",
+        metadata = "results/{build}/metadata.tsv",
+    log:
+        "logs/{build}/filtered.txt",
+    benchmark:
+        "benchmarks/{build}/filtered.txt",
+    params:
+        filter_params = '--exclude-all',
+        strain_id = config.get("strain_id_field", "strain"),
+    shell:
+        r"""
+        augur filter \
+            --sequences {input.sequences:q} \
+            --metadata {input.metadata:q} \
+            --metadata-id-columns {params.strain_id:q} \
+            --exclude {input.exclude:q} \
+            --include {input.include:q} \
+            --output {output.sequences:q} \
+            --output-metadata {output.metadata:q} \
+            {params.filter_params} 2>&1 | tee {log:q}
         """
