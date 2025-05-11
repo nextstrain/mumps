@@ -38,12 +38,16 @@ rule get_nextclade_dataset:
 
 rule run_nextclade:
     input:
-        dataset=f"data/nextclade_data/{DATASET_NAME}.zip",
+        dataset=f"../nextclade_data/{DATASET_NAME}",
         sequences="results/sequences.fasta",
     output:
         nextclade="results/nextclade.tsv",
         alignment="results/alignment.fasta",
         translations="results/translations.zip",
+    log:
+        "logs/run_nextclade.txt",
+    benchmark:
+        "benchmarks/run_nextclade.txt"
     params:
         # The lambda is used to deactivate automatic wildcard expansion.
         # https://github.com/snakemake/snakemake/blob/384d0066c512b0429719085f2cf886fdb97fd80a/snakemake/rules.py#L997-L1000
@@ -55,7 +59,9 @@ rule run_nextclade:
             --input-dataset {input.dataset} \
             --output-tsv {output.nextclade} \
             --output-fasta {output.alignment} \
-            --output-translations {params.translations}
+            --output-translations {params.translations} \
+            --silent \
+            2>&1 | tee {log:q}
 
         zip -rj {output.translations} results/translations
         """
