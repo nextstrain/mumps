@@ -59,7 +59,7 @@ rule translate:
     input:
         tree = "results/{build}/tree.nwk",
         node_data = "results/{build}/nt_muts.json",
-        reference = config['reference'],
+        reference = lambda wildcard: config['reference'][wildcard.build],
     output:
         node_data = "results/{build}/aa_muts.json",
     log:

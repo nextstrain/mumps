@@ -298,11 +298,17 @@ MuV_genotype	A
 MuV_genotype	B
 MuV_genotype	C
 MuV_genotype	D
+MuV_genotype	D1
 MuV_genotype	F
 MuV_genotype	G
+MuV_genotype	G1
+MuV_genotype	G2
 MuV_genotype	H
+MuV_genotype	H1
+MuV_genotype	H2
 MuV_genotype	I
 MuV_genotype	J
 MuV_genotype	K
+MuV_genotype	K/M
 MuV_genotype	L
 MuV_genotype	N

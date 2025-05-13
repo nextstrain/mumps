@@ -56,8 +56,6 @@ rule refine:
     benchmark:
         "benchmarks/{build}/refine.txt",
     params:
-        coalescent = "opt",
-        date_inference = "marginal",
         clock_filter_iqd = lambda wildcard: config['refine'][wildcard.build],
         strain_id = config.get("strain_id_field", "strain"),
     shell:
@@ -69,9 +67,5 @@ rule refine:
             --metadata-id-columns {params.strain_id:q} \
             --output-tree {output.tree:q} \
             --output-node-data {output.node_data:q} \
-            --timetree \
-            --coalescent {params.coalescent:q} \
-            --date-confidence \
-            --date-inference {params.date_inference:q} \
             {params.clock_filter_iqd} 2>&1 | tee {log:q}
         """
