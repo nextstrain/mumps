@@ -51,7 +51,7 @@ rule export:
     """Exporting data files for for auspice"""
     input:
         tree = "results/{build}/tree.nwk",
-        metadata = "data/metadata.tsv",
+        metadata = "results/sh/metadata_merged.tsv",
         branch_lengths = "results/{build}/branch_lengths.json",
         traits = "results/{build}/traits.json",
         nt_muts = "results/{build}/nt_muts.json",

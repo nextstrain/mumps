@@ -1,0 +1,53 @@
+LOCUS       MN920136_REF                 316 bp    cRNA    linear   VRL 19-JAN-2020
+DEFINITION  Mumps virus genotype G strain MuVs/Manitoba.CAN/16.17/8[G] small
+            hydrophobic protein (SH) gene, complete cds.
+ACCESSION   MN920136_REF
+VERSION     MN920136.1
+KEYWORDS    .
+SOURCE      Mumps virus genotype G
+  ORGANISM  Mumps virus genotype G
+            Viruses; Riboviria; Orthornavirae; Negarnaviricota;
+            Haploviricotina; Monjiviricetes; Mononegavirales; Paramyxoviridae;
+            Rubulavirinae; Orthorubulavirus; Orthorubulavirus parotitidis.
+REFERENCE   1  (bases 1 to 316)
+  AUTHORS   Hiebert,J. and Severini,A.
+  TITLE     Mumps surveillance in Canada
+  JOURNAL   Unpublished
+REFERENCE   2  (bases 1 to 316)
+  AUTHORS   Hiebert,J. and Severini,A.
+  TITLE     Direct Submission
+  JOURNAL   Submitted (09-JAN-2020) Viral Exanthemata & STDs, National
+            Microbiology Laboratory, Public Health Agency of Canada, 745 Logan
+            Avenue, Winnipeg, Manitoba R3E 3L5, Canada
+COMMENT     ##Assembly-Data-START##
+            Sequencing Technology :: Sanger dideoxy sequencing
+            ##Assembly-Data-END##
+FEATURES             Location/Qualifiers
+     source          1..316
+                     /organism="Mumps virus genotype G"
+                     /mol_type="viral cRNA"
+                     /strain="MuVs/Manitoba.CAN/16.17/8[G]"
+                     /isolate="MMR17-1436"
+                     /isolation_source="buccal swab"
+                     /host="Homo sapiens"
+                     /db_xref="taxon:1384672"
+                     /geo_loc_name="Canada"
+                     /collection_date="2017-04-20"
+                     /note="genotype: G"
+     gene            51..224
+                     /gene="SH"
+     CDS             51..224
+                     /gene="SH"
+                     /codon_start=1
+                     /product="small hydrophobic protein"
+                     /protein_id="QHG14343.1"
+                     /translation="MPAIQPPLYLTFLLLILLYLIITLYVWIILTVTYKTAVRHAALY
+                     QRSFFHWSFDHSL"
+ORIGIN
+        1 aagaatgaat ctcatggggt cgtaacgtct cgtgaccctg ccgttgcact atgccggcga
+       61 tccaaccccc attatacctc acatttctat tgctaattct tctttatctg atcataactt
+      121 tgtatgtctg gattatatta actgttactt ataagactgc ggtgcgacat gcagcactgt
+      181 accagagatc cttctttcac tggagtttcg atcactcact ctaagaagat ccccagttag
+      241 gacaagttcc gatccatcat gcaagaacaa tctgcatttg aataatgccg ttcaatcatg
+      301 agacataaag aaaaaa
+//

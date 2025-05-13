@@ -50,6 +50,24 @@ rule decompress:
         zstd -d -c {input.metadata} > {output.metadata}
         """
 
+rule merge_annotations:
+    """Merge identical sequence annotations"""
+    input:
+        metadata = "data/metadata.tsv",
+        identical = "defaults/sh/metadata_identical.tsv",
+    output:
+        merged_metadata = "data/metadata_merged.tsv",
+    params:
+        id_column = "accession",
+    shell:
+        r"""
+        augur merge --metadata \
+          a={input.metadata:q} \
+          b={input.identical:q} \
+          --metadata-id-columns {params.id_column} \
+          --output-metadata {output.merged_metadata}
+        """
+
 rule filter:
     """
     Filtering to
@@ -57,7 +75,6 @@ rule filter:
       - from {params.min_date} onwards
       - excluding strains in {input.exclude}
       - including strains in {input.include}
-      - minimum genome length of {params.min_length} (50% of Zika virus genome)
     """
     input:
         sequences = "data/sequences.fasta",
@@ -72,7 +89,6 @@ rule filter:
     benchmark:
         "benchmarks/{build}/filtered.txt",
     params:
-        min_length = config['filter']['min_length'],
         group_by = config['filter']['group_by'],
         filter_params = lambda wildcard: config['filter']['specific'][wildcard.build],
         strain_id = config.get("strain_id_field", "strain"),
@@ -86,8 +102,52 @@ rule filter:
             --include {input.include:q} \
             --output {output.sequences:q} \
             --output-metadata {output.metadata:q} \
-            --min-length {params.min_length:q} \
             --group-by {params.group_by} \
+            {params.filter_params} 2>&1 | tee {log:q}
+        """
+
+ruleorder: filter_sh > filter
+
+rule filter_sh:
+    """
+    Filtering to
+      - various criteria based on the auspice JSON target
+      - from {params.min_date} onwards
+      - excluding strains in {input.exclude}
+      - including strains in {input.include}
+    """
+    input:
+        sequences = "data/sequences.fasta",
+        metadata = "data/metadata.tsv",
+        clade_membership = "defaults/sh/metadata_duplicate.txt",
+        exclude = "defaults/sh/exclude.txt",
+        include = "defaults/sh/include.txt"
+    output:
+        merged_metadata = "results/sh/metadata_merged.tsv",
+        sequences = "results/sh/filtered.fasta",
+        metadata = "results/sh/metadata.tsv",
+    log:
+        "logs/sh/filtered.txt",
+    benchmark:
+        "benchmarks/sh/filtered.txt",
+    params:
+        group_by = config['filter']['group_by'],
+        filter_params = config['filter']['specific']['sh'],
+        strain_id = config.get("strain_id_field", "strain"),
+    shell:
+        r"""
+        augur merge \
+        --metadata a={input.metadata:q} b={input.clade_membership:q} \
+        --metadata-id-columns a={params.strain_id:q} b={params.strain_id:q} \
+        --output-metadata {output.merged_metadata:q}
+
+        augur filter \
+            --sequences {input.sequences:q} \
+            --metadata {output.merged_metadata:q} \
+            --metadata-id-columns {params.strain_id:q} \
+            --include {input.include:q} \
+            --output-sequences {output.sequences:q} \
+            --output-metadata {output.metadata:q} \
             {params.filter_params} 2>&1 | tee {log:q}
         """
 
@@ -98,7 +158,7 @@ rule align:
     """
     input:
         sequences = "results/{build}/filtered.fasta",
-        reference = config['reference'],
+        reference = lambda wildcard: config['reference'][wildcard.build],
     output:
         alignment = "results/{build}/aligned.fasta",
     log:
