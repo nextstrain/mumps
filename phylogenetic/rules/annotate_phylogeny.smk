@@ -100,7 +100,7 @@ rule traits:
             --metadata {input.metadata:q} \
             --metadata-id-columns {params.strain_id:q} \
             --output {output.node_data:q} \
-            --columns {params.columns:q} \
+            --columns {params.columns} \
             --confidence \
             --sampling-bias-correction {params.sampling_bias_correction:q} | tee {log:q}
         """
