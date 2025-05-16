@@ -15,6 +15,7 @@ ancestral:
 
 traits:
   sh: clade_membership MuV_genotype
+  genome: clade_membership MuV_genotype
   sampling_bias_correction: 3
 
 colors:
