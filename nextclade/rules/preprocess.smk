@@ -51,7 +51,7 @@ rule merge_clade_membership:
         metadata="data/metadata.tsv",
         clade_membership="defaults/{build}/reference_strains.tsv",
     output:
-        merged_metadata="data/{build}/metadata_merged.tsv",
+        merged_metadata="data/{build}/metadata_merged_raw.tsv",
     benchmark:
         "benchmarks/{build}/merge_clade_membership.txt",
     params:
@@ -63,6 +63,18 @@ rule merge_clade_membership:
         --metadata a={input.metadata:q} b={input.clade_membership:q} \
         --metadata-id-columns a={params.metadata_id:q} b={params.clade_membership_id:q} \
         --output-metadata {output.merged_metadata:q}
+        """
+
+rule fill_in_clade_membership:
+    input:
+        merged_metadata="data/{build}/metadata_merged_raw.tsv",
+    output:
+        merged_metadata="data/{build}/metadata_merged.tsv",
+    benchmark:
+        "benchmarks/{build}/fill_in_clade_membership.txt",
+    shell:
+        r"""
+        python scripts/fill-clade-membership.py --input-metadata {input.merged_metadata} --output-metadata {output.merged_metadata}
         """
 
 rule filter:
@@ -85,7 +97,7 @@ rule filter:
     benchmark:
         "benchmarks/{build}/filtered.txt",
     params:
-        filter_params = '--exclude-all',
+        filter_params = lambda wildcard: config['filter'][wildcard.build],
         strain_id = config.get("strain_id_field", "strain"),
     shell:
         r"""

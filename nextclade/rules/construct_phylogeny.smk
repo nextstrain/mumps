@@ -57,7 +57,7 @@ rule refine:
     benchmark:
         "benchmarks/{build}/refine.txt",
     params:
-        refine_params = '--root mid_point',
+        refine_params = lambda wildcard: config['refine'][wildcard.build],
         strain_id = config.get("strain_id_field", "strain"),
     shell:
         r"""
