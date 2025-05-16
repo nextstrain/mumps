@@ -20,8 +20,6 @@ https://docs.nextstrain.org/projects/nextclade/page/user/nextclade-cli.html
 """
 DATASET_NAMES = config["nextclade"]["dataset_name"]
 
-DATASET_NAMES = ['genome', 'sh']
-
 wildcard_constraints:
     DATASET_NAME = "|".join(DATASET_NAMES)
 
@@ -96,6 +94,7 @@ rule join_metadata_and_nextclade:
         metadata="data/subset_metadata.tsv",
         sh_nextclade_metadata="results/sh/nextclade_metadata.tsv",
         genome_nextclade_metadata="results/genome/nextclade_metadata.tsv",
+        genomesample_nextclade_metadata="results/genomesample/nextclade_metadata.tsv",
     output:
         metadata="results/metadata.tsv",
     params:
@@ -108,10 +107,12 @@ rule join_metadata_and_nextclade:
                 metadata={input.metadata:q} \
                 sh_nextclade={input.sh_nextclade_metadata:q} \
                 genome_nextclade={input.genome_nextclade_metadata:q} \
+                genomesample_nextclade={input.genomesample_nextclade_metadata:q} \
             --metadata-id-columns \
                 metadata={params.metadata_id_field:q} \
                 sh_nextclade={params.nextclade_id_field:q} \
                 genome_nextclade={params.nextclade_id_field:q} \
+                genomesample_nextclade={params.nextclade_id_field:q} \
             --output-metadata {output.metadata:q} \
             --no-source-columns
         """
