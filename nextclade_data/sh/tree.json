@@ -2,7 +2,7 @@
   "version": "v2",
   "meta": {
     "title": "Real-time tracking of mumps virus evolution",
-    "updated": "2025-05-11",
+    "updated": "2025-05-15",
     "build_url": "https://github.com/nextstrain/mumps",
     "data_provenance": [
       {
@@ -188,41 +188,41 @@
       {
         "key": "country",
         "demes": {
-          "China": {
-            "latitude": 35.000074,
-            "longitude": 104.999927
-          },
-          "USA": {
-            "latitude": 39.7837304,
-            "longitude": -100.4458824
-          },
-          "Mongolia": {
-            "latitude": 46.8250388,
-            "longitude": 103.8499736
+          "Denmark": {
+            "latitude": 56.0,
+            "longitude": 10.0
           },
           "Germany": {
             "latitude": 51.0834196,
             "longitude": 10.4234469
           },
-          "Denmark": {
-            "latitude": 56.0,
-            "longitude": 10.0
+          "United Kingdom": {
+            "latitude": 54.542713,
+            "longitude": -2.384858
           },
-          "Sweden": {
-            "latitude": 59.6749712,
-            "longitude": 14.5208584
-          },
-          "Croatia": {
-            "latitude": 45.16667,
-            "longitude": 15.5
+          "China": {
+            "latitude": 35.000074,
+            "longitude": 104.999927
           },
           "Japan": {
             "latitude": 35.68536,
             "longitude": 139.75309
           },
-          "United Kingdom": {
-            "latitude": 54.542713,
-            "longitude": -2.384858
+          "Croatia": {
+            "latitude": 45.16667,
+            "longitude": 15.5
+          },
+          "Sweden": {
+            "latitude": 59.6749712,
+            "longitude": 14.5208584
+          },
+          "Mongolia": {
+            "latitude": 46.8250388,
+            "longitude": 103.8499736
+          },
+          "USA": {
+            "latitude": 39.7837304,
+            "longitude": -100.4458824
           },
           "Russia": {
             "latitude": 64.6863136,
@@ -233,10 +233,6 @@
       {
         "key": "region",
         "demes": {
-          "Asia": {
-            "latitude": 35.000074,
-            "longitude": 104.999927
-          },
           "North America": {
             "latitude": 28.2367447,
             "longitude": -97.738017
@@ -244,6 +240,10 @@
           "Europe": {
             "latitude": 49.646237,
             "longitude": 10.799454
+          },
+          "Asia": {
+            "latitude": 35.000074,
+            "longitude": 104.999927
           }
         }
       }
@@ -295,7 +295,27 @@
   "tree": {
     "name": "NODE_0000000",
     "node_attrs": {
-      "div": 0
+      "div": 0,
+      "clade_membership": {
+        "value": "N",
+        "confidence": {
+          "N": 0.145,
+          "K": 0.0839,
+          "D": 0.0833,
+          "G": 0.0786,
+          "B": 0.0767,
+          "H": 0.0736,
+          "ungroup1": 0.0717,
+          "C": 0.0705,
+          "A": 0.0636,
+          "I": 0.056,
+          "L": 0.0554,
+          "F": 0.0531,
+          "J": 0.0479,
+          "ungroup2": 0.0406
+        },
+        "entropy": 2.588
+      }
     },
     "branch_attrs": {
       "mutations": {
@@ -304,13 +324,14 @@
           "G10A",
           "A28T",
           "A45G",
+          "A88G",
           "C126T",
           "C127T",
           "C133T",
           "A139G",
-          "C149T",
           "C162T",
           "G169A",
+          "A177C",
           "C178T",
           "C179T",
           "T184G",
@@ -318,10 +339,8 @@
           "T193G",
           "G196A",
           "T197C",
-          "C215A",
           "C225T",
           "G233A",
-          "T238C",
           "A244C",
           "C261T",
           "T262C",
@@ -329,7 +348,6 @@
           "G280A",
           "G285A",
           "C289T",
-          "T292G",
           "C307T",
           "C308T",
           "A315T",
@@ -342,6 +360,7 @@
         "SH": [
           "T16I",
           "T28I",
+          "N33T",
           "H34Y",
           "N35K",
           "Y40H",
@@ -351,7 +370,7 @@
         ]
       },
       "labels": {
-        "aa": "SH: T16I, T28I, H34Y, N35K, Y40H, S49F, G52S, Q55H"
+        "aa": "SH: T16I, T28I, N33T, H34Y, N35K, Y40H, S49F, G52S, Q55H"
       }
     },
     "children": [
@@ -362,21 +381,22 @@
           "clade_membership": {
             "value": "A",
             "confidence": {
-              "A": 0.971,
-              "": 0.00415,
-              "N": 0.00237,
-              "K": 0.00226,
-              "H": 0.00226,
-              "C": 0.00224,
-              "B": 0.00224,
-              "D": 0.00223,
-              "G": 0.00222,
-              "F": 0.00218,
-              "I": 0.00216,
-              "J": 0.00214,
-              "L": 0.00214
+              "A": 0.965,
+              "N": 0.0033,
+              "H": 0.00275,
+              "K": 0.00274,
+              "C": 0.00273,
+              "G": 0.00272,
+              "B": 0.00272,
+              "D": 0.0027,
+              "ungroup1": 0.00269,
+              "F": 0.00265,
+              "I": 0.00256,
+              "L": 0.00255,
+              "J": 0.00254,
+              "ungroup2": 0.00248
             },
-            "entropy": 0.2
+            "entropy": 0.242
           },
           "MuV_genotype": {
             "value": "A",
@@ -404,24 +424,22 @@
               "G4A",
               "T28A",
               "G45A",
+              "G88A",
               "T127C",
               "T133C",
               "G139A",
-              "T149C",
               "T162C",
               "A169G",
+              "C177A",
               "T178C",
               "T187G",
               "C197T",
-              "A215C",
               "T225C",
               "A233G",
-              "C238T",
               "T261C",
               "A280G",
               "A285G",
               "T289C",
-              "G292T",
               "T315A",
               "C318T",
               "T321G",
@@ -430,13 +448,14 @@
             ],
             "SH": [
               "I28T",
+              "T33N",
               "H40Y",
               "F49S",
               "S52G"
             ]
           },
           "labels": {
-            "aa": "SH: I28T, H40Y, F49S, S52G"
+            "aa": "SH: I28T, T33N, H40Y, F49S, S52G"
           }
         },
         "children": [
@@ -449,7 +468,7 @@
                 "confidence": {
                   "A": 1.0
                 },
-                "entropy": 0.000424
+                "entropy": 0.000536
               },
               "MuV_genotype": {
                 "value": "A",
@@ -497,6 +516,9 @@
                     "author": "Zhang et al.",
                     "value": "Zhang et al."
                   },
+                  "region": {
+                    "value": "Asia"
+                  },
                   "clade_membership": {
                     "value": "A",
                     "confidence": {
@@ -513,9 +535,6 @@
                   },
                   "country": {
                     "value": "China"
-                  },
-                  "region": {
-                    "value": "Asia"
                   }
                 },
                 "branch_attrs": {
@@ -567,9 +586,9 @@
               "clade_membership": {
                 "value": "A",
                 "confidence": {
-                  "A": 0.996
+                  "A": 0.995
                 },
-                "entropy": 0.0334
+                "entropy": 0.0442
               },
               "MuV_genotype": {
                 "value": "A",
@@ -605,7 +624,7 @@
                     "confidence": {
                       "A": 1.0
                     },
-                    "entropy": 0.000674
+                    "entropy": 0.000854
                   },
                   "MuV_genotype": {
                     "value": "A",
@@ -691,7 +710,7 @@
                         "confidence": {
                           "A": 1.0
                         },
-                        "entropy": 1.71e-05
+                        "entropy": 2.09e-05
                       },
                       "MuV_genotype": {
                         "value": "A",
@@ -786,7 +805,7 @@
                     "confidence": {
                       "A": 1.0
                     },
-                    "entropy": 0.00131
+                    "entropy": 0.0017
                   },
                   "MuV_genotype": {
                     "value": "A",
@@ -867,7 +886,7 @@
                         "confidence": {
                           "A": 1.0
                         },
-                        "entropy": 4.31e-05
+                        "entropy": 5.17e-05
                       },
                       "MuV_genotype": {
                         "value": "A",
@@ -930,7 +949,7 @@
                             "confidence": {
                               "A": 1.0
                             },
-                            "entropy": 4.08e-06
+                            "entropy": 4.81e-06
                           },
                           "MuV_genotype": {
                             "value": "A",
@@ -1024,27 +1043,63 @@
       {
         "name": "NODE_0000009",
         "node_attrs": {
-          "div": 0.0102
+          "div": 0.0102,
+          "clade_membership": {
+            "value": "N",
+            "confidence": {
+              "N": 0.184,
+              "K": 0.0924,
+              "D": 0.0921,
+              "G": 0.0852,
+              "B": 0.0819,
+              "H": 0.0767,
+              "ungroup1": 0.0749,
+              "C": 0.0722,
+              "I": 0.0515,
+              "L": 0.051,
+              "F": 0.046,
+              "J": 0.0393,
+              "ungroup2": 0.0287,
+              "A": 0.0243
+            },
+            "entropy": 2.512
+          }
         },
         "branch_attrs": {
           "mutations": {
             "nuc": [
-              "A88G",
-              "A177C"
-            ],
-            "SH": [
-              "N33T"
+              "C149T",
+              "C215A",
+              "T238C",
+              "T292G"
             ]
-          },
-          "labels": {
-            "aa": "SH: N33T"
           }
         },
         "children": [
           {
             "name": "NODE_0000010",
             "node_attrs": {
-              "div": 0.0139
+              "div": 0.0139,
+              "clade_membership": {
+                "value": "N",
+                "confidence": {
+                  "N": 0.269,
+                  "ungroup1": 0.109,
+                  "K": 0.0714,
+                  "D": 0.0711,
+                  "G": 0.0665,
+                  "F": 0.0654,
+                  "B": 0.064,
+                  "H": 0.0603,
+                  "C": 0.0571,
+                  "I": 0.042,
+                  "L": 0.0417,
+                  "J": 0.0334,
+                  "ungroup2": 0.0257,
+                  "A": 0.0231
+                },
+                "entropy": 2.399
+              }
             },
             "branch_attrs": {
               "mutations": {
@@ -1064,7 +1119,7 @@
                     "confidence": {
                       "N": 1.0
                     },
-                    "entropy": 0.00174
+                    "entropy": 0.00194
                   },
                   "MuV_genotype": {
                     "value": "N",
@@ -1103,7 +1158,7 @@
                         "confidence": {
                           "N": 1.0
                         },
-                        "entropy": 1.07e-05
+                        "entropy": 1.38e-05
                       },
                       "MuV_genotype": {
                         "value": "N",
@@ -1162,6 +1217,9 @@
                             "author": "Neverov et al.",
                             "value": "Neverov et al."
                           },
+                          "region": {
+                            "value": "Europe"
+                          },
                           "clade_membership": {
                             "value": "N",
                             "confidence": {
@@ -1178,9 +1236,6 @@
                           },
                           "country": {
                             "value": "Russia"
-                          },
-                          "region": {
-                            "value": "Europe"
                           }
                         },
                         "branch_attrs": {
@@ -1198,7 +1253,7 @@
                         "confidence": {
                           "N": 1.0
                         },
-                        "entropy": 3.23e-05
+                        "entropy": 4.21e-05
                       },
                       "MuV_genotype": {
                         "value": "N",
@@ -1225,6 +1280,9 @@
                             "author": "Santak et al.",
                             "value": "Santak et al."
                           },
+                          "region": {
+                            "value": "Europe"
+                          },
                           "clade_membership": {
                             "value": "N",
                             "confidence": {
@@ -1241,9 +1299,6 @@
                           },
                           "country": {
                             "value": "Croatia"
-                          },
-                          "region": {
-                            "value": "Europe"
                           }
                         },
                         "branch_attrs": {
@@ -1267,6 +1322,9 @@
                             "author": "Neverov et al.",
                             "value": "Neverov et al."
                           },
+                          "region": {
+                            "value": "Europe"
+                          },
                           "clade_membership": {
                             "value": "N",
                             "confidence": {
@@ -1283,9 +1341,6 @@
                           },
                           "country": {
                             "value": "Russia"
-                          },
-                          "region": {
-                            "value": "Europe"
                           }
                         },
                         "branch_attrs": {
@@ -1299,7 +1354,27 @@
               {
                 "name": "NODE_0000014",
                 "node_attrs": {
-                  "div": 0.0202
+                  "div": 0.0202,
+                  "clade_membership": {
+                    "value": "ungroup1",
+                    "confidence": {
+                      "ungroup1": 0.201,
+                      "N": 0.196,
+                      "F": 0.118,
+                      "K": 0.0581,
+                      "D": 0.0578,
+                      "G": 0.0548,
+                      "B": 0.0531,
+                      "H": 0.0508,
+                      "C": 0.0487,
+                      "I": 0.0381,
+                      "L": 0.0378,
+                      "J": 0.0324,
+                      "ungroup2": 0.0271,
+                      "A": 0.026
+                    },
+                    "entropy": 2.39
+                  }
                 },
                 "branch_attrs": {
                   "mutations": {
@@ -1328,6 +1403,13 @@
                       "author": {
                         "author": "Jin et al.",
                         "value": "Jin et al."
+                      },
+                      "clade_membership": {
+                        "value": "ungroup1",
+                        "confidence": {
+                          "ungroup1": 1.0
+                        },
+                        "entropy": -1e-12
                       }
                     },
                     "branch_attrs": {
@@ -1361,7 +1443,7 @@
                         "confidence": {
                           "F": 1.0
                         },
-                        "entropy": 0.00382
+                        "entropy": 0.00434
                       },
                       "MuV_genotype": {
                         "value": "F",
@@ -1410,7 +1492,7 @@
                             "confidence": {
                               "F": 1.0
                             },
-                            "entropy": 0.000735
+                            "entropy": 0.000886
                           },
                           "MuV_genotype": {
                             "value": "F",
@@ -1440,6 +1522,9 @@
                                 "author": "He et al.",
                                 "value": "He et al."
                               },
+                              "region": {
+                                "value": "Asia"
+                              },
                               "clade_membership": {
                                 "value": "F",
                                 "confidence": {
@@ -1456,9 +1541,6 @@
                               },
                               "country": {
                                 "value": "China"
-                              },
-                              "region": {
-                                "value": "Asia"
                               }
                             },
                             "branch_attrs": {
@@ -1487,7 +1569,7 @@
                                 "confidence": {
                                   "F": 1.0
                                 },
-                                "entropy": 2.16e-05
+                                "entropy": 2.7e-05
                               },
                               "MuV_genotype": {
                                 "value": "F",
@@ -1529,6 +1611,9 @@
                                     "author": "Cui et al.",
                                     "value": "Cui et al."
                                   },
+                                  "region": {
+                                    "value": "Asia"
+                                  },
                                   "clade_membership": {
                                     "value": "F",
                                     "confidence": {
@@ -1545,9 +1630,6 @@
                                   },
                                   "country": {
                                     "value": "China"
-                                  },
-                                  "region": {
-                                    "value": "Asia"
                                   }
                                 },
                                 "branch_attrs": {
@@ -1570,6 +1652,9 @@
                                     "author": "Cui et al.",
                                     "value": "Cui et al."
                                   },
+                                  "region": {
+                                    "value": "Asia"
+                                  },
                                   "clade_membership": {
                                     "value": "F",
                                     "confidence": {
@@ -1586,9 +1671,6 @@
                                   },
                                   "country": {
                                     "value": "China"
-                                  },
-                                  "region": {
-                                    "value": "Asia"
                                   }
                                 },
                                 "branch_attrs": {
@@ -1608,7 +1690,7 @@
                             "confidence": {
                               "F": 1.0
                             },
-                            "entropy": 0.000233
+                            "entropy": 0.000296
                           },
                           "MuV_genotype": {
                             "value": "F",
@@ -1641,7 +1723,7 @@
                                 "confidence": {
                                   "F": 1.0
                                 },
-                                "entropy": 4.37e-05
+                                "entropy": 5.52e-05
                               },
                               "MuV_genotype": {
                                 "value": "F",
@@ -1684,6 +1766,9 @@
                                     "author": "He et al.",
                                     "value": "He et al."
                                   },
+                                  "region": {
+                                    "value": "Asia"
+                                  },
                                   "clade_membership": {
                                     "value": "F",
                                     "confidence": {
@@ -1700,9 +1785,6 @@
                                   },
                                   "country": {
                                     "value": "China"
-                                  },
-                                  "region": {
-                                    "value": "Asia"
                                   }
                                 },
                                 "branch_attrs": {
@@ -1728,6 +1810,9 @@
                                     "author": "Feng et al.",
                                     "value": "Feng et al."
                                   },
+                                  "region": {
+                                    "value": "Asia"
+                                  },
                                   "clade_membership": {
                                     "value": "F",
                                     "confidence": {
@@ -1744,9 +1829,6 @@
                                   },
                                   "country": {
                                     "value": "China"
-                                  },
-                                  "region": {
-                                    "value": "Asia"
                                   }
                                 },
                                 "branch_attrs": {
@@ -1764,7 +1846,7 @@
                                 "confidence": {
                                   "F": 1.0
                                 },
-                                "entropy": 0.000415
+                                "entropy": 0.000551
                               },
                               "MuV_genotype": {
                                 "value": "F",
@@ -1794,6 +1876,9 @@
                                     "author": "Ma et al.",
                                     "value": "Ma et al."
                                   },
+                                  "region": {
+                                    "value": "Asia"
+                                  },
                                   "clade_membership": {
                                     "value": "F",
                                     "confidence": {
@@ -1810,9 +1895,6 @@
                                   },
                                   "country": {
                                     "value": "China"
-                                  },
-                                  "region": {
-                                    "value": "Asia"
                                   }
                                 },
                                 "branch_attrs": {
@@ -1842,7 +1924,7 @@
                                     "confidence": {
                                       "F": 0.999
                                     },
-                                    "entropy": 0.00684
+                                    "entropy": 0.00926
                                   },
                                   "MuV_genotype": {
                                     "value": "F",
@@ -1989,7 +2071,27 @@
           {
             "name": "NODE_0000022",
             "node_attrs": {
-              "div": 0.0127
+              "div": 0.0127,
+              "clade_membership": {
+                "value": "N",
+                "confidence": {
+                  "N": 0.13,
+                  "K": 0.108,
+                  "D": 0.107,
+                  "G": 0.0986,
+                  "B": 0.0947,
+                  "H": 0.0882,
+                  "C": 0.0827,
+                  "I": 0.0576,
+                  "L": 0.0571,
+                  "ungroup1": 0.0524,
+                  "J": 0.0427,
+                  "F": 0.0325,
+                  "ungroup2": 0.0298,
+                  "A": 0.0184
+                },
+                "entropy": 2.524
+              }
             },
             "branch_attrs": {
               "mutations": {}
@@ -1998,7 +2100,27 @@
               {
                 "name": "NODE_0000023",
                 "node_attrs": {
-                  "div": 0.0128
+                  "div": 0.0128,
+                  "clade_membership": {
+                    "value": "K",
+                    "confidence": {
+                      "K": 0.123,
+                      "D": 0.123,
+                      "N": 0.12,
+                      "G": 0.112,
+                      "B": 0.0872,
+                      "H": 0.0813,
+                      "C": 0.0763,
+                      "I": 0.0536,
+                      "L": 0.0531,
+                      "ungroup1": 0.0489,
+                      "J": 0.0401,
+                      "ungroup2": 0.0334,
+                      "F": 0.0309,
+                      "A": 0.0182
+                    },
+                    "entropy": 2.51
+                  }
                 },
                 "branch_attrs": {
                   "mutations": {}
@@ -2011,21 +2133,22 @@
                       "clade_membership": {
                         "value": "G",
                         "confidence": {
-                          "G": 0.257,
-                          "": 0.235,
-                          "K": 0.0694,
-                          "D": 0.0691,
-                          "N": 0.0648,
-                          "B": 0.0527,
-                          "H": 0.0502,
-                          "C": 0.0482,
-                          "I": 0.0373,
-                          "L": 0.0373,
-                          "J": 0.0315,
-                          "F": 0.027,
-                          "A": 0.021
+                          "G": 0.282,
+                          "K": 0.0831,
+                          "D": 0.0827,
+                          "N": 0.0814,
+                          "ungroup2": 0.0799,
+                          "B": 0.0622,
+                          "H": 0.0591,
+                          "C": 0.0563,
+                          "I": 0.0427,
+                          "L": 0.0424,
+                          "ungroup1": 0.0399,
+                          "J": 0.0352,
+                          "F": 0.03,
+                          "A": 0.0228
                         },
-                        "entropy": 2.221
+                        "entropy": 2.384
                       },
                       "MuV_genotype": {
                         "value": "G",
@@ -2066,7 +2189,14 @@
                       {
                         "name": "NODE_0000025",
                         "node_attrs": {
-                          "div": 0.0703
+                          "div": 0.0703,
+                          "clade_membership": {
+                            "value": "ungroup2",
+                            "confidence": {
+                              "ungroup2": 1.0
+                            },
+                            "entropy": 0.00132
+                          }
                         },
                         "branch_attrs": {
                           "mutations": {
@@ -2116,11 +2246,18 @@
                                 "author": "Jin et al.",
                                 "value": "Jin et al."
                               },
-                              "country": {
-                                "value": "United Kingdom"
-                              },
                               "region": {
                                 "value": "Europe"
+                              },
+                              "clade_membership": {
+                                "value": "ungroup2",
+                                "confidence": {
+                                  "ungroup2": 1.0
+                                },
+                                "entropy": -1e-12
+                              },
+                              "country": {
+                                "value": "United Kingdom"
                               }
                             },
                             "branch_attrs": {
@@ -2139,6 +2276,13 @@
                               "author": {
                                 "author": "Jin et al.",
                                 "value": "Jin et al."
+                              },
+                              "clade_membership": {
+                                "value": "ungroup2",
+                                "confidence": {
+                                  "ungroup2": 1.0
+                                },
+                                "entropy": -1e-12
                               }
                             },
                             "branch_attrs": {
@@ -2156,7 +2300,7 @@
                             "confidence": {
                               "G": 0.998
                             },
-                            "entropy": 0.0212
+                            "entropy": 0.0234
                           },
                           "MuV_genotype": {
                             "value": "G",
@@ -2189,7 +2333,7 @@
                                 "confidence": {
                                   "G": 1.0
                                 },
-                                "entropy": 4.72e-05
+                                "entropy": 5.43e-05
                               },
                               "MuV_genotype": {
                                 "value": "G",
@@ -2285,7 +2429,7 @@
                                 "confidence": {
                                   "G": 1.0
                                 },
-                                "entropy": 0.00173
+                                "entropy": 0.00222
                               },
                               "MuV_genotype": {
                                 "value": "G",
@@ -2355,7 +2499,7 @@
                                     "confidence": {
                                       "G": 1.0
                                     },
-                                    "entropy": 6.99e-05
+                                    "entropy": 9.38e-05
                                   },
                                   "MuV_genotype": {
                                     "value": "G",
@@ -2397,6 +2541,9 @@
                                         "author": "Cui et al.",
                                         "value": "Cui et al."
                                       },
+                                      "region": {
+                                        "value": "Europe"
+                                      },
                                       "clade_membership": {
                                         "value": "G",
                                         "confidence": {
@@ -2413,9 +2560,6 @@
                                       },
                                       "country": {
                                         "value": "United Kingdom"
-                                      },
-                                      "region": {
-                                        "value": "Europe"
                                       }
                                     },
                                     "branch_attrs": {
@@ -2431,7 +2575,7 @@
                                         "confidence": {
                                           "G": 1.0
                                         },
-                                        "entropy": 1.12e-05
+                                        "entropy": 1.45e-05
                                       },
                                       "MuV_genotype": {
                                         "value": "G",
@@ -2458,6 +2602,9 @@
                                             "author": "Santak et al.",
                                             "value": "Santak et al."
                                           },
+                                          "region": {
+                                            "value": "Europe"
+                                          },
                                           "clade_membership": {
                                             "value": "G",
                                             "confidence": {
@@ -2474,9 +2621,6 @@
                                           },
                                           "country": {
                                             "value": "Croatia"
-                                          },
-                                          "region": {
-                                            "value": "Europe"
                                           }
                                         },
                                         "branch_attrs": {
@@ -2502,7 +2646,7 @@
                                             "confidence": {
                                               "G": 1.0
                                             },
-                                            "entropy": 3.95e-06
+                                            "entropy": 5.07e-06
                                           },
                                           "MuV_genotype": {
                                             "value": "G",
@@ -2532,6 +2676,9 @@
                                                 "author": "Santak et al.",
                                                 "value": "Santak et al."
                                               },
+                                              "region": {
+                                                "value": "Europe"
+                                              },
                                               "clade_membership": {
                                                 "value": "G",
                                                 "confidence": {
@@ -2548,9 +2695,6 @@
                                               },
                                               "country": {
                                                 "value": "Croatia"
-                                              },
-                                              "region": {
-                                                "value": "Europe"
                                               }
                                             },
                                             "branch_attrs": {
@@ -2573,6 +2717,9 @@
                                                 "author": "Kirkness et al.",
                                                 "value": "Kirkness et al."
                                               },
+                                              "region": {
+                                                "value": "North America"
+                                              },
                                               "clade_membership": {
                                                 "value": "G",
                                                 "confidence": {
@@ -2589,9 +2736,6 @@
                                               },
                                               "country": {
                                                 "value": "USA"
-                                              },
-                                              "region": {
-                                                "value": "North America"
                                               }
                                             },
                                             "branch_attrs": {
@@ -2613,25 +2757,26 @@
                   {
                     "name": "NODE_0000032",
                     "node_attrs": {
-                      "div": 0.0242,
+                      "div": 0.0241,
                       "clade_membership": {
                         "value": "K",
                         "confidence": {
-                          "K": 0.363,
-                          "D": 0.361,
-                          "": 0.075,
-                          "G": 0.0295,
-                          "N": 0.0286,
-                          "B": 0.0239,
-                          "H": 0.0228,
-                          "C": 0.022,
-                          "I": 0.0176,
-                          "L": 0.0175,
-                          "J": 0.0151,
-                          "F": 0.0132,
-                          "A": 0.0107
+                          "K": 0.369,
+                          "D": 0.367,
+                          "N": 0.0363,
+                          "G": 0.0346,
+                          "B": 0.0279,
+                          "H": 0.0266,
+                          "C": 0.0254,
+                          "I": 0.0195,
+                          "L": 0.0194,
+                          "ungroup1": 0.0183,
+                          "J": 0.0163,
+                          "ungroup2": 0.0148,
+                          "F": 0.0141,
+                          "A": 0.0112
                         },
-                        "entropy": 1.706
+                        "entropy": 1.728
                       },
                       "MuV_genotype": {
                         "value": "K",
@@ -2640,7 +2785,7 @@
                           "D": 0.361,
                           "": 0.075,
                           "G": 0.0295,
-                          "N": 0.0286,
+                          "N": 0.0285,
                           "B": 0.0239,
                           "H": 0.0228,
                           "C": 0.022,
@@ -2671,10 +2816,10 @@
                           "clade_membership": {
                             "value": "D",
                             "confidence": {
-                              "D": 0.994,
-                              "K": 0.00324
+                              "D": 0.993,
+                              "K": 0.00392
                             },
-                            "entropy": 0.0477
+                            "entropy": 0.0563
                           },
                           "MuV_genotype": {
                             "value": "D",
@@ -2711,10 +2856,10 @@
                               "clade_membership": {
                                 "value": "D",
                                 "confidence": {
-                                  "D": 0.996,
-                                  "K": 0.00231
+                                  "D": 0.994,
+                                  "K": 0.0029
                                 },
-                                "entropy": 0.0365
+                                "entropy": 0.0449
                               },
                               "MuV_genotype": {
                                 "value": "D",
@@ -2796,6 +2941,9 @@
                                     "author": "Cui et al.",
                                     "value": "Cui et al."
                                   },
+                                  "region": {
+                                    "value": "Europe"
+                                  },
                                   "clade_membership": {
                                     "value": "D",
                                     "confidence": {
@@ -2812,9 +2960,6 @@
                                   },
                                   "country": {
                                     "value": "United Kingdom"
-                                  },
-                                  "region": {
-                                    "value": "Europe"
                                   }
                                 },
                                 "branch_attrs": {
@@ -2852,7 +2997,7 @@
                                 "confidence": {
                                   "D": 1.0
                                 },
-                                "entropy": 6.92e-05
+                                "entropy": 8.74e-05
                               },
                               "MuV_genotype": {
                                 "value": "D",
@@ -2897,6 +3042,9 @@
                                     "author": "Jin et al.",
                                     "value": "Jin et al."
                                   },
+                                  "region": {
+                                    "value": "Europe"
+                                  },
                                   "clade_membership": {
                                     "value": "D",
                                     "confidence": {
@@ -2913,9 +3061,6 @@
                                   },
                                   "country": {
                                     "value": "United Kingdom"
-                                  },
-                                  "region": {
-                                    "value": "Europe"
                                   }
                                 },
                                 "branch_attrs": {
@@ -2938,6 +3083,9 @@
                                     "author": "Jin et al.",
                                     "value": "Jin et al."
                                   },
+                                  "region": {
+                                    "value": "Europe"
+                                  },
                                   "clade_membership": {
                                     "value": "D",
                                     "confidence": {
@@ -2954,9 +3102,6 @@
                                   },
                                   "country": {
                                     "value": "Germany"
-                                  },
-                                  "region": {
-                                    "value": "Europe"
                                   }
                                 },
                                 "branch_attrs": {
@@ -2974,10 +3119,10 @@
                           "clade_membership": {
                             "value": "K",
                             "confidence": {
-                              "K": 0.992,
-                              "D": 0.00415
+                              "K": 0.991,
+                              "D": 0.00499
                             },
-                            "entropy": 0.0597
+                            "entropy": 0.0701
                           },
                           "MuV_genotype": {
                             "value": "K",
@@ -3012,9 +3157,10 @@
                               "clade_membership": {
                                 "value": "K",
                                 "confidence": {
-                                  "K": 0.996
+                                  "K": 0.995,
+                                  "D": 0.00112
                                 },
-                                "entropy": 0.0323
+                                "entropy": 0.0442
                               },
                               "MuV_genotype": {
                                 "value": "K",
@@ -3059,6 +3205,9 @@
                                     "author": "Tecle et al.",
                                     "value": "Tecle et al."
                                   },
+                                  "region": {
+                                    "value": "Europe"
+                                  },
                                   "clade_membership": {
                                     "value": "K",
                                     "confidence": {
@@ -3075,9 +3224,6 @@
                                   },
                                   "country": {
                                     "value": "Denmark"
-                                  },
-                                  "region": {
-                                    "value": "Europe"
                                   }
                                 },
                                 "branch_attrs": {
@@ -3123,6 +3269,9 @@
                                     "author": "Jin et al.",
                                     "value": "Jin et al."
                                   },
+                                  "region": {
+                                    "value": "Europe"
+                                  },
                                   "clade_membership": {
                                     "value": "K",
                                     "confidence": {
@@ -3139,9 +3288,6 @@
                                   },
                                   "country": {
                                     "value": "Sweden"
-                                  },
-                                  "region": {
-                                    "value": "Europe"
                                   }
                                 },
                                 "branch_attrs": {
@@ -3173,10 +3319,10 @@
                               "clade_membership": {
                                 "value": "K",
                                 "confidence": {
-                                  "K": 0.996,
-                                  "D": 0.0021
+                                  "K": 0.995,
+                                  "D": 0.00268
                                 },
-                                "entropy": 0.0328
+                                "entropy": 0.0406
                               },
                               "MuV_genotype": {
                                 "value": "K",
@@ -3207,6 +3353,9 @@
                                     "author": "Kirkness et al.",
                                     "value": "Kirkness et al."
                                   },
+                                  "region": {
+                                    "value": "North America"
+                                  },
                                   "clade_membership": {
                                     "value": "K",
                                     "confidence": {
@@ -3223,9 +3372,6 @@
                                   },
                                   "country": {
                                     "value": "USA"
-                                  },
-                                  "region": {
-                                    "value": "North America"
                                   }
                                 },
                                 "branch_attrs": {
@@ -3261,7 +3407,7 @@
                                     "confidence": {
                                       "K": 1.0
                                     },
-                                    "entropy": 5.82e-05
+                                    "entropy": 7.53e-05
                                   },
                                   "MuV_genotype": {
                                     "value": "K",
@@ -3284,7 +3430,7 @@
                                   {
                                     "name": "JQ945276",
                                     "node_attrs": {
-                                      "div": 0.0438,
+                                      "div": 0.0437,
                                       "strain": {
                                         "value": "MuVi/RW154.USA/0.70s[K]"
                                       },
@@ -3300,6 +3446,9 @@
                                         "author": "Jin et al.",
                                         "value": "Jin et al."
                                       },
+                                      "region": {
+                                        "value": "North America"
+                                      },
                                       "clade_membership": {
                                         "value": "K",
                                         "confidence": {
@@ -3316,9 +3465,6 @@
                                       },
                                       "country": {
                                         "value": "USA"
-                                      },
-                                      "region": {
-                                        "value": "North America"
                                       }
                                     },
                                     "branch_attrs": {
@@ -3328,7 +3474,7 @@
                                   {
                                     "name": "KF878080",
                                     "node_attrs": {
-                                      "div": 0.0438,
+                                      "div": 0.0437,
                                       "strain": {
                                         "value": "MuVi/RW154.USA/0.70s[K]"
                                       },
@@ -3341,6 +3487,9 @@
                                         "author": "Jin et al.",
                                         "value": "Jin et al."
                                       },
+                                      "region": {
+                                        "value": "North America"
+                                      },
                                       "clade_membership": {
                                         "value": "K",
                                         "confidence": {
@@ -3357,9 +3506,6 @@
                                       },
                                       "country": {
                                         "value": "USA"
-                                      },
-                                      "region": {
-                                        "value": "North America"
                                       }
                                     },
                                     "branch_attrs": {
@@ -3379,7 +3525,27 @@
               {
                 "name": "NODE_0000040",
                 "node_attrs": {
-                  "div": 0.0128
+                  "div": 0.0128,
+                  "clade_membership": {
+                    "value": "N",
+                    "confidence": {
+                      "N": 0.118,
+                      "B": 0.107,
+                      "H": 0.0992,
+                      "K": 0.0972,
+                      "D": 0.0969,
+                      "C": 0.0928,
+                      "G": 0.0895,
+                      "I": 0.0646,
+                      "L": 0.0639,
+                      "ungroup1": 0.048,
+                      "J": 0.0474,
+                      "F": 0.0302,
+                      "ungroup2": 0.0278,
+                      "A": 0.0178
+                    },
+                    "entropy": 2.53
+                  }
                 },
                 "branch_attrs": {
                   "mutations": {}
@@ -3392,21 +3558,22 @@
                       "clade_membership": {
                         "value": "B",
                         "confidence": {
-                          "B": 0.31,
-                          "I": 0.191,
-                          "": 0.121,
-                          "N": 0.0492,
-                          "H": 0.0471,
-                          "C": 0.0451,
-                          "K": 0.0445,
-                          "D": 0.0443,
-                          "G": 0.0427,
-                          "L": 0.035,
-                          "J": 0.0294,
-                          "F": 0.0224,
-                          "A": 0.0182
+                          "B": 0.316,
+                          "I": 0.19,
+                          "N": 0.0627,
+                          "H": 0.0547,
+                          "K": 0.0531,
+                          "D": 0.0528,
+                          "C": 0.052,
+                          "G": 0.0499,
+                          "L": 0.0388,
+                          "J": 0.0319,
+                          "ungroup1": 0.0316,
+                          "F": 0.0243,
+                          "ungroup2": 0.0231,
+                          "A": 0.0191
                         },
-                        "entropy": 2.157
+                        "entropy": 2.225
                       },
                       "MuV_genotype": {
                         "value": "B",
@@ -3447,9 +3614,9 @@
                             "value": "I",
                             "confidence": {
                               "I": 0.996,
-                              "B": 0.00104
+                              "B": 0.00114
                             },
-                            "entropy": 0.0345
+                            "entropy": 0.0384
                           },
                           "MuV_genotype": {
                             "value": "I",
@@ -3531,7 +3698,7 @@
                                 "confidence": {
                                   "I": 1.0
                                 },
-                                "entropy": 5.43e-05
+                                "entropy": 6.52e-05
                               },
                               "MuV_genotype": {
                                 "value": "I",
@@ -3570,6 +3737,9 @@
                                     "author": "Jin et al.",
                                     "value": "Jin et al."
                                   },
+                                  "region": {
+                                    "value": "Asia"
+                                  },
                                   "clade_membership": {
                                     "value": "I",
                                     "confidence": {
@@ -3586,9 +3756,6 @@
                                   },
                                   "country": {
                                     "value": "Japan"
-                                  },
-                                  "region": {
-                                    "value": "Asia"
                                   }
                                 },
                                 "branch_attrs": {
@@ -3604,7 +3771,7 @@
                                     "confidence": {
                                       "I": 1.0
                                     },
-                                    "entropy": 4.58e-05
+                                    "entropy": 5.68e-05
                                   },
                                   "MuV_genotype": {
                                     "value": "I",
@@ -3634,6 +3801,9 @@
                                         "author": "Jin et al.",
                                         "value": "Jin et al."
                                       },
+                                      "region": {
+                                        "value": "Asia"
+                                      },
                                       "clade_membership": {
                                         "value": "I",
                                         "confidence": {
@@ -3650,9 +3820,6 @@
                                       },
                                       "country": {
                                         "value": "Japan"
-                                      },
-                                      "region": {
-                                        "value": "Asia"
                                       }
                                     },
                                     "branch_attrs": {
@@ -3668,7 +3835,7 @@
                                         "confidence": {
                                           "I": 1.0
                                         },
-                                        "entropy": 0.00102
+                                        "entropy": 0.00129
                                       },
                                       "MuV_genotype": {
                                         "value": "I",
@@ -3753,6 +3920,9 @@
                                             "author": "Lee et al.",
                                             "value": "Lee et al."
                                           },
+                                          "region": {
+                                            "value": "Asia"
+                                          },
                                           "clade_membership": {
                                             "value": "I",
                                             "confidence": {
@@ -3766,9 +3936,6 @@
                                               "I": 1.0
                                             },
                                             "entropy": -1e-12
-                                          },
-                                          "region": {
-                                            "value": "Asia"
                                           }
                                         },
                                         "branch_attrs": {
@@ -3798,7 +3965,7 @@
                             "confidence": {
                               "B": 0.998
                             },
-                            "entropy": 0.0161
+                            "entropy": 0.0181
                           },
                           "MuV_genotype": {
                             "value": "B",
@@ -3838,7 +4005,7 @@
                                 "confidence": {
                                   "B": 1.0
                                 },
-                                "entropy": 0.00161
+                                "entropy": 0.00209
                               },
                               "MuV_genotype": {
                                 "value": "B",
@@ -3867,7 +4034,7 @@
                                     "confidence": {
                                       "B": 1.0
                                     },
-                                    "entropy": 0.00351
+                                    "entropy": 0.00468
                                   },
                                   "MuV_genotype": {
                                     "value": "B",
@@ -3910,6 +4077,9 @@
                                         "author": "Jin et al.",
                                         "value": "Jin et al."
                                       },
+                                      "region": {
+                                        "value": "Asia"
+                                      },
                                       "clade_membership": {
                                         "value": "B",
                                         "confidence": {
@@ -3926,9 +4096,6 @@
                                       },
                                       "country": {
                                         "value": "Japan"
-                                      },
-                                      "region": {
-                                        "value": "Asia"
                                       }
                                     },
                                     "branch_attrs": {
@@ -4011,7 +4178,7 @@
                                     "confidence": {
                                       "B": 1.0
                                     },
-                                    "entropy": 3.47e-05
+                                    "entropy": 4.4e-05
                                   },
                                   "MuV_genotype": {
                                     "value": "B",
@@ -4115,7 +4282,7 @@
                                 "confidence": {
                                   "B": 1.0
                                 },
-                                "entropy": 0.00437
+                                "entropy": 0.00523
                               },
                               "MuV_genotype": {
                                 "value": "B",
@@ -4185,7 +4352,7 @@
                                     "confidence": {
                                       "B": 1.0
                                     },
-                                    "entropy": 0.000743
+                                    "entropy": 0.000958
                                   },
                                   "MuV_genotype": {
                                     "value": "B",
@@ -4213,7 +4380,7 @@
                                         "confidence": {
                                           "B": 1.0
                                         },
-                                        "entropy": 4.65e-05
+                                        "entropy": 5.93e-05
                                       },
                                       "MuV_genotype": {
                                         "value": "B",
@@ -4317,7 +4484,7 @@
                                         "confidence": {
                                           "B": 1.0
                                         },
-                                        "entropy": 1.22e-05
+                                        "entropy": 1.53e-05
                                       },
                                       "MuV_genotype": {
                                         "value": "B",
@@ -4412,7 +4579,27 @@
                   {
                     "name": "NODE_0000054",
                     "node_attrs": {
-                      "div": 0.0128
+                      "div": 0.0128,
+                      "clade_membership": {
+                        "value": "H",
+                        "confidence": {
+                          "H": 0.114,
+                          "N": 0.11,
+                          "C": 0.106,
+                          "B": 0.0992,
+                          "K": 0.0904,
+                          "D": 0.0901,
+                          "G": 0.0835,
+                          "L": 0.073,
+                          "I": 0.0606,
+                          "J": 0.054,
+                          "ungroup1": 0.0454,
+                          "F": 0.0292,
+                          "ungroup2": 0.027,
+                          "A": 0.0179
+                        },
+                        "entropy": 2.53
+                      }
                     },
                     "branch_attrs": {
                       "mutations": {}
@@ -4421,7 +4608,27 @@
                       {
                         "name": "NODE_0000055",
                         "node_attrs": {
-                          "div": 0.0154
+                          "div": 0.0154,
+                          "clade_membership": {
+                            "value": "C",
+                            "confidence": {
+                              "C": 0.151,
+                              "H": 0.102,
+                              "N": 0.0981,
+                              "B": 0.0891,
+                              "K": 0.0815,
+                              "D": 0.0812,
+                              "J": 0.0768,
+                              "G": 0.0757,
+                              "L": 0.067,
+                              "I": 0.0564,
+                              "ungroup1": 0.0433,
+                              "F": 0.0298,
+                              "ungroup2": 0.0279,
+                              "A": 0.0203
+                            },
+                            "entropy": 2.525
+                          }
                         },
                         "branch_attrs": {
                           "mutations": {
@@ -4444,9 +4651,9 @@
                               "clade_membership": {
                                 "value": "J",
                                 "confidence": {
-                                  "J": 0.997
+                                  "J": 0.996
                                 },
-                                "entropy": 0.0277
+                                "entropy": 0.0328
                               },
                               "MuV_genotype": {
                                 "value": "J",
@@ -4532,9 +4739,9 @@
                                   "clade_membership": {
                                     "value": "J",
                                     "confidence": {
-                                      "J": 0.999
+                                      "J": 0.998
                                     },
-                                    "entropy": 0.0142
+                                    "entropy": 0.018
                                   },
                                   "MuV_genotype": {
                                     "value": "J",
@@ -4616,7 +4823,7 @@
                                         "confidence": {
                                           "J": 1.0
                                         },
-                                        "entropy": 5.03e-05
+                                        "entropy": 6.27e-05
                                       },
                                       "MuV_genotype": {
                                         "value": "J",
@@ -4653,6 +4860,9 @@
                                             "author": "Jin et al.",
                                             "value": "Jin et al."
                                           },
+                                          "region": {
+                                            "value": "Europe"
+                                          },
                                           "clade_membership": {
                                             "value": "J",
                                             "confidence": {
@@ -4669,9 +4879,6 @@
                                           },
                                           "country": {
                                             "value": "United Kingdom"
-                                          },
-                                          "region": {
-                                            "value": "Europe"
                                           }
                                         },
                                         "branch_attrs": {
@@ -4697,6 +4904,9 @@
                                             "author": "Jin et al.",
                                             "value": "Jin et al."
                                           },
+                                          "region": {
+                                            "value": "Europe"
+                                          },
                                           "clade_membership": {
                                             "value": "J",
                                             "confidence": {
@@ -4713,9 +4923,6 @@
                                           },
                                           "country": {
                                             "value": "United Kingdom"
-                                          },
-                                          "region": {
-                                            "value": "Europe"
                                           }
                                         },
                                         "branch_attrs": {
@@ -4735,10 +4942,13 @@
                               "clade_membership": {
                                 "value": "C",
                                 "confidence": {
-                                  "C": 0.991,
-                                  "": 0.00173
+                                  "C": 0.989,
+                                  "H": 0.00113,
+                                  "N": 0.00108,
+                                  "J": 0.00103,
+                                  "B": 0.00102
                                 },
-                                "entropy": 0.0744
+                                "entropy": 0.0917
                               },
                               "MuV_genotype": {
                                 "value": "C",
@@ -4781,10 +4991,18 @@
                                   "clade_membership": {
                                     "value": "C",
                                     "confidence": {
-                                      "C": 0.991,
-                                      "": 0.0014
+                                      "C": 0.986,
+                                      "J": 0.0012,
+                                      "H": 0.0012,
+                                      "N": 0.00116,
+                                      "B": 0.00112,
+                                      "G": 0.00107,
+                                      "L": 0.00107,
+                                      "K": 0.00106,
+                                      "D": 0.00105,
+                                      "I": 0.00102
                                     },
-                                    "entropy": 0.0762
+                                    "entropy": 0.108
                                   },
                                   "MuV_genotype": {
                                     "value": "C",
@@ -4927,9 +5145,9 @@
                                   "clade_membership": {
                                     "value": "C",
                                     "confidence": {
-                                      "C": 0.999
+                                      "C": 0.998
                                     },
-                                    "entropy": 0.0132
+                                    "entropy": 0.0181
                                   },
                                   "MuV_genotype": {
                                     "value": "C",
@@ -4960,6 +5178,9 @@
                                         "author": "Santak et al.",
                                         "value": "Santak et al."
                                       },
+                                      "region": {
+                                        "value": "Europe"
+                                      },
                                       "clade_membership": {
                                         "value": "C",
                                         "confidence": {
@@ -4976,9 +5197,6 @@
                                       },
                                       "country": {
                                         "value": "Croatia"
-                                      },
-                                      "region": {
-                                        "value": "Europe"
                                       }
                                     },
                                     "branch_attrs": {
@@ -5017,7 +5235,7 @@
                                         "confidence": {
                                           "C": 1.0
                                         },
-                                        "entropy": 0.0014
+                                        "entropy": 0.00199
                                       },
                                       "MuV_genotype": {
                                         "value": "C",
@@ -5054,6 +5272,9 @@
                                             "author": "Jin et al.",
                                             "value": "Jin et al."
                                           },
+                                          "region": {
+                                            "value": "Europe"
+                                          },
                                           "clade_membership": {
                                             "value": "C",
                                             "confidence": {
@@ -5070,9 +5291,6 @@
                                           },
                                           "country": {
                                             "value": "Sweden"
-                                          },
-                                          "region": {
-                                            "value": "Europe"
                                           }
                                         },
                                         "branch_attrs": {
@@ -5096,6 +5314,9 @@
                                             "author": "Neverov et al.",
                                             "value": "Neverov et al."
                                           },
+                                          "region": {
+                                            "value": "Europe"
+                                          },
                                           "clade_membership": {
                                             "value": "C",
                                             "confidence": {
@@ -5112,9 +5333,6 @@
                                           },
                                           "country": {
                                             "value": "Russia"
-                                          },
-                                          "region": {
-                                            "value": "Europe"
                                           }
                                         },
                                         "branch_attrs": {
@@ -5151,21 +5369,22 @@
                           "clade_membership": {
                             "value": "H",
                             "confidence": {
-                              "H": 0.202,
-                              "": 0.165,
-                              "L": 0.133,
-                              "C": 0.0713,
-                              "B": 0.0646,
-                              "N": 0.0643,
-                              "K": 0.0573,
-                              "D": 0.0571,
-                              "G": 0.0548,
-                              "I": 0.0441,
-                              "J": 0.042,
-                              "F": 0.0255,
-                              "A": 0.0193
+                              "H": 0.211,
+                              "L": 0.135,
+                              "N": 0.0833,
+                              "C": 0.0814,
+                              "B": 0.076,
+                              "K": 0.0696,
+                              "D": 0.0693,
+                              "G": 0.065,
+                              "I": 0.0495,
+                              "J": 0.0453,
+                              "ungroup1": 0.0389,
+                              "F": 0.0281,
+                              "ungroup2": 0.0265,
+                              "A": 0.0206
                             },
-                            "entropy": 2.357
+                            "entropy": 2.446
                           },
                           "MuV_genotype": {
                             "value": "H",
@@ -5211,7 +5430,7 @@
                                 "confidence": {
                                   "L": 0.999
                                 },
-                                "entropy": 0.0104
+                                "entropy": 0.0116
                               },
                               "MuV_genotype": {
                                 "value": "L",
@@ -5292,7 +5511,7 @@
                                     "confidence": {
                                       "L": 1.0
                                     },
-                                    "entropy": 7.92e-05
+                                    "entropy": 9.36e-05
                                   },
                                   "MuV_genotype": {
                                     "value": "L",
@@ -5326,6 +5545,9 @@
                                         "author": "Jin et al.",
                                         "value": "Jin et al."
                                       },
+                                      "region": {
+                                        "value": "Asia"
+                                      },
                                       "clade_membership": {
                                         "value": "L",
                                         "confidence": {
@@ -5342,9 +5564,6 @@
                                       },
                                       "country": {
                                         "value": "Japan"
-                                      },
-                                      "region": {
-                                        "value": "Asia"
                                       }
                                     },
                                     "branch_attrs": {
@@ -5398,21 +5617,22 @@
                               "clade_membership": {
                                 "value": "H",
                                 "confidence": {
-                                  "H": 0.98,
-                                  "": 0.00352,
-                                  "L": 0.0027,
-                                  "C": 0.00167,
-                                  "B": 0.00155,
-                                  "N": 0.00151,
-                                  "K": 0.00145,
-                                  "D": 0.00143,
-                                  "G": 0.00141,
-                                  "J": 0.0013,
-                                  "I": 0.0013,
-                                  "F": 0.00108,
-                                  "A": 0.00101
+                                  "H": 0.977,
+                                  "L": 0.00314,
+                                  "C": 0.00212,
+                                  "N": 0.00209,
+                                  "B": 0.00197,
+                                  "K": 0.00184,
+                                  "D": 0.00182,
+                                  "G": 0.0018,
+                                  "I": 0.00157,
+                                  "J": 0.00157,
+                                  "ungroup1": 0.0014,
+                                  "F": 0.00128,
+                                  "ungroup2": 0.00124,
+                                  "A": 0.0012
                                 },
-                                "entropy": 0.146
+                                "entropy": 0.168
                               },
                               "MuV_genotype": {
                                 "value": "H",
@@ -5424,7 +5644,7 @@
                                   "B": 0.00155,
                                   "N": 0.00151,
                                   "K": 0.00145,
-                                  "D": 0.00143,
+                                  "D": 0.00144,
                                   "G": 0.00141,
                                   "J": 0.0013,
                                   "I": 0.0013,
@@ -5473,6 +5693,9 @@
                                     "author": "Kirkness et al.",
                                     "value": "Kirkness et al."
                                   },
+                                  "region": {
+                                    "value": "North America"
+                                  },
                                   "clade_membership": {
                                     "value": "H",
                                     "confidence": {
@@ -5489,9 +5712,6 @@
                                   },
                                   "country": {
                                     "value": "USA"
-                                  },
-                                  "region": {
-                                    "value": "North America"
                                   }
                                 },
                                 "branch_attrs": {
@@ -5524,7 +5744,7 @@
                                     "confidence": {
                                       "H": 1.0
                                     },
-                                    "entropy": 0.00248
+                                    "entropy": 0.0034
                                   },
                                   "MuV_genotype": {
                                     "value": "H",
@@ -5550,9 +5770,9 @@
                                       "clade_membership": {
                                         "value": "H",
                                         "confidence": {
-                                          "H": 0.995
+                                          "H": 0.992
                                         },
-                                        "entropy": 0.0453
+                                        "entropy": 0.0652
                                       },
                                       "MuV_genotype": {
                                         "value": "H",
@@ -5572,80 +5792,6 @@
                                       }
                                     },
                                     "children": [
-                                      {
-                                        "name": "AB600843",
-                                        "node_attrs": {
-                                          "div": 0.114,
-                                          "strain": {
-                                            "value": "MuVi-MNG09-024"
-                                          },
-                                          "host": {
-                                            "value": "Homo sapiens"
-                                          },
-                                          "url": "https://www.ncbi.nlm.nih.gov/nuccore/AB600843",
-                                          "accession": "AB600843",
-                                          "author": {
-                                            "author": "Kidokoro et al.",
-                                            "value": "Kidokoro et al."
-                                          },
-                                          "clade_membership": {
-                                            "value": "H",
-                                            "confidence": {
-                                              "H": 1.0
-                                            },
-                                            "entropy": -1e-12
-                                          },
-                                          "MuV_genotype": {
-                                            "value": "H",
-                                            "confidence": {
-                                              "H": 1.0
-                                            },
-                                            "entropy": -1e-12
-                                          },
-                                          "country": {
-                                            "value": "Mongolia"
-                                          },
-                                          "region": {
-                                            "value": "Asia"
-                                          }
-                                        },
-                                        "branch_attrs": {
-                                          "mutations": {
-                                            "nuc": [
-                                              "A10C",
-                                              "A103G",
-                                              "A135G",
-                                              "G155A",
-                                              "T163C",
-                                              "A166C",
-                                              "T175C",
-                                              "T178C",
-                                              "T224C",
-                                              "G228A",
-                                              "T235C",
-                                              "A243G",
-                                              "C260T",
-                                              "T267C",
-                                              "C287A",
-                                              "G292A",
-                                              "T301C",
-                                              "A310C",
-                                              "A311T",
-                                              "A332G"
-                                            ],
-                                            "SH": [
-                                              "Y19C",
-                                              "V26I",
-                                              "F49L",
-                                              "R50H",
-                                              "H55R"
-                                            ]
-                                          },
-                                          "labels": {
-                                            "aa": "SH: Y19C, V26I, F49L, R50H, H55R"
-                                          }
-                                        }
-                                      },
                                       {
                                         "name": "AF467767",
                                         "node_attrs": {
@@ -5698,6 +5844,80 @@
                                             "aa": "SH: P56Q"
                                           }
                                         }
+                                      },
+                                      {
+                                        "name": "AB600843",
+                                        "node_attrs": {
+                                          "div": 0.114,
+                                          "strain": {
+                                            "value": "MuVi-MNG09-024"
+                                          },
+                                          "host": {
+                                            "value": "Homo sapiens"
+                                          },
+                                          "url": "https://www.ncbi.nlm.nih.gov/nuccore/AB600843",
+                                          "accession": "AB600843",
+                                          "author": {
+                                            "author": "Kidokoro et al.",
+                                            "value": "Kidokoro et al."
+                                          },
+                                          "region": {
+                                            "value": "Asia"
+                                          },
+                                          "clade_membership": {
+                                            "value": "H",
+                                            "confidence": {
+                                              "H": 1.0
+                                            },
+                                            "entropy": -1e-12
+                                          },
+                                          "MuV_genotype": {
+                                            "value": "H",
+                                            "confidence": {
+                                              "H": 1.0
+                                            },
+                                            "entropy": -1e-12
+                                          },
+                                          "country": {
+                                            "value": "Mongolia"
+                                          }
+                                        },
+                                        "branch_attrs": {
+                                          "mutations": {
+                                            "nuc": [
+                                              "A10C",
+                                              "A103G",
+                                              "A135G",
+                                              "G155A",
+                                              "T163C",
+                                              "A166C",
+                                              "T175C",
+                                              "T178C",
+                                              "T224C",
+                                              "G228A",
+                                              "T235C",
+                                              "A243G",
+                                              "C260T",
+                                              "T267C",
+                                              "C287A",
+                                              "G292A",
+                                              "T301C",
+                                              "A310C",
+                                              "A311T",
+                                              "A332G"
+                                            ],
+                                            "SH": [
+                                              "Y19C",
+                                              "V26I",
+                                              "F49L",
+                                              "R50H",
+                                              "H55R"
+                                            ]
+                                          },
+                                          "labels": {
+                                            "aa": "SH: Y19C, V26I, F49L, R50H, H55R"
+                                          }
+                                        }
                                       }
                                     ]
                                   },
@@ -5710,7 +5930,7 @@
                                         "confidence": {
                                           "H": 1.0
                                         },
-                                        "entropy": 0.000152
+                                        "entropy": 0.000217
                                       },
                                       "MuV_genotype": {
                                         "value": "H",
@@ -5733,7 +5953,7 @@
                                             "confidence": {
                                               "H": 1.0
                                             },
-                                            "entropy": 0.000458
+                                            "entropy": 0.000606
                                           },
                                           "MuV_genotype": {
                                             "value": "H",
@@ -5799,6 +6019,9 @@
                                                 "author": "Agafonov et al.",
                                                 "value": "Agafonov et al."
                                               },
+                                              "region": {
+                                                "value": "Europe"
+                                              },
                                               "clade_membership": {
                                                 "value": "H",
                                                 "confidence": {
@@ -5815,9 +6038,6 @@
                                               },
                                               "country": {
                                                 "value": "Russia"
-                                              },
-                                              "region": {
-                                                "value": "Europe"
                                               }
                                             },
                                             "branch_attrs": {
@@ -5847,7 +6067,7 @@
                                             "confidence": {
                                               "H": 1.0
                                             },
-                                            "entropy": 3.42e-05
+                                            "entropy": 4.36e-05
                                           },
                                           "MuV_genotype": {
                                             "value": "H",
@@ -5893,6 +6113,9 @@
                                                 "author": "Jin et al.",
                                                 "value": "Jin et al."
                                               },
+                                              "region": {
+                                                "value": "Europe"
+                                              },
                                               "clade_membership": {
                                                 "value": "H",
                                                 "confidence": {
@@ -5909,9 +6132,6 @@
                                               },
                                               "country": {
                                                 "value": "United Kingdom"
-                                              },
-                                              "region": {
-                                                "value": "Europe"
                                               }
                                             },
                                             "branch_attrs": {
@@ -5934,6 +6154,9 @@
                                                 "author": "Jin et al.",
                                                 "value": "Jin et al."
                                               },
+                                              "region": {
+                                                "value": "Europe"
+                                              },
                                               "clade_membership": {
                                                 "value": "H",
                                                 "confidence": {
@@ -5950,9 +6173,6 @@
                                               },
                                               "country": {
                                                 "value": "United Kingdom"
-                                              },
-                                              "region": {
-                                                "value": "Europe"
                                               }
                                             },
                                             "branch_attrs": {
