@@ -32,8 +32,18 @@
       "type": "categorical"
     },
     {
-      "key": "MuV_genotype_nextclade",
-      "title": "MuV genotype (Nextclade)",
+      "key": "MuV_genotype_nextclade_sh",
+      "title": "MuV genotype SH (Nextclade)",
+      "type": "categorical"
+    },
+    {
+      "key": "MuV_genotype_nextclade_genome",
+      "title": "MuV genotype genome (Nextclade)",
+      "type": "categorical"
+    },
+    {
+      "key": "MuV_genotype_nextclade_genomesample",
+      "title": "MuV genotype genome sampled (Nextclade)",
       "type": "categorical"
     },
     {
