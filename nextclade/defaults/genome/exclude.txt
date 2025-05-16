@@ -11,7 +11,7 @@ AF201473 # Jin et al, 2015 Genotype A identical to AF338106
 EA500333 # Jin et al, 2015 Genotype A identical to AF345290
 BD293024 # Jin et al, 2015 Genotype A identical to AF345290
 DI035997 # Jin et al, 2015 Genotype A identical to AF345290
-HQ416907 # Jin et al, 2015 Genotype A identical to AF345290
+#HQ416907 # Jin et al, 2015 Genotype A identical to AF345290
 AX081134 # Jin et al, 2015 Genotype A identical to FN431985
 AB000386 # Jin et al, 2015 Genotype B identical to AB000388
 AF314558 # Jin et al, 2015 Genotype B identical to AB000388
