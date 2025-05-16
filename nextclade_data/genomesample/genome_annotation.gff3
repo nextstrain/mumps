@@ -1,0 +1,23 @@
+##gff-version 3
+#!gff-spec-version 1.21
+#!processor NCBI annotwriter
+##sequence-region HQ416907.1 1 15384
+##species https://www.ncbi.nlm.nih.gov/Taxonomy/Browser/wwwtax.cgi?id=2560602
+#HQ416907	Genbank	region	1	15384	.	+	.	ID=HQ416907.1:1..15384;Dbxref=taxon:2560602;country=China;gbkey=Src;genotype=A;isolate=S79;mol_type=viral cRNA;note=live vaccine minor component;old-name=Mumps virus;strain=Jeryl Lynn
+HQ416907	Genbank	gene	146	1795	.	+	.	ID=gene-NP;Name=NP;gbkey=Gene;gene=NP;gene_biotype=protein_coding
+#HQ416907	Genbank	CDS	146	1795	.	+	0	ID=cds-ADR82171.1;Parent=gene-NP;Dbxref=NCBI_GP:ADR82171.1;Name=ADR82171.1;gbkey=CDS;gene=NP;product=nucleocapsid protein;protein_id=ADR82171.1
+HQ416907	Genbank	gene	1979	3151	.	+	.	ID=gene-P;Name=P;gbkey=Gene;gene=P;gene_biotype=protein_coding
+#HQ416907	Genbank	CDS	1979	3152	.	+	0	ID=cds-ADR82172.1;Parent=gene-P;Dbxref=NCBI_GP:ADR82172.1;Name=ADR82172.1;Note=mRNA co-transcriptionally modified by addition of two G nucleotides;exception=RNA editing;gbkey=CDS;gene=P;product=phosphoprotein;protein_id=ADR82172.1
+#HQ416907	Genbank	CDS	1979	2653	.	+	0	ID=cds-ADR82173.1;Parent=gene-P;Dbxref=NCBI_GP:ADR82173.1;Name=ADR82173.1;gbkey=CDS;gene=P;product=V protein;protein_id=ADR82173.1
+#HQ416907	Genbank	CDS	1979	2490	.	+	0	ID=cds-ADR82174.1;Parent=gene-P;Dbxref=NCBI_GP:ADR82174.1;Name=ADR82174.1;Note=mRNA co-transcriptionally modified by addition of four G nucleotides;exception=RNA editing;gbkey=CDS;gene=P;product=I protein;protein_id=ADR82174.1
+#HQ416907	Genbank	sequence_feature	2439	2444	.	+	.	ID=id-P;Note=P mRNA co-transcriptionally modified by addition of two G nucleotides to this region%3B I mRNA co-transcriptionally modified by addition of four G nucleotides to this region;gbkey=misc_feature;gene=P
+HQ416907	Genbank	gene	3264	4391	.	+	.	ID=gene-M;Name=M;gbkey=Gene;gene=M;gene_biotype=protein_coding
+#HQ416907	Genbank	CDS	3264	4391	.	+	0	ID=cds-ADR82175.1;Parent=gene-M;Dbxref=NCBI_GP:ADR82175.1;Name=ADR82175.1;gbkey=CDS;gene=M;product=matrix protein;protein_id=ADR82175.1
+HQ416907	Genbank	gene	4546	6162	.	+	.	ID=gene-F;Name=F;gbkey=Gene;gene=F;gene_biotype=protein_coding
+#HQ416907	Genbank	CDS	4546	6162	.	+	0	ID=cds-ADR82179.1;Parent=gene-F;Dbxref=NCBI_GP:ADR82179.1;Name=ADR82179.1;gbkey=CDS;gene=F;product=fusion protein;protein_id=ADR82179.1
+HQ416907	Genbank	gene	6268	6441	.	+	.	ID=gene-SH;Name=SH;gbkey=Gene;gene=SH;gene_biotype=protein_coding
+#HQ416907	Genbank	CDS	6268	6441	.	+	0	ID=cds-ADR82176.1;Parent=gene-SH;Dbxref=NCBI_GP:ADR82176.1;Name=ADR82176.1;gbkey=CDS;gene=SH;product=small hydrophobic protein;protein_id=ADR82176.1
+HQ416907	Genbank	gene	6614	8362	.	+	.	ID=gene-HN;Name=HN;gbkey=Gene;gene=HN;gene_biotype=protein_coding
+#HQ416907	Genbank	CDS	6614	8362	.	+	0	ID=cds-ADR82177.1;Parent=gene-HN;Dbxref=NCBI_GP:ADR82177.1;Name=ADR82177.1;gbkey=CDS;gene=HN;product=hemagglutinin/neuraminidase;protein_id=ADR82177.1
+HQ416907	Genbank	gene	8438	15223	.	+	.	ID=gene-L;Name=L;gbkey=Gene;gene=L;gene_biotype=protein_coding
+#HQ416907	Genbank	CDS	8438	15223	.	+	0	ID=cds-ADR82178.1;Parent=gene-L;Dbxref=NCBI_GP:ADR82178.1;Name=ADR82178.1;gbkey=CDS;gene=L;product=viral polymerase;protein_id=ADR82178.1
