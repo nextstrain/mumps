@@ -1,0 +1,27 @@
+# Format: <GenBank accession> [# <strain name> <reason>]
+BD293023 # Jin et al, 2015 Genotype A identical to AF338106
+EA500331 # Jin et al, 2015 Genotype A identical to AF338106
+AX081133 # Jin et al, 2015 Genotype A identical to AF338106
+DI021804 # Jin et al, 2015 Genotype A identical to AF338106
+DI064912 # Jin et al, 2015 Genotype A identical to AF338106
+AX081123 # Jin et al, 2015 Genotype A identical to AF338106
+FJ211584 # Jin et al, 2015 Genotype A identical to AF338106
+BD293022 # Jin et al, 2015 Genotype A identical to AF338106
+AF201473 # Jin et al, 2015 Genotype A identical to AF338106
+EA500333 # Jin et al, 2015 Genotype A identical to AF345290
+BD293024 # Jin et al, 2015 Genotype A identical to AF345290
+DI035997 # Jin et al, 2015 Genotype A identical to AF345290
+HQ416907 # Jin et al, 2015 Genotype A identical to AF345290
+AX081134 # Jin et al, 2015 Genotype A identical to FN431985
+AB000386 # Jin et al, 2015 Genotype B identical to AB000388
+AF314558 # Jin et al, 2015 Genotype B identical to AB000388
+FJ375177 # Jin et al, 2015 Genotype B identical to AB000388
+NC_002200 # Jin et al, 2015 Genotype B identical to AB040874
+EU884413 # Jin et al, 2015 Genotype F identical to FJ556896
+DQ649478 # Jin et al, 2015 Genotype F identical to FJ556896
+JX287387 # Jin et al, 2015 Genotype G identical to JN635498
+JX287389 # Jin et al, 2015 Genotype G identical to JN635498
+JN012242 # Jin et al, 2015 Genotype G identical to JX287385
+AB600942 # Jin et al, 2015 Genotype I identical to KF878078
+JF727651 # Jin et al, 2015 Genotype L identical to AY508995
+AY685921 # Jin et al, 2015 Genotype L identical to AY685920
