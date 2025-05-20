@@ -22,7 +22,7 @@ ancestral:
 
 traits:
   north-america: country division MuV_genotype
-  global: region MuV_genotype
+  global: region MuV_genotype MuV_genotype_nextclade_sh MuV_genotype_nextclade_genome MuV_genotype_nextclade_genomesample
   sampling_bias_correction: 3
 
 colors:
