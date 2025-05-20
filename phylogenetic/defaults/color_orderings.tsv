@@ -306,3 +306,42 @@ MuV_genotype	J
 MuV_genotype	K
 MuV_genotype	L
 MuV_genotype	N
+
+MuV_genotype_nextclade_sh	A
+MuV_genotype_nextclade_sh	B
+MuV_genotype_nextclade_sh	C
+MuV_genotype_nextclade_sh	D
+MuV_genotype_nextclade_sh	F
+MuV_genotype_nextclade_sh	G
+MuV_genotype_nextclade_sh	H
+MuV_genotype_nextclade_sh	I
+MuV_genotype_nextclade_sh	J
+MuV_genotype_nextclade_sh	K
+MuV_genotype_nextclade_sh	L
+MuV_genotype_nextclade_sh	N
+
+MuV_genotype_nextclade_genome	A
+MuV_genotype_nextclade_genome	B
+MuV_genotype_nextclade_genome	C
+MuV_genotype_nextclade_genome	D
+MuV_genotype_nextclade_genome	F
+MuV_genotype_nextclade_genome	G
+MuV_genotype_nextclade_genome	H
+MuV_genotype_nextclade_genome	I
+MuV_genotype_nextclade_genome	J
+MuV_genotype_nextclade_genome	K
+MuV_genotype_nextclade_genome	L
+MuV_genotype_nextclade_genome	N
+
+MuV_genotype_nextclade_genomesample	A
+MuV_genotype_nextclade_genomesample	B
+MuV_genotype_nextclade_genomesample	C
+MuV_genotype_nextclade_genomesample	D
+MuV_genotype_nextclade_genomesample	F
+MuV_genotype_nextclade_genomesample	G
+MuV_genotype_nextclade_genomesample	H
+MuV_genotype_nextclade_genomesample	I
+MuV_genotype_nextclade_genomesample	J
+MuV_genotype_nextclade_genomesample	K
+MuV_genotype_nextclade_genomesample	L
+MuV_genotype_nextclade_genomesample	N
