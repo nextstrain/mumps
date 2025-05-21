@@ -95,6 +95,7 @@ rule join_metadata_and_nextclade:
         sh_nextclade_metadata="results/sh/nextclade_metadata.tsv",
         genome_nextclade_metadata="results/genome/nextclade_metadata.tsv",
         genomesample_nextclade_metadata="results/genomesample/nextclade_metadata.tsv",
+        genomesampleoutgroup_nextclade_metadata="results/genomesampleoutgroup/nextclade_metadata.tsv",
     output:
         metadata="results/metadata.tsv",
     params:
@@ -108,11 +109,13 @@ rule join_metadata_and_nextclade:
                 sh_nextclade={input.sh_nextclade_metadata:q} \
                 genome_nextclade={input.genome_nextclade_metadata:q} \
                 genomesample_nextclade={input.genomesample_nextclade_metadata:q} \
+                genomesampleoutgroup_nextclade={input.genomesampleoutgroup_nextclade_metadata:q} \
             --metadata-id-columns \
                 metadata={params.metadata_id_field:q} \
                 sh_nextclade={params.nextclade_id_field:q} \
                 genome_nextclade={params.nextclade_id_field:q} \
                 genomesample_nextclade={params.nextclade_id_field:q} \
+                genomesampleoutgroup_nextclade={params.nextclade_id_field:q} \
             --output-metadata {output.metadata:q} \
             --no-source-columns
         """
