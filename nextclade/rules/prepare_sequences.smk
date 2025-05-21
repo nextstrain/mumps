@@ -36,12 +36,13 @@ rule align:
         "logs/{build}/align.txt",
     benchmark:
         "benchmarks/{build}/align.txt",
+    params:
+        align_params=lambda wildcard: config['align'][wildcard.build]
     shell:
         r"""
         augur align \
             --sequences {input.sequences:q} \
             --reference-sequence {input.reference:q} \
             --output {output.alignment:q} \
-            --fill-gaps \
-            --remove-reference 2>&1 | tee {log:q}
+            {params.align_params} 2>&1 | tee {log:q}
         """
