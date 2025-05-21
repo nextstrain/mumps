@@ -47,6 +47,11 @@
       "type": "categorical"
     },
     {
+      "key": "MuV_genotype_nextclade_genomesampleoutgroup",
+      "title": "MuV genotype genome sampled outgrouped (Nextclade)",
+      "type": "categorical"
+    },
+    {
       "key": "country",
       "title": "Country",
       "type": "categorical"
@@ -105,6 +110,11 @@
           "name": "MuV_genotype_nextclade_genomesample",
           "displayName": "Nextclade Genome Sampled",
           "description": "Mumps genotype based on Genome + sampled region"
+        },
+        {
+          "name": "MuV_genotype_nextclade_genomesampleoutgroup",
+          "displayName": "Nextclade Genome Sampled with Outgroup",
+          "description": "Mumps genotype based on Genome + sampled region + outgroup"
         }
       ],
       "pathogen": {
