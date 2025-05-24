@@ -19,6 +19,7 @@ wildcard_constraints:
 # https://docs.nextstrain.org/projects/nextclade/page/user/datasets.html
 rule all:
     input:
+        auspice_json=expand("auspice/mumps_{build}.json", build=builds)
         # Fill in paths to the final exported Nextclade dataset.
 
 
