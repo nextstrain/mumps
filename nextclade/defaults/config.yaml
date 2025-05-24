@@ -8,6 +8,7 @@ sequences_url: "https://data.nextstrain.org/files/workflows/mumps/sequences.fast
 metadata_url: "https://data.nextstrain.org/files/workflows/mumps/metadata.tsv.zst"
 
 strain_id_field: "accession"
+reference: "defaults/{build}/reference.gb"
 
 clade_membership:
   metadata: "defaults/{build}/reference_strains.tsv"
@@ -15,3 +16,6 @@ clade_membership:
 
 filter:
   sh: '--exclude-all'
+
+align:
+  sh: '--fill-gaps --remove-reference'

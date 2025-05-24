@@ -21,3 +21,29 @@ This part of the workflow usually includes the following steps:
 
 See Nextclade's and Augur's usage docs for these commands for more details.
 """
+
+rule align:
+    """
+    Aligning sequences to {input.reference}
+      - filling gaps with N
+    """
+    input:
+        sequences = "results/{build}/filtered.fasta",
+        reference = config['reference'],
+    output:
+        alignment = "results/{build}/aligned.fasta",
+    log:
+        "logs/{build}/align.txt",
+    benchmark:
+        "benchmarks/{build}/align.txt",
+    params:
+        align_params=lambda wildcard: config['align'][wildcard.build]
+    shell:
+        r"""
+        augur align \
+            --sequences {input.sequences:q} \
+            --reference-sequence {input.reference:q} \
+            --output {output.alignment:q} \
+            {params.align_params} \
+        2>&1 | tee {log:q}
+        """
