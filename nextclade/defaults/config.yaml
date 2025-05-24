@@ -19,3 +19,6 @@ filter:
 
 align:
   sh: '--fill-gaps --remove-reference'
+
+refine:
+  sh: '--root mid_point'
