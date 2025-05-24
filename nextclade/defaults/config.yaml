@@ -22,3 +22,11 @@ align:
 
 refine:
   sh: '--root mid_point'
+
+ancestral:
+  inference: "joint"
+  root_sequence: "defaults/{build}/reference.fasta"
+
+traits:
+  sampling_bias_correction: 3
+  sh: clade_membership MuV_genotype
