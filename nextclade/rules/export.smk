@@ -93,3 +93,59 @@ rule export:
             --output {output.auspice_json:q} \
             2>&1 | tee {log}
         """
+
+rule assemble_dataset:
+    input:
+        reference="defaults/{build}/reference.fasta",
+        tree="auspice/mumps_{build}.json",
+        pathogen_json="defaults/{build}/pathogen.json",
+        sequences="defaults/{build}/sequences.fasta",
+        annotation="defaults/{build}/genome_annotation.gff3",
+        readme="defaults/{build}/README.md",
+        changelog="defaults/{build}/CHANGELOG.md",
+    output:
+        reference="datasets/{build}/reference.fasta",
+        tree="datasets/{build}/tree.json",
+        pathogen_json="datasets/{build}/pathogen.json",
+        sequences="datasets/{build}/sequences.fasta",
+        annotation="datasets/{build}/genome_annotation.gff3",
+        readme="datasets/{build}/README.md",
+        changelog="datasets/{build}/CHANGELOG.md",
+    benchmark:
+        "benchmarks/{build}/assemble_dataset.txt",
+    shell:
+        """
+        cp {input.reference} {output.reference}
+        cp {input.tree} {output.tree}
+        cp {input.pathogen_json} {output.pathogen_json}
+        cp {input.annotation} {output.annotation}
+        cp {input.readme} {output.readme}
+        cp {input.changelog} {output.changelog}
+        cp {input.sequences} {output.sequences}
+        """
+
+rule test_dataset:
+    input:
+        tree="datasets/{build}/tree.json",
+        pathogen_json="datasets/{build}/pathogen.json",
+        sequences="defaults/{build}/sequences.fasta",
+        annotation="datasets/{build}/genome_annotation.gff3",
+        readme="datasets/{build}/README.md",
+        changelog="datasets/{build}/CHANGELOG.md",
+    output:
+        outdir=directory("test_output/{build}"),
+    log:
+        "logs/{build}/test_dataset.txt",
+    benchmark:
+        "benchmarks/{build}/test_dataset.txt",
+    params:
+        dataset_dir="datasets/{build}",
+    shell:
+        """
+        nextclade run \
+          --input-dataset {params.dataset_dir} \
+          --output-all {output.outdir} \
+          --silent \
+          {input.sequences} \
+          2>&1 | tee {log}
+        """
