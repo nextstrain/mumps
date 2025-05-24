@@ -8,6 +8,11 @@ workdir: workflow.current_basedir
 # Use default configuration values. Override with Snakemake's --configfile/--config options.
 configfile: "defaults/config.yaml"
 
+builds = ["sh"]
+
+wildcard_constraints:
+    build = "|".join(builds)
+
 # This is the default rule that Snakemake will run when there are no specified targets.
 # The default output of the Nextclade workflow is usually the produced Nextclade dataset.
 # See Nextclade docs on expected naming conventions of dataset files

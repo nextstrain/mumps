@@ -3,3 +3,15 @@
 #
 # Define optional config parameters with their default values here so that users
 # do not have to dig through the workflows to figure out the default values
+# Both files must be zstd compressed
+sequences_url: "https://data.nextstrain.org/files/workflows/mumps/sequences.fasta.zst"
+metadata_url: "https://data.nextstrain.org/files/workflows/mumps/metadata.tsv.zst"
+
+strain_id_field: "accession"
+
+clade_membership:
+  metadata: "defaults/{build}/reference_strains.tsv"
+  fallback: "MuV_genotype"
+
+filter:
+  sh: '--exclude-all'
