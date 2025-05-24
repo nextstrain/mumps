@@ -30,3 +30,12 @@ ancestral:
 traits:
   sampling_bias_correction: 3
   sh: clade_membership MuV_genotype
+
+colors:
+  color_schemes: "../phylogenetic/defaults/color_schemes.tsv"
+  color_orderings: "../phylogenetic/defaults/color_orderings.tsv"
+
+export:
+  lat_longs: "../phylogenetic/defaults/lat_longs.tsv"
+  auspice_config: "defaults/{build}/auspice_config.json"
+  description: "../phylogenetic/defaults/description.md"
