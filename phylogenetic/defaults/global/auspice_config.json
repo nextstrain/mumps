@@ -28,7 +28,12 @@
     },
     {
       "key": "MuV_genotype",
-      "title": "MuV genotype",
+      "title": "MuV genotype (GenBank)",
+      "type": "categorical"
+    },
+    {
+      "key": "MuV_genotype_nextclade",
+      "title": "MuV genotype SH (Nextclade)",
       "type": "categorical"
     },
     {
@@ -73,8 +78,13 @@
       "clade_node_attrs": [
         {
           "name": "MuV_genotype",
-          "displayName": "MuV Genotype",
-          "description": "Mumps genotype"
+          "displayName": "GenBank",
+          "description": "Mumps genotype based on GenBank"
+        },
+        {
+          "name": "MuV_genotype_nextclade",
+          "displayName": "Nextclade SH",
+          "description": "Mumps genotype based on SH region"
         }
       ],
       "pathogen": {
