@@ -159,3 +159,20 @@ rule genbank_to_json:
         (bio json --lines {input.genbank:q} \
         > {output.ndjson:q} ) 2>> {log:q}
         """
+
+rule parse_strain:
+    input:
+        ndjson="data/entrez.ndjson",
+    output:
+        metadata="data/metadata_ncbi_entrez.tsv",
+    benchmark:
+        "benchmarks/parse_strain.txt",
+    log:
+        "logs/parse_strain.txt"
+    shell:
+        r"""
+        ( cat {input.ndjson:q} \
+        | jq -c '{{accession: .record.accessions[0], strain: .record.strain[0]}}' \
+        | augur curate passthru \
+            --output-metadata {output.metadata:q} ) 2>> {log:q}
+        """
