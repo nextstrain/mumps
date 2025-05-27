@@ -144,3 +144,18 @@ rule fetch_from_ncbi_entrez:
             --term {params.term:q} \
             --output {output.genbank:q}
         """
+
+rule genbank_to_json:
+    input:
+        genbank="data/genbank.gb",
+    output:
+        ndjson=temp("data/entrez.ndjson"),
+    benchmark:
+        "benchmarks/genbank_to_json.txt",
+    log:
+        "logs/genbank_to_json.txt",
+    shell:
+        r"""
+        (bio json --lines {input.genbank:q} \
+        > {output.ndjson:q} ) 2>> {log:q}
+        """
