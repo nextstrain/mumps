@@ -106,7 +106,7 @@ rule format_ncbi_dataset_report:
 rule format_ncbi_datasets_ndjson:
     input:
         ncbi_dataset_sequences="data/ncbi_dataset_sequences.fasta",
-        ncbi_dataset_tsv="data/ncbi_dataset_report.tsv",
+        ncbi_dataset_tsv="data/ncbi_dataset_report_with_strain.tsv",
     output:
         ndjson="data/ncbi.ndjson",
     log:
@@ -175,4 +175,25 @@ rule parse_strain:
         | jq -c '{{accession: .record.accessions[0], strain: .record.strain[0]}}' \
         | augur curate passthru \
             --output-metadata {output.metadata:q} ) 2>> {log:q}
+        """
+
+rule merge_strain_name:
+    input:
+        ncbi_dataset="data/ncbi_dataset_report.tsv",
+        ncbi_entrez="data/metadata_ncbi_entrez.tsv",
+    output:
+        metadata="data/ncbi_dataset_report_with_strain.tsv",
+    log:
+        "logs/merge_strain_name.txt"
+    params:
+        metadata_id='accession',
+    shell:
+        r"""
+        augur merge \
+          --metadata \
+            datasets={input.ncbi_dataset:q} \
+            entrez={input.ncbi_entrez:q} \
+          --metadata-id-columns {params.metadata_id} \
+          --output-metadata {output.metadata:q} \
+          2>> {log:q}
         """
