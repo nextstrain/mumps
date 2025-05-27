@@ -124,3 +124,23 @@ rule format_ncbi_datasets_ndjson:
             --duplicate-reporting warn \
             2> {log} > {output.ndjson}
         """
+
+###########################################################################
+########################## 2. Fetch from Entrez ###########################
+###########################################################################
+
+rule fetch_from_ncbi_entrez:
+    params:
+        term=config["entrez_search_term"],
+    output:
+        genbank="data/genbank.gb",
+    # Allow retries in case of network errors
+    retries: 5
+    benchmark:
+        "benchmarks/fetch_from_ncbi_entrez.txt"
+    shell:
+        r"""
+        vendored/fetch-from-ncbi-entrez \
+            --term {params.term:q} \
+            --output {output.genbank:q}
+        """
