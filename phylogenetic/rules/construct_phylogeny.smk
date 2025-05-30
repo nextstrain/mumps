@@ -31,9 +31,11 @@ rule tree:
         "benchmarks/{build}/tree.txt",
     shell:
         r"""
+        exec &> >(tee {log:q})
+
         augur tree \
             --alignment {input.alignment:q} \
-            --output {output.tree:q} 2>&1 | tee {log:q}
+            --output {output.tree:q}
         """
 
 rule refine:
@@ -62,6 +64,8 @@ rule refine:
         strain_id = config.get("strain_id_field", "strain"),
     shell:
         r"""
+        exec &> >(tee {log:q})
+
         augur refine \
             --tree {input.tree:q} \
             --alignment {input.alignment:q} \
@@ -73,5 +77,6 @@ rule refine:
             --coalescent {params.coalescent:q} \
             --date-confidence \
             --date-inference {params.date_inference:q} \
-            {params.clock_filter_iqd} 2>&1 | tee {log:q}
+            {params.clock_filter_iqd}
+
         """

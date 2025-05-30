@@ -39,12 +39,13 @@ rule colors:
         "benchmarks/{build}/colors.txt"
     shell:
         r"""
+        exec &> >(tee {log:q})
+
         python3 scripts/assign-colors.py \
             --color-schemes {input.color_schemes:q} \
             --ordering {input.color_orderings:q} \
             --metadata {input.metadata:q} \
-            --output {output.colors:q} \
-            2>&1 | tee {log}
+            --output {output.colors:q}
         """
 
 rule export:
@@ -70,6 +71,8 @@ rule export:
         strain_id = config.get("strain_id_field", "strain"),
     shell:
         r"""
+        exec &> >(tee {log:q})
+
         augur export v2 \
             --tree {input.tree:q} \
             --metadata {input.metadata:q} \
@@ -80,7 +83,7 @@ rule export:
             --auspice-config {input.auspice_config:q} \
             --description {input.description:q} \
             --include-root-sequence-inline \
-            --output {output.auspice_json:q} | tee {log:q}
+            --output {output.auspice_json:q}
         """
 
 rule tip_frequencies:
@@ -92,6 +95,8 @@ rule tip_frequencies:
         metadata = "results/{build}/metadata.tsv",
     output:
         tip_freq = "auspice/mumps_{build}_tip-frequencies.json"
+    log:
+        "logs/{build}/tip_frequencies.txt"
     params:
         strain_id = config["strain_id_field"],
         min_date = config["tip_frequencies"]["min_date"],
@@ -100,6 +105,8 @@ rule tip_frequencies:
         proportion_wide = config["tip_frequencies"]["proportion_wide"]
     shell:
         r"""
+        exec &> >(tee {log:q})
+
         augur frequencies \
             --method kde \
             --tree {input.tree} \
