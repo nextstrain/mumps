@@ -131,7 +131,7 @@ rule format_ncbi_datasets_ndjson:
 
 rule fetch_from_ncbi_entrez:
     params:
-        term=config["entrez_search_term"],
+        term=f'txid{config["ncbi_taxon_id"]}[Primary Organism]',
     output:
         genbank="data/genbank.gb",
     # Allow retries in case of network errors
