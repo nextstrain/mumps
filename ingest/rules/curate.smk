@@ -92,7 +92,8 @@ rule curate:
                 --output-metadata {output.metadata} \
                 --output-fasta {output.sequences} \
                 --output-id-field {params.id_field} \
-                --output-seq-field {params.sequence_field} ) 2>> {log}
+                --output-seq-field {params.sequence_field} ) \
+            2>&1 | tee {log:q}
         """
 
 rule add_metadata_columns:

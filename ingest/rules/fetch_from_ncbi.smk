@@ -136,13 +136,16 @@ rule fetch_from_ncbi_entrez:
         genbank="data/genbank.gb",
     # Allow retries in case of network errors
     retries: 5
+    log:
+        "logs/fetch_from_ncbi_entrez.txt"
     benchmark:
         "benchmarks/fetch_from_ncbi_entrez.txt"
     shell:
         r"""
         vendored/fetch-from-ncbi-entrez \
             --term {params.term:q} \
-            --output {output.genbank:q}
+            --output {output.genbank:q} \
+        2>&1 | tee {log:q}
         """
 
 rule genbank_to_json:
@@ -157,7 +160,7 @@ rule genbank_to_json:
     shell:
         r"""
         (bio json --lines {input.genbank:q} \
-        > {output.ndjson:q} ) 2>> {log:q}
+        > {output.ndjson:q} ) 2> {log:q}
         """
 
 rule parse_strain:
@@ -174,7 +177,8 @@ rule parse_strain:
         ( cat {input.ndjson:q} \
         | jq -c '{{accession: .record.accessions[0], strain: .record.strain[0]}}' \
         | augur curate passthru \
-            --output-metadata {output.metadata:q} ) 2>> {log:q}
+            --output-metadata {output.metadata:q} ) \
+        2>&1 | tee {log:q}
         """
 
 rule merge_strain_name:
@@ -195,5 +199,5 @@ rule merge_strain_name:
             entrez={input.ncbi_entrez:q} \
           --metadata-id-columns {params.metadata_id} \
           --output-metadata {output.metadata:q} \
-          2>> {log:q}
+          2>&1 | tee {log:q}
         """
