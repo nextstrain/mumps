@@ -84,7 +84,7 @@ rule filter:
             --metadata-id-columns {params.strain_id:q} \
             --exclude {input.exclude:q} \
             --include {input.include:q} \
-            --output {output.sequences:q} \
+            --output-sequences {output.sequences:q} \
             --output-metadata {output.metadata:q} \
             --min-length {params.min_length:q} \
             --group-by {params.group_by} \

@@ -1,0 +1,48 @@
+LOCUS       MUMSHJ_REF                   361 bp    RNA     linear   VRL 19-DEC-2020
+DEFINITION  Mumps orthorubulavirus Jeryl-Lynn SH gene for small-hydrophobic
+            protein, complete cds.
+ACCESSION   D90232_REF
+VERSION     D90232.1
+KEYWORDS    .
+SOURCE      Mumps orthorubulavirus
+  ORGANISM  Mumps orthorubulavirus
+            Viruses; Riboviria; Orthornavirae; Negarnaviricota;
+            Haploviricotina; Monjiviricetes; Mononegavirales; Paramyxoviridae;
+            Rubulavirinae; Orthorubulavirus; Orthorubulavirus parotitidis.
+REFERENCE   1
+  AUTHORS   Takeuchi,K., Tanabayashi,K., Hishiyama,M., Yamada,A. and Sugiura,A.
+  TITLE     Variations of nucleotide sequences and transcription of the SH gene
+            among mumps virus strains
+  JOURNAL   Virology 181 (1), 364-366 (1991)
+   PUBMED   1994584
+COMMENT     These data kindly submitted in computer readable form by: Kaoru
+            Takeuchi
+            Department of Measles Virus
+            National Institute of Health
+            4-7-1 Gakuen, Musashi-Murayama
+            Tokyo 190-12
+            Japan.
+FEATURES             Location/Qualifiers
+     source          1..361
+                     /organism="Mumps orthorubulavirus"
+                     /mol_type="genomic RNA"
+                     /strain="Jeryl-Lynn"
+                     /db_xref="taxon:2560602"
+     gene            80..253
+                     /gene="SH"
+     CDS             80..253
+                     /gene="SH"
+                     /codon_start=1
+                     /product="small-hydrophobic protein"
+                     /protein_id="BAA14280.1"
+                     /translation="MPAIQPPLYLTFLLLTLLYLIITLYVWTILTINHNTAVRYAALY
+                     QRSFSRWGFDQSL"
+ORIGIN
+        1 ttaaaaaagg tttagaaaaa aactaaaata agaatgaatc tcctagggtc gtaacgtctc
+       61 gtgaccctgc cgttgcacta tgccggcaat ccaacctccc ttatacctaa catttctatt
+      121 gctaaccctt ctctatctaa tcataactct gtatgtctgg actatattga ccattaacca
+      181 taatacggcg gttcggtatg cagcactgta ccagcgatcc ttctctcgct ggggttttga
+      241 tcaatcactc tagaaagatc ctcagttagg gcaagtcccg atccgtcacg ctagaacaag
+      301 ctgcatccaa atgaagctgc actaccatga gacataaaga aaaaagcaag ccagaacaaa
+      361 c
+//
