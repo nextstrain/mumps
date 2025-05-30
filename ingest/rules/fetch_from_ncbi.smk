@@ -106,7 +106,7 @@ rule format_ncbi_dataset_report:
 rule format_ncbi_datasets_ndjson:
     input:
         ncbi_dataset_sequences="data/ncbi_dataset_sequences.fasta",
-        ncbi_dataset_tsv="data/ncbi_dataset_report.tsv",
+        ncbi_dataset_tsv="data/ncbi_dataset_report_with_strain.tsv",
     output:
         ndjson="data/ncbi.ndjson",
     log:
@@ -123,4 +123,81 @@ rule format_ncbi_datasets_ndjson:
             --unmatched-reporting warn \
             --duplicate-reporting warn \
             2> {log} > {output.ndjson}
+        """
+
+###########################################################################
+########################## 2. Fetch from Entrez ###########################
+###########################################################################
+
+rule fetch_from_ncbi_entrez:
+    params:
+        term=f'txid{config["ncbi_taxon_id"]}[Primary Organism]',
+    output:
+        genbank="data/genbank.gb",
+    # Allow retries in case of network errors
+    retries: 5
+    log:
+        "logs/fetch_from_ncbi_entrez.txt"
+    benchmark:
+        "benchmarks/fetch_from_ncbi_entrez.txt"
+    shell:
+        r"""
+        vendored/fetch-from-ncbi-entrez \
+            --term {params.term:q} \
+            --output {output.genbank:q} \
+        2>&1 | tee {log:q}
+        """
+
+rule genbank_to_json:
+    input:
+        genbank="data/genbank.gb",
+    output:
+        ndjson=temp("data/entrez.ndjson"),
+    benchmark:
+        "benchmarks/genbank_to_json.txt",
+    log:
+        "logs/genbank_to_json.txt",
+    shell:
+        r"""
+        (bio json --lines {input.genbank:q} \
+        > {output.ndjson:q} ) 2> {log:q}
+        """
+
+rule parse_strain:
+    input:
+        ndjson="data/entrez.ndjson",
+    output:
+        metadata="data/metadata_ncbi_entrez.tsv",
+    benchmark:
+        "benchmarks/parse_strain.txt",
+    log:
+        "logs/parse_strain.txt"
+    shell:
+        r"""
+        ( cat {input.ndjson:q} \
+        | jq -c '{{accession: .record.accessions[0], strain: .record.strain[0]}}' \
+        | augur curate passthru \
+            --output-metadata {output.metadata:q} ) \
+        2>&1 | tee {log:q}
+        """
+
+rule merge_strain_name:
+    input:
+        ncbi_dataset="data/ncbi_dataset_report.tsv",
+        ncbi_entrez="data/metadata_ncbi_entrez.tsv",
+    output:
+        metadata="data/ncbi_dataset_report_with_strain.tsv",
+    log:
+        "logs/merge_strain_name.txt"
+    params:
+        metadata_id='accession',
+    shell:
+        r"""
+        augur merge \
+          --metadata \
+            datasets={input.ncbi_dataset:q} \
+            entrez={input.ncbi_entrez:q} \
+          --metadata-id-columns {params.metadata_id} \
+          --output-metadata {output.metadata:q} \
+          2>&1 | tee {log:q}
         """
