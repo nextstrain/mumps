@@ -58,7 +58,9 @@ rule curate:
         sequence_field=config["curate"]["output_sequence_field"],
     shell:
         r"""
-        (cat {input.sequences_ndjson} \
+        exec &> >(tee {log:q})
+
+        cat {input.sequences_ndjson} \
             | augur curate rename \
                 --field-map {params.field_map} \
             | augur curate normalize-strings \
@@ -92,8 +94,7 @@ rule curate:
                 --output-metadata {output.metadata} \
                 --output-fasta {output.sequences} \
                 --output-id-field {params.id_field} \
-                --output-seq-field {params.sequence_field} ) \
-            2>&1 | tee {log:q}
+                --output-seq-field {params.sequence_field}
         """
 
 rule add_metadata_columns:
@@ -105,10 +106,14 @@ rule add_metadata_columns:
         metadata = "data/all_metadata.tsv"
     output:
         metadata = temp("data/all_metadata_added.tsv")
+    log:
+        "logs/add_metadata_columns.txt"
     params:
         accession=config['curate']['genbank_accession']
     shell:
         r"""
+        exec &> >(tee {log:q})
+
         csvtk mutate2 -t \
           -n url \
           -e '"https://www.ncbi.nlm.nih.gov/nuccore/" + ${params.accession}' \
@@ -121,10 +126,14 @@ rule subset_metadata:
         metadata="data/all_metadata_added.tsv",
     output:
         subset_metadata="data/subset_metadata.tsv",
+    log:
+        "logs/subset_metadata.txt"
     params:
         metadata_fields=",".join(config["curate"]["metadata_columns"]),
     shell:
         r"""
+        exec &> >(tee {log:q})
+
         csvtk cut -t -f {params.metadata_fields} \
             {input.metadata} > {output.subset_metadata}
         """
