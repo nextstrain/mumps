@@ -5,6 +5,8 @@ data/
 results/
 logs/
 benchmarks/
+nextclade/datasets/
+nextclade/test_output/
 
 # Sensitive environment variables
 environment*
