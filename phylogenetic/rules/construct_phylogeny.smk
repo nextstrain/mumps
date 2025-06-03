@@ -76,7 +76,5 @@ rule refine:
             --timetree \
             --coalescent {params.coalescent:q} \
             --date-confidence \
-            --date-inference {params.date_inference:q} \
-            {params.clock_filter_iqd}
-
+            --date-inference {params.date_inference:q} {params.clock_filter_iqd}
         """
