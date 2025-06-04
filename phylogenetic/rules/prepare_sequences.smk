@@ -78,6 +78,8 @@ rule filter:
         strain_id = config.get("strain_id_field", "strain"),
     shell:
         r"""
+        exec &> >(tee {log:q})
+
         augur filter \
             --sequences {input.sequences:q} \
             --metadata {input.metadata:q} \
@@ -88,7 +90,7 @@ rule filter:
             --output-metadata {output.metadata:q} \
             --min-length {params.min_length:q} \
             --group-by {params.group_by} \
-            {params.filter_params} 2>&1 | tee {log:q}
+            {params.filter_params}
         """
 
 rule align:
@@ -107,10 +109,12 @@ rule align:
         "benchmarks/{build}/align.txt",
     shell:
         r"""
+        exec &> >(tee {log:q})
+
         augur align \
             --sequences {input.sequences:q} \
             --reference-sequence {input.reference:q} \
             --output {output.alignment:q} \
             --fill-gaps \
-            --remove-reference 2>&1 | tee {log:q}
+            --remove-reference
         """

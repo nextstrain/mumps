@@ -38,10 +38,14 @@ rule fetch_ncbi_dataset_package:
         dataset_package=temp("data/ncbi_dataset.zip"),
     # Allow retries in case of network errors
     retries: 5
+    log:
+        "logs/fetch_ncbi_dataset_package.txt"
     benchmark:
         "benchmarks/fetch_ncbi_dataset_package.txt"
     shell:
         r"""
+        exec &> >(tee {log:q})
+
         datasets download virus genome taxon {params.ncbi_taxon_id:q} \
             --no-progressbar \
             --filename {output.dataset_package}
@@ -55,8 +59,12 @@ rule dump_ncbi_dataset_report:
         dataset_package="data/ncbi_dataset.zip",
     output:
         ncbi_dataset_tsv="data/ncbi_dataset_report_raw.tsv",
+    log:
+        "logs/dump_ncbi_dataset_report.txt"
     shell:
         r"""
+        exec &> >(tee {log:q})
+
         dataformat tsv virus-genome \
             --package {input.dataset_package} > {output.ncbi_dataset_tsv}
         """
@@ -67,10 +75,14 @@ rule extract_ncbi_dataset_sequences:
         dataset_package="data/ncbi_dataset.zip",
     output:
         ncbi_dataset_sequences=temp("data/ncbi_dataset_sequences.fasta"),
+    log:
+        "logs/extract_ncbi_dataset_sequences.txt"
     benchmark:
         "benchmarks/extract_ncbi_dataset_sequences.txt"
     shell:
         r"""
+        exec &> >(tee {log:q})
+
         unzip -jp {input.dataset_package} \
             ncbi_dataset/data/genomic.fna > {output.ncbi_dataset_sequences}
         """
@@ -83,10 +95,14 @@ rule format_ncbi_dataset_report:
         ncbi_dataset_tsv=temp("data/ncbi_dataset_report.tsv"),
     params:
         ncbi_datasets_fields=",".join(config["ncbi_datasets_fields"]),
+    log:
+        "logs/format_ncbi_dataset_report.txt"
     benchmark:
         "benchmarks/format_ncbi_dataset_report.txt"
     shell:
         r"""
+        exec &> >(tee {log:q})
+
         dataformat tsv virus-genome \
             --package {input.dataset_package} \
             --fields {params.ncbi_datasets_fields:q} \
@@ -115,6 +131,8 @@ rule format_ncbi_datasets_ndjson:
         "benchmarks/format_ncbi_datasets_ndjson.txt"
     shell:
         r"""
+        exec &> >(tee {log:q})
+
         augur curate passthru \
             --metadata {input.ncbi_dataset_tsv} \
             --fasta {input.ncbi_dataset_sequences} \
@@ -142,10 +160,11 @@ rule fetch_from_ncbi_entrez:
         "benchmarks/fetch_from_ncbi_entrez.txt"
     shell:
         r"""
+        exec &> >(tee {log:q})
+
         vendored/fetch-from-ncbi-entrez \
             --term {params.term:q} \
-            --output {output.genbank:q} \
-        2>&1 | tee {log:q}
+            --output {output.genbank:q}
         """
 
 rule genbank_to_json:
@@ -159,8 +178,9 @@ rule genbank_to_json:
         "logs/genbank_to_json.txt",
     shell:
         r"""
-        (bio json --lines {input.genbank:q} \
-        > {output.ndjson:q} ) 2> {log:q}
+        exec &> >(tee {log:q})
+
+        bio json --lines {input.genbank:q} > {output.ndjson:q}
         """
 
 rule parse_strain:
@@ -174,11 +194,12 @@ rule parse_strain:
         "logs/parse_strain.txt"
     shell:
         r"""
-        ( cat {input.ndjson:q} \
+        exec &> >(tee {log:q})
+
+        cat {input.ndjson:q} \
         | jq -c '{{accession: .record.accessions[0], strain: .record.strain[0]}}' \
         | augur curate passthru \
-            --output-metadata {output.metadata:q} ) \
-        2>&1 | tee {log:q}
+          --output-metadata {output.metadata:q}
         """
 
 rule merge_strain_name:
@@ -193,11 +214,12 @@ rule merge_strain_name:
         metadata_id='accession',
     shell:
         r"""
+        exec &> >(tee {log:q})
+
         augur merge \
           --metadata \
             datasets={input.ncbi_dataset:q} \
             entrez={input.ncbi_entrez:q} \
           --metadata-id-columns {params.metadata_id} \
-          --output-metadata {output.metadata:q} \
-          2>&1 | tee {log:q}
+          --output-metadata {output.metadata:q}
         """

@@ -64,11 +64,12 @@ rule merge_clade_membership:
         clade_membership_id=config.get("strain_id_field", "strain"),
     shell:
         r"""
+        exec &> >(tee {log:q})
+
         augur merge \
         --metadata a={input.metadata:q} b={input.clade_membership:q} \
         --metadata-id-columns a={params.metadata_id:q} b={params.clade_membership_id:q} \
-        --output-metadata {output.merged_metadata:q} \
-        2>&1 | tee {log:q}
+        --output-metadata {output.merged_metadata:q}
         """
 
 rule fill_in_clade_membership:
@@ -85,12 +86,13 @@ rule fill_in_clade_membership:
         genotype_column=config['clade_membership']['fallback']
     shell:
         r"""
+        exec &> >(tee {log:q})
+
         python scripts/fill-clade-membership.py \
           --input-metadata {input.merged_metadata:q} \
           --output-metadata {output.merged_metadata:q} \
           --clade-membership-column {params.clade_membership_column:q} \
-          --genotype-column {params.genotype_column:q} \
-          2>&1 | tee {log:q}
+          --genotype-column {params.genotype_column:q}
         """
 
 rule filter:
@@ -117,6 +119,8 @@ rule filter:
         strain_id = config.get("strain_id_field", "strain"),
     shell:
         r"""
+        exec &> >(tee {log:q})
+
         augur filter \
             --sequences {input.sequences:q} \
             --metadata {input.metadata:q} \
@@ -125,6 +129,5 @@ rule filter:
             --include {input.include:q} \
             --output {output.sequences:q} \
             --output-metadata {output.metadata:q} \
-            {params.filter_params} \
-            2>&1 | tee {log:q}
+            {params.filter_params}
         """

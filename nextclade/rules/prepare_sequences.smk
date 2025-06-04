@@ -40,10 +40,11 @@ rule align:
         align_params=lambda wildcard: config['align'][wildcard.build]
     shell:
         r"""
+        exec &> >(tee {log:q})
+
         augur align \
             --sequences {input.sequences:q} \
             --reference-sequence {input.reference:q} \
             --output {output.alignment:q} \
-            {params.align_params} \
-        2>&1 | tee {log:q}
+            {params.align_params}
         """
