@@ -39,13 +39,14 @@ rule ancestral:
         inference = config["ancestral"]["inference"],
     shell:
         r"""
+        exec &> >(tee {log:q})
+
         augur ancestral \
             --tree {input.tree:q} \
             --alignment {input.alignment:q} \
             --output-node-data {output.node_data:q} \
             --root-sequence {input.root_sequence} \
-            --inference {params.inference:q} \
-            2>&1 | tee {log:q}
+            --inference {params.inference:q}
         """
 
 rule translate:
@@ -62,12 +63,13 @@ rule translate:
         "benchmarks/{build}/translate.txt",
     shell:
         r"""
+        exec &> >(tee {log:q})
+
         augur translate \
             --tree {input.tree:q} \
             --ancestral-sequences {input.node_data:q} \
             --reference-sequence {input.reference:q} \
-            --output {output.node_data:q} \
-            2>&1 | tee {log:q}
+            --output {output.node_data:q}
         """
 
 rule traits:
@@ -90,6 +92,8 @@ rule traits:
         strain_id = config.get("strain_id_field", "strain"),
     shell:
         r"""
+        exec &> >(tee {log:q})
+
         augur traits \
             --tree {input.tree:q} \
             --metadata {input.metadata:q} \
@@ -97,6 +101,5 @@ rule traits:
             --output {output.node_data:q} \
             --columns {params.columns} \
             --confidence \
-            --sampling-bias-correction {params.sampling_bias_correction:q} \
-            2>&1 | tee {log:q}
+            --sampling-bias-correction {params.sampling_bias_correction:q}
         """

@@ -49,12 +49,13 @@ rule colors:
         "benchmarks/{build}/colors.txt"
     shell:
         r"""
+        exec &> >(tee {log:q})
+
         python3 ../phylogenetic/scripts/assign-colors.py \
             --color-schemes {input.color_schemes:q} \
             --ordering {input.color_orderings:q} \
             --metadata {input.metadata:q} \
-            --output {output.colors:q} \
-            2>&1 | tee {log}
+            --output {output.colors:q}
         """
 
 rule export:
@@ -80,6 +81,8 @@ rule export:
         strain_id = config.get("strain_id_field", "strain"),
     shell:
         r"""
+        exec &> >(tee {log:q})
+
         augur export v2 \
             --tree {input.tree:q} \
             --metadata {input.metadata:q} \
@@ -90,8 +93,7 @@ rule export:
             --auspice-config {input.auspice_config:q} \
             --description {input.description:q} \
             --include-root-sequence-inline \
-            --output {output.auspice_json:q} \
-            2>&1 | tee {log}
+            --output {output.auspice_json:q}
         """
 
 rule assemble_dataset:
@@ -142,10 +144,11 @@ rule test_dataset:
         dataset_dir="datasets/{build}",
     shell:
         """
+        exec &> >(tee {log:q})
+
         nextclade run \
           --input-dataset {params.dataset_dir} \
           --output-all {output.outdir} \
           --silent \
-          {input.sequences} \
-          2>&1 | tee {log}
+          {input.sequences}
         """

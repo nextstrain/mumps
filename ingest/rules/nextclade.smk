@@ -51,6 +51,8 @@ rule run_nextclade:
         "benchmarks/{DATASET_NAME}/run_nextclade.txt",
     shell:
         r"""
+        exec &> >(tee {log:q})
+
         nextclade3 run \
             {input.sequences} \
             --input-dataset {input.dataset:q} \
@@ -75,6 +77,8 @@ rule nextclade_metadata:
         nextclade_fields=lambda wildcard: ",".join(config["nextclade"][wildcard.DATASET_NAME]["field_map"].values()),
     shell:
         r"""
+        exec &> >(tee {log:q})
+
         augur curate rename \
             --metadata {input.nextclade:q} \
             --id-column {params.nextclade_id_field:q} \
@@ -102,6 +106,8 @@ rule join_metadata_and_nextclade:
         nextclade_id_field=config["nextclade"]["id_field"],
     shell:
         r"""
+        exec &> >(tee {log:q})
+
         augur merge \
             --metadata \
                 metadata={input.metadata:q} \
