@@ -23,6 +23,10 @@ align:
   sh: '--fill-gaps --remove-reference'
   genome: '--fill-gaps'
   genome-new: '--fill-gaps'
+  reference:
+    sh: "defaults/sh/reference.gb"
+    genome: "defaults/genome/reference.gb"
+    genome-new: "defaults/genome-new/root.gb"
 
 refine:
   sh: '--root mid_point'

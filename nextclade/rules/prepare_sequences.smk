@@ -29,7 +29,7 @@ rule align:
     """
     input:
         sequences = "results/{build}/filtered.fasta",
-        reference = config['reference'],
+        reference = lambda wildcard: config['align']['reference'][wildcard.build],
     output:
         alignment = "results/{build}/aligned.fasta",
     log:
