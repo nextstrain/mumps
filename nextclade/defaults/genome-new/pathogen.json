@@ -2,9 +2,9 @@
   "alignmentParams": {
     "minLength": 80,
     "penaltyGapExtend": 0,
-    "penaltyGapOpen": 4,
-    "penaltyGapOpenInFrame": 7,
-    "penaltyGapOpenOutOfFrame": 8,
+    "penaltyGapOpen": 8,
+    "penaltyGapOpenInFrame": 12,
+    "penaltyGapOpenOutOfFrame": 15,
     "penaltyMismatch": 1,
     "scoreMatch": 3,
     "noTranslatePastStop": false,
