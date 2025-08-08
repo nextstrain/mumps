@@ -95,6 +95,7 @@ rule join_metadata_and_nextclade:
         metadata="data/subset_metadata.tsv",
         sh_nextclade_metadata="results/sh/nextclade_metadata.tsv",
         genome_nextclade_metadata="results/genome/nextclade_metadata.tsv",
+        genome_new_nextclade_metadata="results/genome-new/nextclade_metadata.tsv",
     output:
         metadata="results/metadata.tsv",
     log:
@@ -113,10 +114,12 @@ rule join_metadata_and_nextclade:
                 metadata={input.metadata:q} \
                 sh_nextclade={input.sh_nextclade_metadata:q} \
                 genome_nextclade={input.genome_nextclade_metadata:q} \
+                genome_new_nextclade={input.genome_new_nextclade_metadata:q} \
             --metadata-id-columns \
                 metadata={params.metadata_id_field:q} \
                 sh_nextclade={params.nextclade_id_field:q} \
                 genome_nextclade={params.nextclade_id_field:q} \
+                genome_new_nextclade={params.nextclade_id_field:q} \
             --output-metadata {output.metadata:q} \
             --no-source-columns \
         2>&1 | tee {log:q}
