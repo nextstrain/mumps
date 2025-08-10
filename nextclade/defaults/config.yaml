@@ -17,7 +17,7 @@ clade_membership:
 filter:
   sh: '--exclude-all'
   genome: --subsample-max-sequences 300 --min-date 1950 --group-by country year month MuV_genotype division --min-length 8000 --exclude-where clade_membership=''
-  genome-new: '--exclude-all'
+  genome-new: --subsample-max-sequences 300 --min-date 1950 --group-by MuV_genotype --min-length 12000 --exclude-where clade_membership=''
 
 align:
   sh: '--fill-gaps --remove-reference'
@@ -26,16 +26,18 @@ align:
   reference:
     sh: "defaults/sh/reference.gb"
     genome: "defaults/genome/reference.gb"
-    genome-new: "defaults/genome-new/root.gb"
+    genome-new: "defaults/genome-new/reference.fasta"
 
 refine:
   sh: '--root mid_point'
   genome: '--root ROOT_UNCLASSIFIED --timetree --coalescent opt --date-confidence --date-inference marginal'
-  genome-new: '--root ROOT_UNCLASSIFIED --timetree --coalescent opt --date-confidence --date-inference marginal'
+  genome-new: '--root mid_point'
 
 ancestral:
   inference: "joint"
   root_sequence: "defaults/{build}/reference.fasta"
+  annotation: "defaults/{build}/reference.gb"
+  genes: ['F', 'HN', 'I', 'L', 'M', 'NP', 'P', 'SH', 'V']
 
 traits:
   sampling_bias_correction: 3

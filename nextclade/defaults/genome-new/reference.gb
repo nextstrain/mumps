@@ -51,13 +51,13 @@ FEATURES             Location/Qualifiers
                      QDLLRYNENGDSQQDARGEHGNTFPNNPNQNAQLQVGDWDE"
      gene            1979..3152
                      /gene="P"
-     CDS             1979..3152
+     CDS             join(1979..2443,2442..3152)
                      /gene="P"
                      /exception="RNA editing"
                      /note="mRNA co-transcriptionally modified by addition of
                      two G nucleotides"
                      /codon_start=1
-                     /product="phosphoprotein"
+                     /product="P"
                      /protein_id="ADR82172.1"
                      /translation="MDQFIKQDETGDLIETGMNVANHFLSTPIQGTNSLSKASILPGV
                      APVLIGNPEQKNIQHPTASHQGSKTKGRGSGVRSIIVSPSEAGNGGTQIPEPLFAQTG
@@ -67,7 +67,7 @@ FEATURES             Location/Qualifiers
                      DPGNPTGVPVDELRRSFSDHVTIVSGPGDVSFSSSEKPTLYLDELARPVSKPRPAKQT
                      KSQPVKDLAGQKVMITKMITDCVANPQMKQAFEQRLAKASTEDALNDIKRDIIRSAI"
      CDS             1979..2653
-                     /gene="P"
+                     /gene="V"
                      /codon_start=1
                      /product="V protein"
                      /protein_id="ADR82173.1"
@@ -76,8 +76,8 @@ FEATURES             Location/Qualifiers
                      QGGIVTTVHQDPTIQPTGSYRSVELAKIGKERMINRFVEKPRTSTPVTEFKRGAGSGC
                      SRPDNPRGGHRREWSLSWVQGEVRVFEWCNPICSPITAAARFHSCKCGNCPAKCDQCE
                      RDYGPP"
-     CDS             1979..2490
-                     /gene="P"
+     CDS             join(1979..2443,2440..2490)
+                     /gene="I"
                      /exception="RNA editing"
                      /note="mRNA co-transcriptionally modified by addition of
                      four G nucleotides"
@@ -199,7 +199,7 @@ FEATURES             Location/Qualifiers
                      NTILRLIVERILMYTVRNWCILPTQTRLTLRQSIELGEFRLRDVITPMEILKLSPNRK
                      YLKSALNQSTFNHLMGETSDILLNRAYQKRIWKAIGCVIYCFGLLTPDVEDSERIDID
                      NDIPDYDIHGDII"
-ORIGIN      
+ORIGIN
         1 accaagggga aaatgaagat gggatatcgg tagaacaaat agtgtaagaa acagtaagcc
        61 cggaagtggt gttttgcgat ttcgaggccg ggctcgatcc tcaccttcca ttgtcactag
       121 ggggcatttt gacactacct ggaaaatgtt gtctgtgctc aaagcattcg agcggttcac
