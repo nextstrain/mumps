@@ -27,6 +27,12 @@ This dataset supports:
 
 - Assignment of genotype
 - Phylogenetic placement
+- Translation of annotated reading frames
+- Quality metrics based on unexpected frameshifts, stop codons, and coverage.
+
+### Note on translation of P-gene products
+The Mumps virus genome undergoes RNA editing in the P-gene before translation. The translation of edited products (addition of 2 or 4 guanine in a poly-G tract) is accommodated in the GFF genome annotation by ``slippage'' of 2 or 4 nucleotides backwards inside the poly-G tract.
+
 
 ## What are Nextclade datasets
 
