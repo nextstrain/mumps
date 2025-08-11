@@ -9,7 +9,7 @@ workdir: workflow.current_basedir
 configfile: "defaults/config.yaml"
 
 #builds = ["sh", "genome"]
-builds = ["genome-new"]
+builds = ["sh", "genome-new"]
 
 wildcard_constraints:
     build = "|".join(builds)

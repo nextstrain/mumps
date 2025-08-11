@@ -24,7 +24,7 @@ align:
   genome: '--fill-gaps'
   genome-new: '--fill-gaps'
   reference:
-    sh: "defaults/sh/reference.gb"
+    sh: "defaults/sh/reference.fasta"
     genome: "defaults/genome/reference.gb"
     genome-new: "defaults/genome-new/reference.fasta"
 
@@ -37,7 +37,9 @@ ancestral:
   inference: "joint"
   root_sequence: "defaults/{build}/reference.fasta"
   annotation: "defaults/{build}/reference.gb"
-  genes: ['F', 'HN', 'I', 'L', 'M', 'NP', 'P', 'SH', 'V']
+  genes:
+    sh: ['SH']
+    genome-new: ['F', 'HN', 'I', 'L', 'M', 'NP', 'P', 'SH', 'V']
 
 traits:
   sampling_bias_correction: 3

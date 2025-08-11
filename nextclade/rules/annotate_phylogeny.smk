@@ -39,7 +39,7 @@ rule ancestral:
     params:
         inference = config["ancestral"]["inference"],
         translations = "results/{build}/translations",
-        genes = lambda w: ' '.join(config['ancestral']['genes']),
+        genes = lambda w: ' '.join(config['ancestral']['genes'][w.build]),
     shell:
         r"""
         exec &> >(tee {log:q})
