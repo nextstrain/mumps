@@ -1,1 +1,2 @@
 # Format: <GenBank accession> [# <strain name> <reason>]
+AB600942 # ODATE-3 misannotated as H but seems to be a I based on SH and genome tree placement
