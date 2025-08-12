@@ -4,7 +4,7 @@
 | :-- | :-- |
 | name  | Mumps MuV Genotypes (genome) |
 | authors | [Nextstrain](https://nextstrain.org) |
-| reference | Reconstructed ancestral sequence based on augur refine |
+| reference | Jeryl-Lynn strain, Isolate S79; [HQ416907](https://www.ncbi.nlm.nih.gov/nuccore/HQ416907) |
 | workflow  | https://github.com/nextstrain/mumps/tree/main/nextclade  |
 | path  | `nextstrain/mumps/genome` |
 
