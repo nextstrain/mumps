@@ -8,8 +8,7 @@ workdir: workflow.current_basedir
 # Use default configuration values. Override with Snakemake's --configfile/--config options.
 configfile: "defaults/config.yaml"
 
-#builds = ["sh", "genome"]
-builds = ["sh", "genome-new"]
+builds = ["sh", "genome"]
 
 wildcard_constraints:
     build = "|".join(builds)

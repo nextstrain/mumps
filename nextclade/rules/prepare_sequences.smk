@@ -31,7 +31,7 @@ rule align:
         sequences = "results/{build}/filtered.fasta",
         annotation = "defaults/{build}/genome_annotation.gff3",
         pathogen_json = "defaults/{build}/pathogen.json",
-        reference = lambda wildcard: config['align']['reference'][wildcard.build],
+        reference = "defaults/{build}/reference.fasta",
     output:
         alignment = "results/{build}/aligned.fasta",
     log:

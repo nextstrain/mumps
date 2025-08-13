@@ -127,7 +127,7 @@ rule filter:
             --metadata-id-columns {params.strain_id:q} \
             --exclude {input.exclude:q} \
             --include {input.include:q} \
-            --output {output.sequences:q} \
+            --output-sequences {output.sequences:q} \
             --output-metadata {output.metadata:q} \
             {params.filter_params}
         """

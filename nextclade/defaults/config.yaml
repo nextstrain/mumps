@@ -8,7 +8,6 @@ sequences_url: "https://data.nextstrain.org/files/workflows/mumps/sequences.fast
 metadata_url: "https://data.nextstrain.org/files/workflows/mumps/metadata.tsv.zst"
 
 strain_id_field: "accession"
-reference: "defaults/{build}/reference.gb"
 
 clade_membership:
   metadata: "defaults/{build}/reference_strains.tsv"
@@ -16,22 +15,15 @@ clade_membership:
 
 filter:
   sh: '--exclude-all'
-  genome: --subsample-max-sequences 300 --min-date 1950 --group-by country year month MuV_genotype division --min-length 8000 --exclude-where clade_membership=''
-  genome-new: --subsample-max-sequences 300 --min-date 1950 --group-by MuV_genotype --min-length 12000 --exclude-where clade_membership=''
+  genome: --subsample-max-sequences 300 --min-date 1950 --group-by MuV_genotype --min-length 12000 --exclude-where clade_membership=''
 
 align:
   sh: '--fill-gaps --remove-reference'
   genome: '--fill-gaps'
-  genome-new: '--fill-gaps'
-  reference:
-    sh: "defaults/sh/reference.fasta"
-    genome: "defaults/genome/reference.gb"
-    genome-new: "defaults/genome-new/reference.fasta"
 
 refine:
   sh: '--root mid_point'
-  genome: '--root ROOT_UNCLASSIFIED --timetree --coalescent opt --date-confidence --date-inference marginal'
-  genome-new: '--root mid_point'
+  genome: '--root mid_point'
 
 ancestral:
   inference: "joint"
@@ -39,13 +31,12 @@ ancestral:
   annotation: "defaults/{build}/reference.gb"
   genes:
     sh: ['SH']
-    genome-new: ['F', 'HN', 'I', 'L', 'M', 'NP', 'P', 'SH', 'V']
+    genome: ['F', 'HN', 'I', 'L', 'M', 'NP', 'P', 'SH', 'V']
 
 traits:
   sampling_bias_correction: 3
   sh: clade_membership MuV_genotype
   genome: clade_membership MuV_genotype
-  genome-new: clade_membership MuV_genotype
 
 colors:
   color_schemes: "../phylogenetic/defaults/color_schemes.tsv"
