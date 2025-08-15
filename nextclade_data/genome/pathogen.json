@@ -1,10 +1,10 @@
 {
   "alignmentParams": {
     "minLength": 80,
-    "penaltyGapExtend": 0,
-    "penaltyGapOpen": 4,
-    "penaltyGapOpenInFrame": 7,
-    "penaltyGapOpenOutOfFrame": 8,
+    "penaltyGapExtend": 1,
+    "penaltyGapOpen": 10,
+    "penaltyGapOpenInFrame": 15,
+    "penaltyGapOpenOutOfFrame": 17,
     "penaltyMismatch": 1,
     "scoreMatch": 3,
     "noTranslatePastStop": false,
@@ -13,13 +13,12 @@
     "allowedMismatches": 15,
     "minMatchLength": 20,
     "maxAlignmentAttempts": 5,
-    "includeReference": true,
     "includeNearestNodeInfo": true,
     "retryReverseComplement": true,
-    "minSeedCover": 0.01
+    "minSeedCover": 0.1
   },
   "attributes": {
-    "name": "Mumps virus global tree",
+    "name": "Mumps MuV Genotypes (Full genome)",
     "reference name": "Jeryl-Lynn (genotype A)",
     "reference accession": "D90232"
   },
@@ -47,5 +46,26 @@
   "version": {
     "tag": "unreleased"
   },
-  "defaultCds": "SH"
+  "defaultCds": "SH",
+  "qc": {
+    "missingData": {
+      "enabled": true,
+      "missingDataThreshold": 2000,
+      "scoreBias": 500,
+      "scoreWeight": 50
+    },
+    "mixedSites": {
+      "enabled": true,
+      "mixedSitesThreshold": 15,
+      "scoreWeight": 50
+    },
+    "frameShifts": {
+      "enabled": true,
+      "scoreWeight": 20
+    },
+    "stopCodons": {
+      "enabled": true,
+      "scoreWeight": 50
+    }
+  }
 }

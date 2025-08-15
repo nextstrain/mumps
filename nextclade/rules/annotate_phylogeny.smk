@@ -29,14 +29,17 @@ rule ancestral:
         tree = "results/{build}/tree.nwk",
         alignment = "results/{build}/aligned.fasta",
         root_sequence = config['ancestral']['root_sequence'],
+        annotation = config['ancestral']['annotation'],
     output:
-        node_data = "results/{build}/nt_muts.json",
+        node_data = "results/{build}/muts.json",
     log:
         "logs/{build}/ancestral.txt",
     benchmark:
         "benchmarks/{build}/ancestral.txt",
     params:
         inference = config["ancestral"]["inference"],
+        translations = "results/{build}/translations",
+        genes = lambda w: ' '.join(config['ancestral']['genes'][w.build]),
     shell:
         r"""
         exec &> >(tee {log:q})
@@ -44,32 +47,12 @@ rule ancestral:
         augur ancestral \
             --tree {input.tree:q} \
             --alignment {input.alignment:q} \
+            --annotation {input.annotation:q} \
+            --translations {params.translations:q}/gene.%GENE.fasta \
+            --genes {params.genes} \
             --output-node-data {output.node_data:q} \
             --root-sequence {input.root_sequence} \
             --inference {params.inference:q}
-        """
-
-rule translate:
-    """Translating amino acid sequences"""
-    input:
-        tree = "results/{build}/tree.nwk",
-        node_data = "results/{build}/nt_muts.json",
-        reference = config['reference'],
-    output:
-        node_data = "results/{build}/aa_muts.json",
-    log:
-        "logs/{build}/translate.txt",
-    benchmark:
-        "benchmarks/{build}/translate.txt",
-    shell:
-        r"""
-        exec &> >(tee {log:q})
-
-        augur translate \
-            --tree {input.tree:q} \
-            --ancestral-sequences {input.node_data:q} \
-            --reference-sequence {input.reference:q} \
-            --output {output.node_data:q}
         """
 
 rule traits:

@@ -65,8 +65,7 @@ rule export:
         metadata = "results/{build}/metadata.tsv",
         branch_lengths = "results/{build}/branch_lengths.json",
         traits = "results/{build}/traits.json",
-        nt_muts = "results/{build}/nt_muts.json",
-        aa_muts = "results/{build}/aa_muts.json",
+        muts = "results/{build}/muts.json",
         lat_longs = config['export']['lat_longs'],
         colors = "results/{build}/colors.tsv",
         auspice_config = config['export']['auspice_config'],
@@ -87,7 +86,7 @@ rule export:
             --tree {input.tree:q} \
             --metadata {input.metadata:q} \
             --metadata-id-columns {params.strain_id:q} \
-            --node-data {input.branch_lengths:q} {input.traits:q} {input.nt_muts:q} {input.aa_muts:q} \
+            --node-data {input.branch_lengths:q} {input.traits:q} {input.muts:q} \
             --lat-longs {input.lat_longs:q} \
             --colors {input.colors:q} \
             --auspice-config {input.auspice_config:q} \

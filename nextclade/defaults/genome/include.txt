@@ -34,4 +34,3 @@ KF878081 # MuVi/Fukuoka.JPN/41.00[L] # L
 AY508995 # L3/Russia/Vector # N
 AY685920 # L-Zagreb # N
 KF878082 # Ungroup
-ROOT_UNCLASSIFIED # Unclassified

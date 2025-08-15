@@ -29,7 +29,9 @@ rule align:
     """
     input:
         sequences = "results/{build}/filtered.fasta",
-        reference = config['reference'],
+        annotation = "defaults/{build}/genome_annotation.gff3",
+        pathogen_json = "defaults/{build}/pathogen.json",
+        reference = "defaults/{build}/reference.fasta",
     output:
         alignment = "results/{build}/aligned.fasta",
     log:
@@ -37,14 +39,16 @@ rule align:
     benchmark:
         "benchmarks/{build}/align.txt",
     params:
-        align_params=lambda wildcard: config['align'][wildcard.build]
+        translations = "results/{build}/translations",
     shell:
         r"""
         exec &> >(tee {log:q})
 
-        augur align \
-            --sequences {input.sequences:q} \
-            --reference-sequence {input.reference:q} \
-            --output {output.alignment:q} \
-            {params.align_params}
+        nextclade run \
+            --input-ref {input.reference:q} \
+            --input-annotation {input.annotation:q} \
+            --output-fasta {output.alignment:q} \
+            --input-pathogen-json {input.pathogen_json:q} \
+            --output-translations {params.translations:q}/gene.{{cds}}.fasta \
+            {input.sequences:q}
         """
