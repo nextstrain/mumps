@@ -23,24 +23,24 @@ DATASET_NAMES = config["nextclade"]["dataset_name"]
 wildcard_constraints:
     DATASET_NAME = "|".join(DATASET_NAMES)
 
-# rule get_nextclade_dataset:
-#     """Download Nextclade dataset"""
-#     output:
-#         dataset=f"data/nextclade_data/{DATASET_NAME}.zip",
-#     params:
-#         dataset_name=DATASET_NAME
-#     shell:
-#         r"""
-#         nextclade3 dataset get \
-#             --name={params.dataset_name:q} \
-#             --output-zip={output.dataset} \
-#             --verbose
-#         """
-
+rule get_nextclade_dataset:
+    """Download Nextclade dataset"""
+    output:
+        dataset="data/nextclade_data/{DATASET_NAME}.zip",
+    params:
+        # Specifically pull datasets from nextstrain/mumps
+        dataset_name=lambda wildcards: f"nextstrain/mumps/{wildcards.DATASET_NAME}"
+    shell:
+        r"""
+        nextclade3 dataset get \
+            --name={params.dataset_name:q} \
+            --output-zip={output.dataset} \
+            --verbose
+        """
 
 rule run_nextclade:
     input:
-        dataset=lambda wildcards: directory(f"../nextclade_data/{wildcards.DATASET_NAME}"),
+        dataset="data/nextclade_data/{DATASET_NAME}.zip",
         sequences="results/sequences.fasta",
     output:
         nextclade="results/{DATASET_NAME}/nextclade.tsv",
