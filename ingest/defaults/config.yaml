@@ -125,7 +125,8 @@ curate:
 # Note that this requires a Nextclade dataset to already exist for your pathogen.
 nextclade:
   # The name of the Nextclade dataset to use for running nextclade.
-  # Run `nextclade dataset list` to get a full list of available Nextclade datasets
+  # Run `nextclade dataset list --search nextstrain/mumps` to get a list of available mumps datasets
+  # The dataset names listed should match `nextstrain/mumps/<dataset_name>`
   dataset_name: ["sh","genome"]
   # The first column should be the original column name of the Nextclade TSV
   # The second column should be the new column name to use in the final metadata TSV

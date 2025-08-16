@@ -23,24 +23,30 @@ DATASET_NAMES = config["nextclade"]["dataset_name"]
 wildcard_constraints:
     DATASET_NAME = "|".join(DATASET_NAMES)
 
-# rule get_nextclade_dataset:
-#     """Download Nextclade dataset"""
-#     output:
-#         dataset=f"data/nextclade_data/{DATASET_NAME}.zip",
-#     params:
-#         dataset_name=DATASET_NAME
-#     shell:
-#         r"""
-#         nextclade3 dataset get \
-#             --name={params.dataset_name:q} \
-#             --output-zip={output.dataset} \
-#             --verbose
-#         """
+rule get_nextclade_dataset:
+    """Download Nextclade dataset"""
+    output:
+        dataset="data/nextclade_data/{DATASET_NAME}.zip",
+    params:
+        # Specifically pull datasets from nextstrain/mumps
+        dataset_name=lambda wildcards: f"nextstrain/mumps/{wildcards.DATASET_NAME}"
+    benchmark:
+        "benchmarks/{DATASET_NAME}/get_nextclade_dataset.txt"
+    log:
+        "logs/{DATASET_NAME}/get_nextclade_dataset.txt"
+    shell:
+        r"""
+        exec &> >(tee {log:q})
 
+        nextclade3 dataset get \
+            --name={params.dataset_name:q} \
+            --output-zip={output.dataset:q} \
+            --verbose
+        """
 
 rule run_nextclade:
     input:
-        dataset=lambda wildcards: directory(f"../nextclade_data/{wildcards.DATASET_NAME}"),
+        dataset="data/nextclade_data/{DATASET_NAME}.zip",
         sequences="results/sequences.fasta",
     output:
         nextclade="results/{DATASET_NAME}/nextclade.tsv",
@@ -58,8 +64,8 @@ rule run_nextclade:
             --input-dataset {input.dataset:q} \
             --output-tsv {output.nextclade:q} \
             --output-fasta {output.alignment:q} \
-            --silent \
-            2>&1 | tee {log:q}
+            --silent
+
         """
 
 rule nextclade_metadata:
@@ -85,8 +91,8 @@ rule nextclade_metadata:
             --field-map {params.nextclade_field_map:q} \
             --output-metadata - \
         | csvtk cut -t --fields {params.nextclade_fields:q} \
-        > {output.nextclade_metadata:q} \
-        2>&1 | tee {log:q}
+        > {output.nextclade_metadata:q}
+
         """
 
 
@@ -118,6 +124,6 @@ rule join_metadata_and_nextclade:
                 sh_nextclade={params.nextclade_id_field:q} \
                 genome_nextclade={params.nextclade_id_field:q} \
             --output-metadata {output.metadata:q} \
-            --no-source-columns \
-        2>&1 | tee {log:q}
+            --no-source-columns
+
         """
