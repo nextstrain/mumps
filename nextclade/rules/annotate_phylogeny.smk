@@ -28,8 +28,8 @@ rule ancestral:
     input:
         tree = "results/{build}/tree.nwk",
         alignment = "results/{build}/aligned.fasta",
-        root_sequence = config['ancestral']['root_sequence'],
-        annotation = config['ancestral']['annotation'],
+        root_sequence = resolve_config_path(config['assemble_dataset']['reference']),
+        annotation = resolve_config_path(config['ancestral']['annotation']),
     output:
         node_data = "results/{build}/muts.json",
     log:

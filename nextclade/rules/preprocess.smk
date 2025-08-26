@@ -52,7 +52,7 @@ rule decompress:
 rule merge_clade_membership:
     input:
         metadata="data/metadata.tsv",
-        clade_membership=config['clade_membership']['metadata'],
+        clade_membership=resolve_config_path(config['clade_membership']['metadata']),
     output:
         merged_metadata=temp("data/{build}/metadata_merged_raw.tsv"),
     log:
@@ -88,7 +88,7 @@ rule fill_in_clade_membership:
         r"""
         exec &> >(tee {log:q})
 
-        python scripts/fill-clade-membership.py \
+        python {workflow.basedir}/scripts/fill-clade-membership.py \
           --input-metadata {input.merged_metadata:q} \
           --output-metadata {output.merged_metadata:q} \
           --clade-membership-column {params.clade_membership_column:q} \
@@ -105,8 +105,8 @@ rule filter:
     input:
         sequences = "data/sequences.fasta",
         metadata = "data/{build}/metadata_merged.tsv",
-        exclude = "defaults/{build}/exclude.txt",
-        include = "defaults/{build}/include.txt",
+        exclude = resolve_config_path(config['filter']['exclude']),
+        include = resolve_config_path(config['filter']['include']),
     output:
         sequences = "results/{build}/filtered.fasta",
         metadata = "results/{build}/metadata.tsv",

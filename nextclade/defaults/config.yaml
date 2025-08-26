@@ -3,6 +3,10 @@
 #
 # Define optional config parameters with their default values here so that users
 # do not have to dig through the workflows to figure out the default values
+# Define wildcards used for building trees in the workflow, also used in the intermediate files or auxillariary default file names.
+# {builds} represents different analysis, in this case genomic region
+builds: ["sh", "genome"]
+
 # Both files must be zstd compressed
 sequences_url: "https://data.nextstrain.org/files/workflows/mumps/sequences.fasta.zst"
 metadata_url: "https://data.nextstrain.org/files/workflows/mumps/metadata.tsv.zst"
@@ -10,10 +14,12 @@ metadata_url: "https://data.nextstrain.org/files/workflows/mumps/metadata.tsv.zs
 strain_id_field: "accession"
 
 clade_membership:
-  metadata: "defaults/{build}/reference_strains.tsv"
+  metadata: "{build}/reference_strains.tsv"
   fallback: "MuV_genotype"
 
 filter:
+  exclude: "{build}/exclude.txt"
+  include: "{build}/include.txt"
   sh: '--exclude-all'
   genome: --subsample-max-sequences 300 --min-date 1950 --group-by MuV_genotype --min-length 12000 --exclude-where clade_membership=''
 
@@ -27,8 +33,7 @@ refine:
 
 ancestral:
   inference: "joint"
-  root_sequence: "defaults/{build}/reference.fasta"
-  annotation: "defaults/{build}/reference.gb"
+  annotation: "{build}/reference.gb"
   genes:
     sh: ['SH']
     genome: ['F', 'HN', 'I', 'L', 'M', 'NP', 'P', 'SH', 'V']
@@ -39,10 +44,20 @@ traits:
   genome: clade_membership MuV_genotype
 
 colors:
-  color_schemes: "../phylogenetic/defaults/color_schemes.tsv"
-  color_orderings: "../phylogenetic/defaults/color_orderings.tsv"
+  # Note: Reusing files from the phylogenetic workflow
+  color_schemes: "color_schemes.tsv"
+  color_orderings: "color_orderings.tsv"
 
 export:
-  lat_longs: "../phylogenetic/defaults/lat_longs.tsv"
-  auspice_config: "defaults/{build}/auspice_config.json"
-  description: "../phylogenetic/defaults/description.md"
+  auspice_config: "{build}/auspice_config.json"
+  # Note: Reusing files from the phylogenetic workflow
+  lat_longs: "lat_longs.tsv"
+  description: "description.md"
+
+assemble_dataset:
+  reference: "{build}/reference.fasta"
+  pathogen_json: "{build}/pathogen.json"
+  sequences: "{build}/sequences.fasta"
+  annotation: "{build}/genome_annotation.gff3"
+  readme: "{build}/README.md"
+  changelog: "{build}/CHANGELOG.md"
