@@ -30,9 +30,9 @@ def format_field_map(field_map: dict[str, str]) -> str:
 rule curate:
     input:
         sequences_ndjson="data/ncbi.ndjson",
-        geolocation_rules=config["curate"]["local_geolocation_rules"],
-        annotations=config["curate"]["annotations"],
-        manual_mapping="defaults/MuV_genotype_map.tsv",
+        geolocation_rules=resolve_config_path(config["curate"]["local_geolocation_rules"]),
+        annotations=resolve_config_path(config["curate"]["annotations"]),
+        manual_mapping=resolve_config_path(config["curate"]["mumps_genotype_map"]),
     output:
         metadata="data/all_metadata.tsv",
         sequences="results/sequences.fasta",
@@ -80,12 +80,12 @@ rule curate:
                 --authors-field {params.authors_field} \
                 --default-value {params.authors_default_value} \
                 --abbr-authors-field {params.abbr_authors_field} \
-            | ./scripts/map-new-fields \
+            | {workflow.basedir}/scripts/map-new-fields \
                 --map-tsv {input.manual_mapping} \
                 --map-id taxon_id \
                 --metadata-id taxon_id \
                 --map-fields MuV_genotype \
-            | ./scripts/parse-fields-from-mumps-strain.py \
+            | {workflow.basedir}/scripts/parse-fields-from-mumps-strain.py \
             | augur curate apply-geolocation-rules \
                 --geolocation-rules {input.geolocation_rules} \
             | augur curate apply-record-annotations \
