@@ -14,9 +14,50 @@ All official Nextclade datasets are available at https://github.com/nextstrain/n
 > [mpox](https://github.com/nextstrain/mpox) as an example to create your own
 > Nextclade workflow.
 
-## Workflow Usage
+## Usage
 
-The workflow can be run from the top level pathogen repo directory:
+### With `nextstrain run`
+
+If you haven't set up the mumps pathogen, then set it up with:
+
+```bash
+nextstrain setup mumps
+```
+
+Otherwise, make sure you have the latest set up with:
+
+```bash
+nextstrain update mumps
+```
+
+Run the nextclade workflow with:
+
+```bash
+nextstrain run mumps nextclade <analysis-directory>
+```
+
+Your `<analysis-directory>` will contain the workflow's intermediate files
+and the default outputs of the nextclade workflow:
+
+- nextclade_dataset(s) = <analysis-directory>/datasets/<build_name>/*
+
+
+### With `nextstrain build`
+
+If you don't have a local copy of the mumps repository, use Git to download it
+
+```bash
+git clone https://github.com/nextstrain/mumps.git
+```
+
+Otherwise, update your local copy of the workflow with:
+
+```bash
+cd mumps
+git pull --ff-only origin main
+```
+
+The nextclade workflow can be run from the top level pathogen repo directory:
 ```
 nextstrain build nextclade
 ```
