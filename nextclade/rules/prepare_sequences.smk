@@ -29,9 +29,9 @@ rule align:
     """
     input:
         sequences = "results/{build}/filtered.fasta",
-        annotation = "defaults/{build}/genome_annotation.gff3",
-        pathogen_json = "defaults/{build}/pathogen.json",
-        reference = "defaults/{build}/reference.fasta",
+        annotation = resolve_config_path(config['assemble_dataset']['annotation']),
+        pathogen_json = resolve_config_path(config['assemble_dataset']['pathogen_json']),
+        reference = resolve_config_path(config['assemble_dataset']['reference']),
     output:
         alignment = "results/{build}/aligned.fasta",
     log:

@@ -57,13 +57,13 @@ rule filter:
       - from {params.min_date} onwards
       - excluding strains in {input.exclude}
       - including strains in {input.include}
-      - minimum genome length of {params.min_length} (50% of Zika virus genome)
+      - minimum genome length of {params.min_length}
     """
     input:
         sequences = "data/sequences.fasta",
         metadata = "data/metadata.tsv",
-        exclude = "defaults/{build}/exclude.txt",
-        include = "defaults/{build}/include.txt"
+        exclude = resolve_config_path(config["filter"]["exclude"]),
+        include = resolve_config_path(config["filter"]["include"]),
     output:
         sequences = "results/{build}/filtered.fasta",
         metadata = "results/{build}/metadata.tsv",
@@ -100,7 +100,7 @@ rule align:
     """
     input:
         sequences = "results/{build}/filtered.fasta",
-        reference = config['reference'],
+        reference = resolve_config_path(config['reference']),
     output:
         alignment = "results/{build}/aligned.fasta",
     log:

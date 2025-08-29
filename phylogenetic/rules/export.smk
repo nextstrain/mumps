@@ -28,8 +28,8 @@ See Augur's usage docs for these commands for more details.
 rule colors:
     """Generate color pallete for color by metadata in auspice"""
     input:
-        color_schemes = config['colors']['color_schemes'],
-        color_orderings = config['colors']['color_orderings'],
+        color_schemes = resolve_config_path(config['colors']['color_schemes']),
+        color_orderings = resolve_config_path(config['colors']['color_orderings']),
         metadata = "results/{build}/metadata.tsv",
     output:
         colors = "results/{build}/colors.tsv"
@@ -41,7 +41,7 @@ rule colors:
         r"""
         exec &> >(tee {log:q})
 
-        python3 scripts/assign-colors.py \
+        python3 {workflow.basedir}/scripts/assign-colors.py \
             --color-schemes {input.color_schemes:q} \
             --ordering {input.color_orderings:q} \
             --metadata {input.metadata:q} \
@@ -57,10 +57,10 @@ rule export:
         traits = "results/{build}/traits.json",
         nt_muts = "results/{build}/nt_muts.json",
         aa_muts = "results/{build}/aa_muts.json",
-        lat_longs = config['export']['lat_longs'],
+        lat_longs = resolve_config_path(config['export']['lat_longs']),
         colors = "results/{build}/colors.tsv",
-        auspice_config = config['export']['auspice_config'],
-        description = config['export']['description'],
+        auspice_config = resolve_config_path(config['export']['auspice_config']),
+        description = resolve_config_path(config['export']['description']),
     output:
         auspice_json = "auspice/mumps_{build}.json",
     log:

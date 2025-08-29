@@ -38,8 +38,9 @@ See Augur's usage docs for these commands for more details.
 rule colors:
     """Generate color pallete for color by metadata in auspice"""
     input:
-        color_schemes = config['colors']['color_schemes'],
-        color_orderings = config['colors']['color_orderings'],
+        # Reusing color schemes and ordering from the phylogenetic workflow
+        color_schemes = resolve_config_path(config['colors']['color_schemes'], defaults_dir=f"{workflow.basedir}/../phylogenetic/defaults/"),
+        color_orderings = resolve_config_path(config['colors']['color_orderings'], defaults_dir=f"{workflow.basedir}/../phylogenetic/defaults/"),
         metadata = "results/{build}/metadata.tsv",
     output:
         colors = "results/{build}/colors.tsv"
@@ -51,7 +52,7 @@ rule colors:
         r"""
         exec &> >(tee {log:q})
 
-        python3 ../phylogenetic/scripts/assign-colors.py \
+        python3 {workflow.basedir}/../phylogenetic/scripts/assign-colors.py \
             --color-schemes {input.color_schemes:q} \
             --ordering {input.color_orderings:q} \
             --metadata {input.metadata:q} \
@@ -66,10 +67,10 @@ rule export:
         branch_lengths = "results/{build}/branch_lengths.json",
         traits = "results/{build}/traits.json",
         muts = "results/{build}/muts.json",
-        lat_longs = config['export']['lat_longs'],
+        lat_longs = resolve_config_path(config['export']['lat_longs'], defaults_dir=f"{workflow.basedir}/../phylogenetic/defaults/"),
         colors = "results/{build}/colors.tsv",
-        auspice_config = config['export']['auspice_config'],
-        description = config['export']['description'],
+        auspice_config = resolve_config_path(config['export']['auspice_config']),
+        description = resolve_config_path(config['export']['description'], defaults_dir=f"{workflow.basedir}/../phylogenetic/defaults/"),
     output:
         auspice_json = "auspice/mumps_{build}.json",
     log:
@@ -97,13 +98,13 @@ rule export:
 
 rule assemble_dataset:
     input:
-        reference="defaults/{build}/reference.fasta",
+        reference=resolve_config_path(config["assemble_dataset"]["reference"]),
         tree="auspice/mumps_{build}.json",
-        pathogen_json="defaults/{build}/pathogen.json",
-        sequences="defaults/{build}/sequences.fasta",
-        annotation="defaults/{build}/genome_annotation.gff3",
-        readme="defaults/{build}/README.md",
-        changelog="defaults/{build}/CHANGELOG.md",
+        pathogen_json=resolve_config_path(config["assemble_dataset"]["pathogen_json"]),
+        sequences=resolve_config_path(config["assemble_dataset"]["sequences"]),
+        annotation=resolve_config_path(config["assemble_dataset"]["annotation"]),
+        readme=resolve_config_path(config["assemble_dataset"]["readme"]),
+        changelog=resolve_config_path(config["assemble_dataset"]["changelog"]),
     output:
         reference="datasets/{build}/reference.fasta",
         tree="datasets/{build}/tree.json",
@@ -129,7 +130,7 @@ rule test_dataset:
     input:
         tree="datasets/{build}/tree.json",
         pathogen_json="datasets/{build}/pathogen.json",
-        sequences="defaults/{build}/sequences.fasta",
+        sequences=resolve_config_path(config["assemble_dataset"]["sequences"]),
         annotation="datasets/{build}/genome_annotation.gff3",
         readme="datasets/{build}/README.md",
         changelog="datasets/{build}/CHANGELOG.md",

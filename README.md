@@ -5,6 +5,7 @@ This repository contains three workflows for the analysis of mumps virus data:
 - [`ingest/`] - Download data from GenBank, clean and curate it
 - [`phylogenetic/`][] - Filter sequences, align, construct phylogeny,
   and export for visualization
+- [`nextclade/`] - Create nextclade datasets
 
 Each workflow directory contains a `README.md` file with more
 information. The results of running both workflows are publicly
@@ -15,16 +16,19 @@ visible at [nextstrain.org/mumps][].
 Follow the [standard installation instructions][] for Nextstrain's
 suite of software tools.
 
-## Quick start
-
-Run the phylogenetic workflow by executing the following commands in
-the repository checkout, after installing `nextstrain` per the above
-instructions:
+After you've installed the Nextstrain CLI, you can set up mumps with
 
 ```bash
-cd phylogenetic/
-nextstrain build .
-nextstrain view .
+nextstrain setup mumps
+```
+
+## Quick start
+
+Run the default phylogenetic workflow via:
+
+```bash
+nextstrain run mumps phylogenetic mumps-analysis
+nextstrain view mumps-analysis
 ```
 
 Further documentation is available at "[Running a pathogen workflow][]".
