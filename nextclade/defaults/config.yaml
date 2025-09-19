@@ -14,6 +14,8 @@ inputs:
 
 strain_id_field: "accession"
 
+# Merge in clade_membership column from {metadata} file
+# If not defined, use {fallback} column
 clade_membership:
   metadata: "{build}/reference_strains.tsv"
   fallback: "MuV_genotype"
@@ -22,7 +24,7 @@ filter:
   exclude: "{build}/exclude.txt"
   include: "{build}/include.txt"
   sh: '--exclude-all'
-  genome: --subsample-max-sequences 300 --min-date 1950 --group-by MuV_genotype --min-length 12000 --exclude-where clade_membership=''
+  genome: --subsample-max-sequences 300 --min-date 1950 --group-by clade_membership --min-length 12000 --exclude-where clade_membership=''
 
 align:
   sh: '--fill-gaps --remove-reference'
