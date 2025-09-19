@@ -27,7 +27,7 @@
       "type": "categorical"
     },
     {
-      "key": "MuV_genotype",
+      "key": "clade_membership",
       "title": "MuV genotype",
       "type": "categorical"
     },
@@ -58,7 +58,6 @@
   },
   "filters": [
     "clade_membership",
-    "MuV_genotype",
     "country",
     "region",
     "author"
@@ -67,44 +66,5 @@
     "strain",
     "isolate",
     "host"
-  ],
-  "extensions": {
-    "nextclade": {
-      "clade_node_attrs": [
-        {
-          "name": "MuV_genotype",
-          "displayName": "MuV Genotype",
-          "description": "Mumps genotype"
-        }
-      ],
-      "pathogen": {
-        "schemaVersion":"3.0.0",
-        "attributes": {
-          "name": "Mumps genotype tree",
-          "reference name": "Jeryl-Lynn (genotype A)",
-          "reference accession": "D90232"
-        },
-        "alignmentParams": {
-          "minLength": 80,
-          "penaltyGapExtend": 1,
-          "penaltyGapOpen": 4,
-          "penaltyGapOpenInFrame": 4,
-          "penaltyGapOpenOutOfFrame": 6,
-          "penaltyMismatch": 1,
-          "scoreMatch": 4,
-          "noTranslatePastStop": false,
-          "excessBandwidth": 9,
-          "terminalBandwidth": 80,
-          "allowedMismatches": 12,
-          "minMatchLength": 30,
-          "maxAlignmentAttempts": 5,
-          "includeReference": true,
-          "includeNearestNodeInfo": true,
-          "retryReverseComplement": true,
-          "minSeedCover": 0.01
-        },
-        "defaultCds": "SH"
-      }
-    }
-  }
+  ]
 }

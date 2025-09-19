@@ -40,8 +40,8 @@ ancestral:
 
 traits:
   sampling_bias_correction: 3
-  sh: clade_membership MuV_genotype
-  genome: clade_membership MuV_genotype
+  sh: clade_membership
+  genome: clade_membership
 
 colors:
   # Note: Reusing files from the phylogenetic workflow
