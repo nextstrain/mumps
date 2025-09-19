@@ -27,6 +27,8 @@ This dataset supports:
 
 - Assignment of genotype
 - Phylogenetic placement
+- Translation of annotated reading frames
+- Quality metrics based on unexpected frameshifts, stop codons, and coverage.
 
 ## What are Nextclade datasets
 
