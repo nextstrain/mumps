@@ -51,7 +51,7 @@
     "qc": {
     "missingData": {
       "enabled": true,
-      "missingDataThreshold": 2000,
+      "missingDataThreshold": 300,
       "scoreBias": 500,
       "scoreWeight": 50
     },
