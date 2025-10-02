@@ -5,11 +5,12 @@ REQUIRED INPUTS:
 
     metadata    = data/metadata.tsv
     sequences   = data/sequences.fasta
-    reference   = ../shared/reference.fasta
+    reference   = (from config)
 
 OUTPUTS:
 
-    prepared_sequences = results/prepared_sequences.fasta
+    metadata  = results/{build}/metadata.tsv
+    alignment = results/{build}/aligned.fasta
 
 This part of the workflow usually includes the following steps:
 
