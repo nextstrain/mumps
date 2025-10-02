@@ -4,7 +4,7 @@ export a Nextstrain dataset.
 
 REQUIRED INPUTS:
 
-    metadata        = results/{build}/filtered.tsv
+    metadata        = results/{build}/subsampled.tsv
     tree            = results/{build}/tree.nwk
     branch_lengths  = results/{build}/branch_lengths.json
     node_data       = results/{build}/*.json
@@ -31,7 +31,7 @@ rule colors:
     input:
         color_schemes = resolve_config_path(config['colors']['color_schemes']),
         color_orderings = resolve_config_path(config['colors']['color_orderings']),
-        metadata = "results/{build}/filtered.tsv",
+        metadata = "results/{build}/subsampled.tsv",
     output:
         colors = "results/{build}/colors.tsv"
     log:
@@ -53,7 +53,7 @@ rule export:
     """Exporting data files for for auspice"""
     input:
         tree = "results/{build}/tree.nwk",
-        metadata = "results/{build}/filtered.tsv",
+        metadata = "results/{build}/subsampled.tsv",
         branch_lengths = "results/{build}/branch_lengths.json",
         traits = "results/{build}/traits.json",
         nt_muts = "results/{build}/nt_muts.json",
@@ -93,7 +93,7 @@ rule tip_frequencies:
     """
     input:
         tree = "results/{build}/tree.nwk",
-        metadata = "results/{build}/filtered.tsv",
+        metadata = "results/{build}/subsampled.tsv",
     output:
         tip_freq = "auspice/mumps_{build}_tip-frequencies.json"
     log:

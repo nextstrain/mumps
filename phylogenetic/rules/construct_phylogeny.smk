@@ -3,7 +3,7 @@ This part of the workflow constructs the phylogenetic tree.
 
 REQUIRED INPUTS:
 
-    metadata   = results/{build}/filtered.tsv
+    metadata   = results/{build}/subsampled.tsv
     alignment  = results/{build}/aligned.fasta
 
 OUTPUTS:
@@ -49,7 +49,7 @@ rule refine:
     input:
         tree = "results/{build}/tree_raw.nwk",
         alignment = "results/{build}/aligned.fasta",
-        metadata = "results/{build}/filtered.tsv"
+        metadata = "results/{build}/subsampled.tsv"
     output:
         tree = "results/{build}/tree.nwk",
         node_data = "results/{build}/branch_lengths.json",
