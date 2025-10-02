@@ -25,6 +25,7 @@ refine:
 
 ancestral:
   inference: "joint"
+  root_sequence: "reference.gb"
 
 traits:
   north-america: country division MuV_genotype MuV_genotype_nextclade_sh MuV_genotype_nextclade_genome
