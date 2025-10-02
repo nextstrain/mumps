@@ -4,14 +4,15 @@ export a Nextstrain dataset.
 
 REQUIRED INPUTS:
 
-    metadata        = data/metadata.tsv
-    tree            = results/tree.nwk
-    branch_lengths  = results/branch_lengths.json
-    node_data       = results/*.json
+    metadata        = results/{build}/filtered.tsv
+    tree            = results/{build}/tree.nwk
+    branch_lengths  = results/{build}/branch_lengths.json
+    node_data       = results/{build}/*.json
 
 OUTPUTS:
 
-    auspice_json = auspice/${build_name}.json
+    auspice_json = auspice/mumps_{build}.json
+    tip_freq     = auspice/mumps_{build}_tip-frequencies.json
 
     There are optional sidecar JSON files that can be exported as part of the dataset.
     See Nextstrain's data format docs for more details on sidecar files:
@@ -30,7 +31,7 @@ rule colors:
     input:
         color_schemes = resolve_config_path(config['colors']['color_schemes']),
         color_orderings = resolve_config_path(config['colors']['color_orderings']),
-        metadata = "results/{build}/metadata.tsv",
+        metadata = "results/{build}/filtered.tsv",
     output:
         colors = "results/{build}/colors.tsv"
     log:
@@ -52,7 +53,7 @@ rule export:
     """Exporting data files for for auspice"""
     input:
         tree = "results/{build}/tree.nwk",
-        metadata = "data/metadata.tsv",
+        metadata = "results/{build}/filtered.tsv",
         branch_lengths = "results/{build}/branch_lengths.json",
         traits = "results/{build}/traits.json",
         nt_muts = "results/{build}/nt_muts.json",
@@ -92,7 +93,7 @@ rule tip_frequencies:
     """
     input:
         tree = "results/{build}/tree.nwk",
-        metadata = "results/{build}/metadata.tsv",
+        metadata = "results/{build}/filtered.tsv",
     output:
         tip_freq = "auspice/mumps_{build}_tip-frequencies.json"
     log:
