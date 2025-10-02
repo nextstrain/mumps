@@ -9,7 +9,7 @@ REQUIRED INPUTS:
 
 OUTPUTS:
 
-    metadata  = results/{build}/metadata.tsv
+    metadata  = results/{build}/filtered.tsv
     alignment = results/{build}/aligned.fasta
 
 This part of the workflow usually includes the following steps:
@@ -67,7 +67,7 @@ rule filter:
         include = resolve_config_path(config["filter"]["include"]),
     output:
         sequences = "results/{build}/filtered.fasta",
-        metadata = "results/{build}/metadata.tsv",
+        metadata = "results/{build}/filtered.tsv",
     log:
         "logs/{build}/filtered.txt",
     benchmark:
