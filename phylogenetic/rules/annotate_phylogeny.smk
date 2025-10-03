@@ -45,6 +45,11 @@ rule ancestral:
         "benchmarks/{build}/ancestral.txt",
     params:
         inference = config["ancestral"]["inference"],
+        root_sequence=lambda w: (
+            ("--root-sequence " + resolve_config_path(config["ancestral"]["root_sequence"])(w))
+            if config["ancestral"].get("root_sequence")
+            else ""
+        ),
     shell:
         r"""
         exec &> >(tee {log:q})
@@ -53,6 +58,7 @@ rule ancestral:
             --tree {input.tree:q} \
             --alignment {input.alignment:q} \
             --output-node-data {output.node_data:q} \
+            {params.root_sequence} \
             --inference {params.inference:q}
         """
 
