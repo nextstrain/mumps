@@ -77,7 +77,7 @@ rule filter:
         include = resolve_config_path(config['filter']['include']),
     output:
         sequences = "results/{build}/filtered.fasta",
-        metadata = "results/{build}/metadata.tsv",
+        metadata = "results/{build}/filtered.tsv",
     log:
         "logs/{build}/filtered.txt",
     benchmark:

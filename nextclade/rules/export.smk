@@ -41,7 +41,7 @@ rule colors:
         # Reusing color schemes and ordering from the phylogenetic workflow
         color_schemes = resolve_config_path(config['colors']['color_schemes'], defaults_dir=f"{workflow.basedir}/../phylogenetic/defaults/"),
         color_orderings = resolve_config_path(config['colors']['color_orderings'], defaults_dir=f"{workflow.basedir}/../phylogenetic/defaults/"),
-        metadata = "results/{build}/metadata.tsv",
+        metadata = "results/{build}/filtered.tsv",
     output:
         colors = "results/{build}/colors.tsv"
     log:
@@ -63,7 +63,7 @@ rule export:
     """Exporting data files for for auspice"""
     input:
         tree = "results/{build}/tree.nwk",
-        metadata = "results/{build}/metadata.tsv",
+        metadata = "results/{build}/filtered.tsv",
         branch_lengths = "results/{build}/branch_lengths.json",
         traits = "results/{build}/traits.json",
         muts = "results/{build}/muts.json",

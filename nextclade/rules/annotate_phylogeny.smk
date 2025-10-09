@@ -62,7 +62,7 @@ rule traits:
     """
     input:
         tree = "results/{build}/tree.nwk",
-        metadata = "results/{build}/metadata.tsv",
+        metadata = "results/{build}/filtered.tsv",
     output:
         node_data = "results/{build}/traits.json",
     log:
