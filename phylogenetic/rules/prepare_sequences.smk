@@ -22,35 +22,6 @@ This part of the workflow usually includes the following steps:
 See Augur's usage docs for these commands for more details.
 """
 
-
-rule download:
-    """Downloading sequences and metadata from data.nextstrain.org"""
-    output:
-        sequences = "data/sequences.fasta.zst",
-        metadata = "data/metadata.tsv.zst"
-    params:
-        sequences_url = config["sequences_url"],
-        metadata_url = config["metadata_url"],
-    shell:
-        """
-        curl -fsSL --compressed {params.sequences_url:q} --output {output.sequences}
-        curl -fsSL --compressed {params.metadata_url:q} --output {output.metadata}
-        """
-
-rule decompress:
-    """Decompressing sequences and metadata"""
-    input:
-        sequences = "data/sequences.fasta.zst",
-        metadata = "data/metadata.tsv.zst"
-    output:
-        sequences = "data/sequences.fasta",
-        metadata = "data/metadata.tsv"
-    shell:
-        """
-        zstd -d -c {input.sequences} > {output.sequences}
-        zstd -d -c {input.metadata} > {output.metadata}
-        """
-
 rule filter:
     """
     Filtering to
@@ -61,8 +32,8 @@ rule filter:
       - minimum genome length of {params.min_length}
     """
     input:
-        sequences = "data/sequences.fasta",
-        metadata = "data/metadata.tsv",
+        sequences = "results/sequences.fasta",
+        metadata = "results/metadata.tsv",
         exclude = resolve_config_path(config["filter"]["exclude"]),
         include = resolve_config_path(config["filter"]["include"]),
     output:
