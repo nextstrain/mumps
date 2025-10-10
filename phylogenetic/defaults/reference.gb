@@ -82,7 +82,7 @@ FEATURES             Location/Qualifiers
                      RDYGPP"
      gene            1916..2426
                      /gene="I"
-     CDS             join(1916..2380,2377..2426)
+     CDS             join(1916..2380,2376..2426)
                      /gene="I"
                      /exception="RNA editing"
                      /note="four non-templated G residues inserted during
