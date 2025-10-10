@@ -9,7 +9,7 @@ REQUIRED INPUTS:
 
 OUTPUTS:
 
-    metadata  = results/{build}/filtered.tsv
+    metadata  = results/{build}/subsampled.tsv
     alignment = results/{build}/aligned.fasta
 
 This part of the workflow usually includes the following steps:
@@ -51,9 +51,9 @@ rule decompress:
         zstd -d -c {input.metadata} > {output.metadata}
         """
 
-rule filter:
+rule subsample:
     """
-    Filtering to
+    Subsampling to
       - various criteria based on the auspice JSON target
       - from {params.min_date} onwards
       - excluding strains in {input.exclude}
@@ -63,35 +63,31 @@ rule filter:
     input:
         sequences = "data/sequences.fasta",
         metadata = "data/metadata.tsv",
-        exclude = resolve_config_path(config["filter"]["exclude"]),
-        include = resolve_config_path(config["filter"]["include"]),
+        config = "results/run_config.yaml",
     output:
-        sequences = "results/{build}/filtered.fasta",
-        metadata = "results/{build}/filtered.tsv",
+        sequences = "results/{build}/subsampled.fasta",
+        metadata = "results/{build}/subsampled.tsv",
     log:
-        "logs/{build}/filtered.txt",
+        "logs/{build}/subsample.txt",
     benchmark:
-        "benchmarks/{build}/filtered.txt",
+        "benchmarks/{build}/subsample.txt",
     params:
-        min_length = config['filter']['min_length'],
-        group_by = config['filter']['group_by'],
-        filter_params = lambda wildcard: config['filter']['specific'][wildcard.build],
+        config_section = lambda w: ["custom_subsample" if config.get("custom_subsample") else "subsample", w.build],
         strain_id = config.get("strain_id_field", "strain"),
+    threads: workflow.cores
     shell:
         r"""
         exec &> >(tee {log:q})
 
-        augur filter \
+        augur subsample \
             --sequences {input.sequences:q} \
             --metadata {input.metadata:q} \
             --metadata-id-columns {params.strain_id:q} \
-            --exclude {input.exclude:q} \
-            --include {input.include:q} \
+            --config {input.config:q} \
+            --config-section {params.config_section:q} \
+            --nthreads {threads:q} \
             --output-sequences {output.sequences:q} \
-            --output-metadata {output.metadata:q} \
-            --min-length {params.min_length:q} \
-            --group-by {params.group_by} \
-            {params.filter_params}
+            --output-metadata {output.metadata:q}
         """
 
 rule align:
@@ -100,7 +96,7 @@ rule align:
       - filling gaps with N
     """
     input:
-        sequences = "results/{build}/filtered.fasta",
+        sequences = "results/{build}/subsampled.fasta",
         reference = resolve_config_path(config['reference']),
     output:
         alignment = "results/{build}/aligned.fasta",

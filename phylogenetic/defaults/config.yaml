@@ -10,14 +10,38 @@ metadata_url: "https://data.nextstrain.org/files/workflows/mumps/metadata.tsv.zs
 strain_id_field: "accession"
 reference: "reference.gb"
 
-filter:
-  min_length: 8000
-  group_by: country year month MuV_genotype division
-  exclude: "{build}/exclude.txt"
-  include: "{build}/include.txt"
-  specific:
-    north-america: --subsample-max-sequences 4000 --min-date 2006 --query "region=='North America' & (MuV_genotype=='G')"
-    global: --subsample-max-sequences 4000 --min-date 1950
+# Override this with your own configuration using `custom_subsample` instead of
+# `subsample`.
+subsample:
+  north-america:
+    samples:
+      all:
+        min_length: 8000
+        group_by:
+          - country
+          - year
+          - month
+          - MuV_genotype
+          - division
+        exclude: "north-america/exclude.txt"
+        include: "north-america/include.txt"
+        max_sequences: 4000
+        min_date: 2006
+        query: region=='North America' & (MuV_genotype=='G')
+  global:
+    samples:
+      all:
+        min_length: 8000
+        group_by:
+          - country
+          - year
+          - month
+          - MuV_genotype
+          - division
+        exclude: "global/exclude.txt"
+        include: "global/include.txt"
+        max_sequences: 4000
+        min_date: 1950
 
 refine:
   north-america: "--clock-filter-iqd 4"

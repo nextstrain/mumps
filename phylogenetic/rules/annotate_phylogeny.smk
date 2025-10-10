@@ -3,7 +3,7 @@ This part of the workflow creates additonal annotations for the phylogenetic tre
 
 REQUIRED INPUTS:
 
-    metadata   = results/{build}/filtered.tsv
+    metadata   = results/{build}/subsampled.tsv
     alignment  = results/{build}/aligned.fasta
     tree       = results/{build}/tree.nwk
 
@@ -92,7 +92,7 @@ rule traits:
     """
     input:
         tree = "results/{build}/tree.nwk",
-        metadata = "results/{build}/filtered.tsv",
+        metadata = "results/{build}/subsampled.tsv",
     output:
         node_data = "results/{build}/traits.json",
     log:
