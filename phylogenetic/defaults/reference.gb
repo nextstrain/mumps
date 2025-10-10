@@ -51,9 +51,9 @@ FEATURES             Location/Qualifiers
                      QRTEVTQLVDRLARGRGAGIPGGPVNPFVPPVQQQQPAAVYEDIPALEESDDDGDEDG
                      GAGFQNGAQAPAVRQGGQNEFRAQPLQDPIQAQLFMPLYPQVSNIPNHQNHQINRIGG
                      MEHQDLLRYNENGDSQQDARGEHGNTFPNNPNQNAQSQVGDWDE"
-     gene            1916..3089
+     gene            1916..3086
                      /gene="P"
-     CDS             1916..3089
+     CDS             join(1916..2380,2379..3086)
                      /gene="P"
                      /exception="RNA editing"
                      /note="two non-templated G residues inserted during
@@ -80,9 +80,9 @@ FEATURES             Location/Qualifiers
                      QGGTVTTVYQDPTIQPTGSYRSVELAKIGKERMINRFVEKPRTSTPVTEFKGGAGSGC
                      SRPDNPRGGHRREWSLSWVQGEVRVFEWCNPICSPITAAARFHSCKCGNCPAKCDQCE
                      RDYGPP"
-     gene            1916..2431
+     gene            1916..2426
                      /gene="I"
-     CDS             1916..2431
+     CDS             join(1916..2380,2376..2426)
                      /gene="I"
                      /exception="RNA editing"
                      /note="four non-templated G residues inserted during
