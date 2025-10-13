@@ -41,6 +41,7 @@ rule colors:
         # Reusing color schemes and ordering from the phylogenetic workflow
         color_schemes = resolve_config_path(config['colors']['color_schemes'], defaults_dir=f"{workflow.basedir}/../phylogenetic/defaults/"),
         color_orderings = resolve_config_path(config['colors']['color_orderings'], defaults_dir=f"{workflow.basedir}/../phylogenetic/defaults/"),
+        # Generate colors per Nextclade dataset to account for differences in clade nomenclature
         metadata = "results/{build}/filtered.tsv",
     output:
         colors = "results/{build}/colors.tsv"
