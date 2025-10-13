@@ -17,41 +17,9 @@ OUTPUTS:
 This part of the workflow usually includes steps to download and curate the required files.
 """
 
-rule download:
-    """Downloading sequences and metadata from data.nextstrain.org"""
-    output:
-        sequences = "data/sequences.fasta.zst",
-        metadata = "data/metadata.tsv.zst"
-    benchmark:
-        "benchmarks/download.txt",
-    params:
-        sequences_url = config["sequences_url"],
-        metadata_url = config["metadata_url"],
-    shell:
-        r"""
-        curl -fsSL --compressed {params.sequences_url:q} --output {output.sequences:q}
-        curl -fsSL --compressed {params.metadata_url:q} --output {output.metadata:q}
-        """
-
-rule decompress:
-    """Decompressing sequences and metadata"""
-    input:
-        sequences = "data/sequences.fasta.zst",
-        metadata = "data/metadata.tsv.zst"
-    output:
-        sequences = "data/sequences.fasta",
-        metadata = "data/metadata.tsv"
-    benchmark:
-        "benchmarks/decompress.txt",
-    shell:
-        r"""
-        zstd -d -c {input.sequences:q} > {output.sequences:q}
-        zstd -d -c {input.metadata:q} > {output.metadata:q}
-        """
-
 rule merge_clade_membership:
     input:
-        metadata="data/metadata.tsv",
+        metadata="results/metadata.tsv",
         clade_membership=resolve_config_path(config['clade_membership']['metadata']),
     output:
         merged_metadata=temp("data/{build}/metadata_merged_raw.tsv"),
@@ -103,13 +71,13 @@ rule filter:
       - including strains in {input.include}
     """
     input:
-        sequences = "data/sequences.fasta",
+        sequences = "results/sequences.fasta",
         metadata = "data/{build}/metadata_merged.tsv",
         exclude = resolve_config_path(config['filter']['exclude']),
         include = resolve_config_path(config['filter']['include']),
     output:
         sequences = "results/{build}/filtered.fasta",
-        metadata = "results/{build}/metadata.tsv",
+        metadata = "results/{build}/filtered.tsv",
     log:
         "logs/{build}/filtered.txt",
     benchmark:

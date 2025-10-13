@@ -2,10 +2,10 @@
 # {builds} represents different analysis, in this case geographic scope
 builds: ["north-america","global"]
 
-# Sequences must be FASTA and metadata must be TSV
-# Both files must be zstd compressed
-sequences_url: "https://data.nextstrain.org/files/workflows/mumps/sequences.fasta.zst"
-metadata_url: "https://data.nextstrain.org/files/workflows/mumps/metadata.tsv.zst"
+inputs:
+  - name: ncbi
+    sequences: "https://data.nextstrain.org/files/workflows/mumps/sequences.fasta.zst"
+    metadata: "https://data.nextstrain.org/files/workflows/mumps/metadata.tsv.zst"
 
 strain_id_field: "accession"
 reference: "reference.gb"

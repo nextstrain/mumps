@@ -31,13 +31,13 @@ rule colors:
     input:
         color_schemes = resolve_config_path(config['colors']['color_schemes']),
         color_orderings = resolve_config_path(config['colors']['color_orderings']),
-        metadata = "results/{build}/filtered.tsv",
+        metadata = "results/metadata.tsv",
     output:
-        colors = "results/{build}/colors.tsv"
+        colors = "results/colors.tsv"
     log:
-        "logs/{build}/colors.txt",
+        "logs/colors.txt",
     benchmark:
-        "benchmarks/{build}/colors.txt"
+        "benchmarks/colors.txt"
     shell:
         r"""
         exec &> >(tee {log:q})
@@ -59,7 +59,7 @@ rule export:
         nt_muts = "results/{build}/nt_muts.json",
         aa_muts = "results/{build}/aa_muts.json",
         lat_longs = resolve_config_path(config['export']['lat_longs']),
-        colors = "results/{build}/colors.tsv",
+        colors = "results/colors.tsv",
         auspice_config = resolve_config_path(config['export']['auspice_config']),
         description = resolve_config_path(config['export']['description']),
     output:
