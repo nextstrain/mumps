@@ -1,0 +1,67 @@
+# washington/config.yaml
+# Purpose of config.yaml is that is provides per-build settings/parameters used at each workflow step. 
+# Tells augur what query/filtering to apply, how many sequences to include, which traits to reconstruct, how to refine the tree, etc.
+
+# Tell Snakemake which build(s) to run
+builds:
+  - washington
+
+# Auspice export settings (override defaults)
+export:
+  auspice_config: washington/auspice_config.json
+  description: washington/description.md
+  lat_longs: ../defaults/lat_longs.tsv
+
+# Color schemes (used for Auspice visualization)
+colors:
+  color_schemes: ../defaults/color_schemes.tsv
+  color_orderings: ../defaults/color_orderings.tsv
+
+# Subsampling (points to WA-specific scheme)
+subsampling:
+  washington: washington/subsampling.yaml
+
+strain_id_field: "accession"
+
+# ---- Per-build settings (IMPORTANT: strings, not nested dicts) ----
+# Filter: CLI flags appended to augur filter
+filter:
+  # Where the workflow looks for per-build include/exclude lists
+  include: "../washington/include.txt" # To ensure reference genome is in WA dataset
+  exclude: "../defaults/north-america/exclude.txt"
+
+  # Per-build “specific” flags are strings indexed by build name
+  #HAVE to have subsample max
+  specific:
+    washington: >-
+      --subsample-max-sequences 99999
+      --min-date 2006
+      --query "region=='North America' & (MuV_genotype == 'G')"
+
+# Traits: space-separated column names, as a single string
+traits:
+  washington: "country division MuV_genotype MuV_genotype_nextclade_sh MuV_genotype_nextclade_genome"
+  sampling_bias_correction: 2.5
+
+# Refine: CLI flags as a single string. This calibratess branch lengths, run clock filtering, infer marginal dates. 
+refine:
+  washington: "--clock-filter-iqd 4 --date-inference marginal"
+  
+  
+# Ancestral: reconstruct states at internal nodes, including the root. 
+# Fixed root allows for Nextclade compatability while still matching the original build's intended reference. 
+ancestral:
+  washington: "--inference reference --root KM597072"
+
+# Translate: not used here, keep empty string. Do not add a reference: so that the build will use the original repos refernce. Will break if hard-coded here. 
+translate:
+  washington: ""
+
+# Tip frequencies 
+tip_frequencies:
+  washington:
+    min_date: 2006
+    interval: 3
+      # Quarterly narrow_bandwidth or every 3 months (3 /12.0 = 0.25)
+    narrow_bandwidth: 0.25
+    proportion_wide: 0.0

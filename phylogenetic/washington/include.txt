@@ -1,0 +1,4 @@
+# Format: <GenBank accession> [# <documentation on reason for inclusion>]
+KM597072_REF #(Global, North America) Builds reference sequence but force included to allow for Nextclade compatibility 
+KM597072 #(Global, North America) Builds reference sequence but force included to allow for Nextclade compatibility 
+

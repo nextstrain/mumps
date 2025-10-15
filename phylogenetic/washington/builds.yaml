@@ -1,0 +1,35 @@
+# phylogenetic/washington/builds.yaml
+# Purpose of the builds.yaml is to tell Snakemake which builds exist and wires them into the workflow. 
+# Defines the new build and points Snakemake to WA assets. Keep this as small as possible and inherit everything else from the repo’s defaults.
+title: "Mumps in Washington"
+default_build_name: washington
+auspice_json_prefix: mumps
+
+builds:
+  washington:
+    # label in Auspice
+    title: "Mumps — Washington focus"
+    region: North America        
+    country: USA                 
+    division: Washington         
+    # wire up the per-build files this workflow expects:
+    files:
+      auspice_config: washington/auspice_config.json
+      color_schemes: defaults/color_schemes.tsv
+      color_orderings: defaults/color_orderings.tsv      
+      lat_longs: defaults/lat_longs.tsv
+      description: washington/description.md
+
+# Hook in the subsampling scheme file for this build.
+subsampling:
+  washington: washington/subsampling.yaml
+
+filter:
+  washington:
+    # Keep NA/USA context for background while focusing WA
+    include:
+      - region == "North America"
+    exclude: []
+traits:
+  washington:
+    sampling_bias_correction: 2.5

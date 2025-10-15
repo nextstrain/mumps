@@ -1,0 +1,104 @@
+{
+  "title": "Genomic Epidemiology of Mumps Virus - Washington State Focused Build",
+  "maintainers": [
+    {"name": "Alena Schroeder, MPH", "url": "https://github.com/NW-PaGe/mumps"}
+  ],
+  "data_provenance": [
+    {
+      "name": "GenBank",
+      "url": "https://www.ncbi.nlm.nih.gov/genbank/"
+    }
+  ],
+  "build_url": "https://github.com/nextstrain/mumps",
+  "colorings": [
+    {
+      "key": "gt",
+      "title": "Genotype",
+      "type": "categorical"
+    },
+    {
+      "key": "num_date",
+      "title": "Date",
+      "type": "continuous"
+    },
+    {
+      "key": "author",
+      "title": "Author",
+      "type": "categorical"
+    },
+    {
+      "key": "MuV_genotype",
+      "title": "MuV genotype (GenBank)",
+      "type": "categorical"
+    },
+    {
+      "key": "MuV_genotype_nextclade_sh",
+      "title": "MuV genotype SH (Nextclade)",
+      "type": "categorical"
+    },
+    {
+      "key": "MuV_genotype_nextclade_genome",
+      "title": "MuV genotype Genome (Nextclade)",
+      "type": "categorical"
+    },
+    {
+      "key": "division",
+      "title": "Division",
+      "type": "categorical"
+    }
+  ],
+  "geo_resolutions": [
+    { "key": "division", "title": "State/Province" },
+    "country"
+  ],
+  "panels": [
+    "tree",
+    "map",
+    "entropy",
+    "frequencies"
+  ],
+  "display_defaults": {
+    "map_triplicate": true,
+    "color_by": "division",
+    "geo_resolution": "division",
+    "tip_label": "strain"
+  },
+  "filters": [
+    "division",
+    "author"
+  ],
+  "metadata_columns": [
+    "strain",
+    "isolate",
+    "host"
+  ],
+  "extensions": {
+    "nextclade": {
+      "clade_node_attrs": [
+        {
+          "name": "MuV_genotype",
+          "displayName": "GenBank",
+          "description": "Mumps genotype based on GenBank"
+        },
+        {
+          "name": "MuV_genotype_nextclade_sh",
+          "displayName": "Nextclade SH",
+          "description": "Mumps genotype based on SH region"
+        },
+        {
+          "name": "MuV_genotype_nextclade_genome",
+          "displayName": "Nextclade Genome",
+          "description": "Mumps genotype based on genome region"
+        }
+      ],
+      "pathogen": {
+        "schemaVersion":"3.0.0",
+        "attributes": {
+          "name": "Mumps virus North America tree",
+          "reference name": "KM597072",
+          "reference accession": "KM597072"
+        }
+      }
+    }
+  }
+}
