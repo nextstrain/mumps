@@ -1,4 +1,4 @@
-# Mumps- Washington Focused Build
+# Mumps (MuV)- Washington Focused Build
 
 ## Build Overview
 - **Build Name**: Mumps- Washington Focused Build
@@ -28,7 +28,7 @@
 - [Acknowledgements](#acknowledgements)
 
 
-## Pathogen Epidemiology
+## Pathogen Epidemiology <a name="pathogen-epidemiology"></a>
 - Overview:
   - Mumps virus (MuV), a negative-sense single-stranded RNA virus in the family Paramyxoviridae.
   - Twelve recognized genotypes (A–N, excluding E and M). In the U.S., genotype G has been dominant since ~2006.
@@ -52,7 +52,7 @@
   - https://www.cdc.gov/mumps/about/index.html 
   - Link Pathogen Genomic Profile if we have one created
 
-## Scientific Decisions
+## Scientific Decisions <a name="scientific-decisions"></a>
 Nextstrain builds are designed for specific purposes and not all types of builds for a particular pathogen will answer the same questions. The following are critical decisions that were made during the development of this build that should be kept in mind when analyzing the data and using this build.
 
 - **Nomenclature**: CDC genotype nomenclature.
@@ -62,11 +62,11 @@ Nextstrain builds are designed for specific purposes and not all types of builds
 - **Inclusion/Exclusion**: In terms of inclusion and exclusion, the build accepts only sequences from 2006 onward to reflect the era of genotype G predominance. Sequences from other genotypes, those with incomplete genomes, and those with insufficient or poor-quality metadata are excluded to ensure reliability.
 - **Other adjustments**: Additional adjustments include applying maximum thresholds on the number of contextual sequences retained from outside Washington while leaving Washington itself unrestricted, guaranteeing that no local data are lost. Low-quality or hypervariable regions of the genome are masked during analysis to reduce noise and improve phylogenetic accuracy.
 
-## Getting Started
+## Getting Started <a name="getting-started"></a>
 - **Washington Prioritization**: The build exposes geography at the U.S. state level via the Division field, allowing rapid side-by-side comparisons of Washington sequences against other states without leaving the tree. Coloring or filtering by Division makes it straightforward to spot cross-border introductions and to confirm whether an apparent Washington clade is actually seeded by multiple states.
 - **MuV genotype & Nextclade Calls**: In Auspice, the dataset ships with genotype-aware views that surface three complementary annotations: the source MuV genotype (GenBank) and the Nextclade genotype calls for both the SH gene and the whole genome. Switching among these in the Color by menu lets analysts verify concordance (or flag discrepancies) between database metadata and algorithmic assignments, which is especially helpful when triaging suspected clusters or quality-controlling new submissions.
 
-### Data Sources & Inputs
+### Data Sources & Inputs <a name="data-sources--inputs"></a>
 - How Samples are Ingested from NCBI: `mumps/ingest/rules/fetch_from_ncbi.smk` 
 - How Samples are Prepared for Sequencing: `mumps/phylogenetic/rules/prepare_sequences.smk`
 
@@ -78,8 +78,8 @@ Nextstrain builds are designed for specific purposes and not all types of builds
     - `mumps/phylogenetic/data/sequences.fasta` (containing viral genome sequences)
     - `mumps/phylogenetic/data/metadata.tsv` (with relevant sample information)
 
-### Setup & Dependencies
-#### Installation
+### Setup & Dependencies <a name="setup--dependencies"></a>
+#### Installation <a name="installation"></a>
 Ensure that you have [Nextstrain](https://docs.nextstrain.org/en/latest/install.html) installed.
 
 To check that Nextstrain is installed:
@@ -87,14 +87,14 @@ To check that Nextstrain is installed:
 nextstrain check-setup
 ```
 
-#### Clone the repository:
+#### Clone the repository <a name="clone-the-repository"></a>
 
 ```
 git clone https://github.com/NW-PaGe/mumps.git
 cd mumps/phylogenetic
 ```
 
-## Run the Build
+## Run the Build <a name="run-the-build"></a>
 Ensure you are located in the build folder `phylogenetic` before running the build command:
 ```
 nextstrain build . --configfile washington/config.yaml
@@ -110,10 +110,10 @@ nextstrain build phylogenetic --configfile washington/config.yaml
 ```
 This ensures that the ingest step refreshes the dataset before the Washington-specific build is executed.
 
-### Run the Build with Test Data (Optional)
+### Run the Build with Test Data (Optional) <a name="run-the-build-with-test-data-optional"></a>
 An alternative configuration file is available for running the phylogenetic workflow on a smaller example dataset. By using `--configfile build-configs/ci/config.yaml`, the workflow is adjusted so that the dataset in `phylogenetic/example_data` is copied into `phylogenetic/data`, thereby skipping the default steps of downloading and decompressing the full Nextstrain dataset.
 
-### Expected Outputs
+### Expected Outputs <a name="expected-outputs"></a>
 The file structure of the repository is as follows with `*`" folders denoting folders that are the build's expected outputs.
 
 ```
@@ -139,12 +139,12 @@ After successfully running the build there will be two output folders containing
 - `results/washington` folder contains: The raw tree, amino acid mutations, nucleotide mutations etc. 
 
 
-### Visualize Results
+### Visualize Results <a name="visualizing-results"></a>
 - Open [auspice.us](auspice.us) in a web browser, and drop `phylogenetic/auspice/mumps_washington.json` in as input. 
 - For guidance on phylogenetic inference, see [The Applied Genomic Epidemiology Handbook](https://www.czbiohub.org/ebook/applied-genomic-epidemiology-handbook/welcome-to-the-applied-genomic-epidemiology-handbook/).
 
 
-## Customization for Local Adaptation
+## Customization for Local Adaptation <a name="customization-for-local-adaptation"></a>
 This build can be customized for use by other states. This is configurable by editing the following files:
 
   - `mumps/phylogenetic/washington/auspice_config.json` lines 2, 4, and 12. 
@@ -167,14 +167,14 @@ This build can be customized for use by other states. This is configurable by ed
     - **line 5:**   query: "country == 'USA' & division == '[Insert your state]'"
     - **line 14:**  query: --query "(country == 'USA') & (division != '[Insert your state]') & (MuV_genotype == 'G')"
 
-## Contributing
+## Contributing <a name="contributing"></a>
 For any questions please submit them to our [Discussions](https://github.com/orgs/NW-PaGe/discussions) page. Software issues and requests can be logged as a Git [Issue](insert link here).
 
-## License
+## License <a name="license"></a>
 This project is licensed under a modified GPL-3.0 License.
 You may use, modify, and distribute this work, but commercial use is strictly prohibited without prior written permission.
 
-## Acknowledgements
+## Acknowledgements <a name="acknowledgements"></a>
 
 Workflow based on Nextstrain mumps
 Adapted structure from NW-PaGe mpox
