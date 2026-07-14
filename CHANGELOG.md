@@ -4,6 +4,11 @@ We use this CHANGELOG to document breaking changes, new features, bug fixes,
 and config value changes that may affect both the usage of the workflows and
 the outputs of the workflows.
 
+## 2026
+
+* 14 July 2026: The refine option for clock filtering has moved from `refine.<build>: "--clock-filter-iqd <N>"` to `refine.<build>.clock_filter_iqd: <N>`. **This is a breaking change**.
+* 14 July 2026: The following refine options can be configured using `refine.<build>.<option>`: `coalescent`, `date_inference`, `timetree`, `date_confidence`, `clock_filter_iqd`.
+
 ## 2025
 
 * 13 October 2025: phylogenetic and nextclade - Update to color handling ([#48][])

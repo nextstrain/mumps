@@ -20,8 +20,18 @@ filter:
     global: --subsample-max-sequences 4000 --min-date 1950
 
 refine:
-  north-america: "--clock-filter-iqd 4"
-  global: ""
+  north-america:
+    coalescent: "opt"
+    date_inference: "marginal"
+    timetree: true
+    date_confidence: true
+    clock_filter_iqd: 4
+  global:
+    coalescent: "opt"
+    date_inference: "marginal"
+    timetree: true
+    date_confidence: true
+    clock_filter_iqd: null
 
 ancestral:
   inference: "joint"
