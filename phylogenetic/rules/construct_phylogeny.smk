@@ -63,6 +63,7 @@ rule refine:
         timetree = lambda w: conditional("--timetree", config["refine"][w.build].get("timetree")),
         date_confidence = lambda w: conditional("--date-confidence", config["refine"][w.build].get("date_confidence")),
         clock_filter_iqd = lambda w: conditional("--clock-filter-iqd", config["refine"][w.build].get("clock_filter_iqd")),
+        divergence_units = lambda w: conditional("--divergence-units", config["refine"][w.build].get("divergence_units")),
         strain_id = config.get("strain_id_field", "strain"),
     shell:
         r"""
@@ -78,6 +79,7 @@ rule refine:
             {params.date_confidence} \
             {params.date_inference} \
             {params.clock_filter_iqd} \
+            {params.divergence_units} \
             --output-tree {output.tree:q} \
             --output-node-data {output.node_data:q}
         """

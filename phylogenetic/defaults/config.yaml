@@ -26,12 +26,14 @@ refine:
     timetree: true
     date_confidence: true
     clock_filter_iqd: 4
+    divergence_units: "mutations-per-site"
   global:
     coalescent: "opt"
     date_inference: "marginal"
     timetree: true
     date_confidence: true
     clock_filter_iqd: null
+    divergence_units: "mutations-per-site"
 
 ancestral:
   inference: "joint"
