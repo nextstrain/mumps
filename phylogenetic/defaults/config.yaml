@@ -22,6 +22,7 @@ filter:
 refine:
   north-america: "--clock-filter-iqd 4"
   global: ""
+  divergence_units: "mutations-per-site"
 
 ancestral:
   inference: "joint"

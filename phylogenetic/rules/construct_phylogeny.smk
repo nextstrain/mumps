@@ -62,6 +62,7 @@ rule refine:
         date_inference = "marginal",
         clock_filter_iqd = lambda wildcard: config['refine'][wildcard.build],
         strain_id = config.get("strain_id_field", "strain"),
+        divergence_units=config["refine"]["divergence_units"],
     shell:
         r"""
         exec &> >(tee {log:q})
@@ -76,5 +77,6 @@ rule refine:
             --timetree \
             --coalescent {params.coalescent:q} \
             --date-confidence \
-            --date-inference {params.date_inference:q} {params.clock_filter_iqd}
+            --date-inference {params.date_inference:q} {params.clock_filter_iqd} \
+            --divergence-units {params.divergence_units:q}
         """

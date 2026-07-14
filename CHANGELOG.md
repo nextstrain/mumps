@@ -4,6 +4,9 @@ We use this CHANGELOG to document breaking changes, new features, bug fixes,
 and config value changes that may affect both the usage of the workflows and
 the outputs of the workflows.
 
+## 2026
+* 13 July 2026: [Divergence units](https://docs.nextstrain.org/projects/augur/en/stable/usage/cli/refine.html) can now be configured using `refine.divergence_units`.
+
 ## 2025
 
 * 13 October 2025: phylogenetic and nextclade - Update to color handling ([#48][])
