@@ -6,6 +6,7 @@ the outputs of the workflows.
 
 ## 2026
 
+* TBD: Command-line parameters for `filter`, `refine`, `ancestral`, `traits`, and `tip_frequencies` are now defined as a single argument string under `<rule>.<build>` in config. This reverts the change from 14 July 2026 and provides a consistent and flexible pattern for passing **non-file** arguments to Augur **This is a breaking change**.
 * 14 July 2026: The refine option for clock filtering has moved from `refine.<build>: "--clock-filter-iqd <N>"` to `refine.<build>.clock_filter_iqd: <N>`. **This is a breaking change**.
 * 14 July 2026: The following refine options can be configured using `refine.<build>.<option>`: `coalescent`, `date_inference`, `timetree`, `date_confidence`, `clock_filter_iqd`, `divergence_units`.
 

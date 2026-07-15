@@ -10,39 +10,74 @@ inputs:
 strain_id_field: "accession"
 reference: "reference.gb"
 
+
+####### Rule-specific parameters #######
+#
+# Most parameters are configured in argument strings given to Augur's command
+# line interface. See each command's reference page for detailed usage docs.
+#
+#   <rule>:
+#     <build>: <argument string>
+#
+# Strings can be formatted across multiple lines in YAML for readability. The '>'
+# block style indicator replaces newlines with spaces, and the '-' block chomping
+# indicator strips trailing newlines.
+#
+# File references have dedicated YAML config parameters. While they are
+# mentioned on Augur command reference pages, they should *not* be configured in
+# argument strings, but instead using their dedicated YAML config parameters.
+# They can be customized per build by referencing '{build}' in the path.
+
+# https://docs.nextstrain.org/projects/augur/en/stable/usage/cli/filter.html
 filter:
-  min_length: 8000
-  group_by: country year month MuV_genotype division
   exclude: "{build}/exclude.txt"
   include: "{build}/include.txt"
-  specific:
-    north-america: --subsample-max-sequences 4000 --min-date 2006 --query "region=='North America' & (MuV_genotype=='G')"
-    global: --subsample-max-sequences 4000 --min-date 1950
+  north-america: >-
+    --min-length 8000
+    --group-by country year month MuV_genotype division
+    --subsample-max-sequences 4000
+    --min-date 2006
+    --query "region=='North America' & (MuV_genotype=='G')"
+  global: >-
+    --min-length 8000
+    --group-by country year month MuV_genotype division
+    --subsample-max-sequences 4000
+    --min-date 1950
 
+# https://docs.nextstrain.org/projects/augur/en/stable/usage/cli/refine.html
 refine:
-  north-america:
-    coalescent: "opt"
-    date_inference: "marginal"
-    timetree: true
-    date_confidence: true
-    clock_filter_iqd: 4
-    divergence_units: "mutations-per-site"
-  global:
-    coalescent: "opt"
-    date_inference: "marginal"
-    timetree: true
-    date_confidence: true
-    clock_filter_iqd: null
-    divergence_units: "mutations-per-site"
+  north-america: >-
+    --coalescent "opt"
+    --date-inference "marginal"
+    --timetree
+    --date-confidence
+    --clock-filter-iqd 4
+    --divergence-units "mutations-per-site"
+  global: >-
+    --coalescent "opt"
+    --date-inference "marginal"
+    --timetree
+    --date-confidence
+    --divergence-units "mutations-per-site"
 
+# https://docs.nextstrain.org/projects/augur/en/stable/usage/cli/ancestral.html
 ancestral:
-  inference: "joint"
   root_sequence: "reference.gb"
+  north-america: >-
+    --inference "joint"
+  global: >-
+    --inference "joint"
 
+# https://docs.nextstrain.org/projects/augur/en/stable/usage/cli/traits.html
 traits:
-  north-america: country division MuV_genotype MuV_genotype_nextclade_sh MuV_genotype_nextclade_genome
-  global: region MuV_genotype MuV_genotype_nextclade_sh MuV_genotype_nextclade_genome
-  sampling_bias_correction: 3
+  north-america: >-
+    --columns country division MuV_genotype MuV_genotype_nextclade_sh MuV_genotype_nextclade_genome
+    --sampling-bias-correction 3
+    --confidence
+  global: >-
+    --columns region MuV_genotype MuV_genotype_nextclade_sh MuV_genotype_nextclade_genome
+    --sampling-bias-correction 3
+    --confidence
 
 colors:
   color_schemes: "color_schemes.tsv"
@@ -53,10 +88,19 @@ export:
   auspice_config: "{build}/auspice_config.json"
   description: "description.md"
 
+# https://docs.nextstrain.org/projects/augur/en/stable/usage/cli/frequencies.html
 tip_frequencies:
-  # 2006 since there is an increase in mumps samples at that time
-  min_date: "2006-01-01"
-  max_date: "12M"
-  # Quarterly narrow_bandwidth or every 3 months (3 /12.0 = 0.25)
-  narrow_bandwidth: 0.25
-  proportion_wide: 0.0
+  # --min-date: 2006 since there is an increase in mumps samples at that time
+  # --narrow-bandwidth: Quarterly or every 3 months (3 /12.0 = 0.25)
+  north-america: >-
+    --min-date "2006-01-01"
+    --max-date "12M"
+    --narrow-bandwidth 0.25
+    --proportion-wide 0.0
+    --method kde
+  global: >-
+    --min-date "2006-01-01"
+    --max-date "12M"
+    --narrow-bandwidth 0.25
+    --proportion-wide 0.0
+    --method kde
