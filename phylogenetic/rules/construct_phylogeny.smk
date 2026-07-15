@@ -41,10 +41,6 @@ rule tree:
 rule refine:
     """
     Refining tree
-      - estimate timetree
-      - use {params.coalescent} coalescent timescale
-      - estimate {params.date_inference} node dates
-      - filter tips more than {params.clock_filter_iqd} IQDs from clock expectation
     """
     input:
         tree = "results/{build}/tree_raw.nwk",
@@ -58,12 +54,7 @@ rule refine:
     benchmark:
         "benchmarks/{build}/refine.txt",
     params:
-        coalescent = lambda w: conditional("--coalescent", config["refine"][w.build].get("coalescent")),
-        date_inference = lambda w: conditional("--date-inference", config["refine"][w.build].get("date_inference")),
-        timetree = lambda w: conditional("--timetree", config["refine"][w.build].get("timetree")),
-        date_confidence = lambda w: conditional("--date-confidence", config["refine"][w.build].get("date_confidence")),
-        clock_filter_iqd = lambda w: conditional("--clock-filter-iqd", config["refine"][w.build].get("clock_filter_iqd")),
-        divergence_units = lambda w: conditional("--divergence-units", config["refine"][w.build].get("divergence_units")),
+        args = lambda w: config["refine"][w.build],
         strain_id = config.get("strain_id_field", "strain"),
     shell:
         r"""
@@ -74,12 +65,7 @@ rule refine:
             --alignment {input.alignment:q} \
             --metadata {input.metadata:q} \
             --metadata-id-columns {params.strain_id:q} \
-            {params.timetree} \
-            {params.coalescent} \
-            {params.date_confidence} \
-            {params.date_inference} \
-            {params.clock_filter_iqd} \
-            {params.divergence_units} \
             --output-tree {output.tree:q} \
-            --output-node-data {output.node_data:q}
+            --output-node-data {output.node_data:q} \
+            {params.args}
         """
