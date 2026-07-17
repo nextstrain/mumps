@@ -9,7 +9,7 @@ REQUIRED INPUTS:
 
 OUTPUTS:
 
-    metadata  = results/{build}/filtered.tsv
+    metadata  = results/{build}/subsampled.tsv
     alignment = results/{build}/aligned.fasta
 
 This part of the workflow usually includes the following steps:
@@ -21,39 +21,34 @@ This part of the workflow usually includes the following steps:
 
 See Augur's usage docs for these commands for more details.
 """
+from augur.subsample import get_referenced_files
 
-rule filter:
-    """
-    Filtering sequences
-    """
+rule subsample:
     input:
+        config = "results/{build}/subsample_config.yaml",
         sequences = "results/sequences.fasta",
         metadata = "results/metadata.tsv",
-        exclude = resolve_config_path(config["filter"]["exclude"]),
-        include = resolve_config_path(config["filter"]["include"]),
+        referenced_files = lambda w: get_referenced_files(f"results/{w.build}/subsample_config.yaml"),
     output:
-        sequences = "results/{build}/filtered.fasta",
-        metadata = "results/{build}/filtered.tsv",
+        sequences = "results/{build}/subsampled.fasta",
+        metadata = "results/{build}/subsampled.tsv",
     log:
-        "logs/{build}/filtered.txt",
+        "logs/{build}/subsample.txt",
     benchmark:
-        "benchmarks/{build}/filtered.txt",
+        "benchmarks/{build}/subsample.txt",
     params:
-        args = lambda w: config['filter'][w.build],
         strain_id = config.get("strain_id_field", "strain"),
     shell:
         r"""
         exec &> >(tee {log:q})
 
-        augur filter \
+        augur subsample \
             --sequences {input.sequences:q} \
             --metadata {input.metadata:q} \
             --metadata-id-columns {params.strain_id:q} \
-            --exclude {input.exclude:q} \
-            --include {input.include:q} \
             --output-sequences {output.sequences:q} \
             --output-metadata {output.metadata:q} \
-            {params.args}
+            --config {input.config}
         """
 
 rule align:
@@ -62,7 +57,7 @@ rule align:
       - filling gaps with N
     """
     input:
-        sequences = "results/{build}/filtered.fasta",
+        sequences = "results/{build}/subsampled.fasta",
         reference = resolve_config_path(config['reference']),
     output:
         alignment = "results/{build}/aligned.fasta",
