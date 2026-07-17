@@ -44,7 +44,7 @@ rule ancestral:
     benchmark:
         "benchmarks/{build}/ancestral.txt",
     params:
-        inference = config["ancestral"]["inference"],
+        args = lambda w: config["ancestral"][w.build],
         root_sequence=lambda w: (
             ("--root-sequence " + resolve_config_path(config["ancestral"]["root_sequence"])(w))
             if config["ancestral"].get("root_sequence")
@@ -59,7 +59,7 @@ rule ancestral:
             --alignment {input.alignment:q} \
             --output-node-data {output.node_data:q} \
             {params.root_sequence} \
-            --inference {params.inference:q}
+            {params.args}
         """
 
 rule translate:
@@ -87,8 +87,7 @@ rule translate:
 
 rule traits:
     """
-    Inferring ancestral traits for {params.columns!s}
-      - increase uncertainty of reconstruction by {params.sampling_bias_correction} to partially account for sampling bias
+    Inferring ancestral traits
     """
     input:
         tree = "results/{build}/tree.nwk",
@@ -100,8 +99,7 @@ rule traits:
     benchmark:
         "benchmarks/{build}/traits.txt",
     params:
-        columns = lambda wildcard: config['traits'][wildcard.build],
-        sampling_bias_correction = config["traits"]["sampling_bias_correction"],
+        args = lambda w: config['traits'][w.build],
         strain_id = config.get("strain_id_field", "strain"),
     shell:
         r"""
@@ -112,7 +110,5 @@ rule traits:
             --metadata {input.metadata:q} \
             --metadata-id-columns {params.strain_id:q} \
             --output {output.node_data:q} \
-            --columns {params.columns} \
-            --confidence \
-            --sampling-bias-correction {params.sampling_bias_correction:q}
+            {params.args}
         """

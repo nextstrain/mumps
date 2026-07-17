@@ -41,10 +41,6 @@ rule tree:
 rule refine:
     """
     Refining tree
-      - estimate timetree
-      - use {params.coalescent} coalescent timescale
-      - estimate {params.date_inference} node dates
-      - filter tips more than {params.clock_filter_iqd} IQDs from clock expectation
     """
     input:
         tree = "results/{build}/tree_raw.nwk",
@@ -58,9 +54,7 @@ rule refine:
     benchmark:
         "benchmarks/{build}/refine.txt",
     params:
-        coalescent = "opt",
-        date_inference = "marginal",
-        clock_filter_iqd = lambda wildcard: config['refine'][wildcard.build],
+        args = lambda w: config["refine"][w.build],
         strain_id = config.get("strain_id_field", "strain"),
     shell:
         r"""
@@ -73,8 +67,5 @@ rule refine:
             --metadata-id-columns {params.strain_id:q} \
             --output-tree {output.tree:q} \
             --output-node-data {output.node_data:q} \
-            --timetree \
-            --coalescent {params.coalescent:q} \
-            --date-confidence \
-            --date-inference {params.date_inference:q} {params.clock_filter_iqd}
+            {params.args}
         """
