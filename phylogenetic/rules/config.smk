@@ -5,6 +5,10 @@ OUTPUTS:
 
     results/run_config.yaml
 """
+def main():
+    write_subsample_config()
+    write_config("results/run_config.yaml")
+
 
 def conditional(option, argument):
     """Used for config-defined arguments whose presence necessitates a command-line option
@@ -25,4 +29,17 @@ def conditional(option, argument):
     raise WorkflowError(f"Workflow function conditional() received an argument value of unexpected type: {type(argument).__name__}")
 
 
-write_config("results/run_config.yaml")
+def write_subsample_config():
+    for build in config["builds"]:
+        if "custom_subsample" in config:
+            section = ["custom_subsample", build]
+        else:
+            section = ["subsample", build]
+        write_config(f"results/{build}/subsample_config.yaml", section=section)
+
+
+try:
+    main()
+except InvalidConfigError as e:
+    print(f"ERROR: {e}", file=sys.stderr)
+    exit(1)
