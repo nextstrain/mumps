@@ -17,25 +17,23 @@ colors:
   color_schemes: ../defaults/color_schemes.tsv
   color_orderings: ../defaults/color_orderings.tsv
 
+# FIXME: use this?
 # Subsampling (points to WA-specific scheme)
 subsampling:
   washington: washington/subsampling.yaml
 
 strain_id_field: "accession"
 
-# ---- Per-build settings (IMPORTANT: strings, not nested dicts) ----
-# Filter: CLI flags appended to augur filter
-filter:
-  # Where the workflow looks for per-build include/exclude lists
-  include: "../washington/include.txt" # To ensure reference genome is in WA dataset
-  exclude: "../defaults/north-america/exclude.txt"
-
-  # Per-build “specific” flags are strings indexed by build name
-  #HAVE to have subsample max
-  washington: >-
-    --subsample-max-sequences 99999
-    --min-date 2006
-    --query "region=='North America' & (MuV_genotype == 'G')"
+# Subsampling
+subsample:
+  washington:
+    samples:
+      all:
+        include: "../washington/include.txt" # To ensure reference genome is in WA dataset
+        exclude: "../defaults/north-america/exclude.txt"
+        # no max_sequences
+        min_date: 2006
+        query: "region=='North America' & (MuV_genotype == 'G')"
 
 # Traits: space-separated column names, as a single string
 traits:
