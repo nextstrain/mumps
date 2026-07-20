@@ -24,12 +24,7 @@ See Augur's usage docs for these commands for more details.
 
 rule filter:
     """
-    Filtering to
-      - various criteria based on the auspice JSON target
-      - from {params.min_date} onwards
-      - excluding strains in {input.exclude}
-      - including strains in {input.include}
-      - minimum genome length of {params.min_length}
+    Filtering sequences
     """
     input:
         sequences = "results/sequences.fasta",
@@ -44,9 +39,7 @@ rule filter:
     benchmark:
         "benchmarks/{build}/filtered.txt",
     params:
-        min_length = config['filter']['min_length'],
-        group_by = config['filter']['group_by'],
-        filter_params = lambda wildcard: config['filter']['specific'][wildcard.build],
+        args = lambda w: config['filter'][w.build],
         strain_id = config.get("strain_id_field", "strain"),
     shell:
         r"""
@@ -60,9 +53,7 @@ rule filter:
             --include {input.include:q} \
             --output-sequences {output.sequences:q} \
             --output-metadata {output.metadata:q} \
-            --min-length {params.min_length:q} \
-            --group-by {params.group_by} \
-            {params.filter_params}
+            {params.args}
         """
 
 rule align:
