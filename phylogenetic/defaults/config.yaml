@@ -28,21 +28,40 @@ reference: "reference.gb"
 # argument strings, but instead using their dedicated YAML config parameters.
 # They can be customized per build by referencing '{build}' in the path.
 
-# https://docs.nextstrain.org/projects/augur/en/stable/usage/cli/filter.html
-filter:
-  exclude: "{build}/exclude.txt"
-  include: "{build}/include.txt"
-  north-america: >-
-    --min-length 8000
-    --group-by country year month MuV_genotype division
-    --subsample-max-sequences 4000
-    --min-date 2006
-    --query "region=='North America' & (MuV_genotype=='G')"
-  global: >-
-    --min-length 8000
-    --group-by country year month MuV_genotype division
-    --subsample-max-sequences 4000
-    --min-date 1950
+# Subsample is different. Instead of an argument string, it takes a YAML
+# configuration which must follow a specific schema.
+#
+# https://docs.nextstrain.org/projects/augur/en/stable/usage/cli/subsample.html#configuration
+subsample:
+  north-america:
+    samples:
+      sample:
+        exclude: "north-america/exclude.txt"
+        include: "north-america/include.txt"
+        min_length: 8000
+        group_by:
+        - country
+        - year
+        - month
+        - MuV_genotype
+        - division
+        max_sequences: 4000
+        min_date: 2006
+        query: "region=='North America' & (MuV_genotype=='G')"
+  global:
+    samples:
+      sample:
+        exclude: "global/exclude.txt"
+        include: "global/include.txt"
+        min_length: 8000
+        group_by:
+        - country
+        - year
+        - month
+        - MuV_genotype
+        - division
+        max_sequences: 4000
+        min_date: 1950
 
 # https://docs.nextstrain.org/projects/augur/en/stable/usage/cli/refine.html
 refine:
