@@ -39,8 +39,8 @@ rule colors:
     """Generate color pallete for color by metadata in auspice"""
     input:
         # Reusing color schemes and ordering from the phylogenetic workflow
-        color_schemes = resolve_config_path(config['colors']['color_schemes'], defaults_dir=f"{workflow.basedir}/../phylogenetic/defaults/"),
-        color_orderings = resolve_config_path(config['colors']['color_orderings'], defaults_dir=f"{workflow.basedir}/../phylogenetic/defaults/"),
+        color_schemes = resolve_config_path(config['colors']['color_schemes']),
+        color_orderings = resolve_config_path(config['colors']['color_orderings']),
         # Generate colors per Nextclade dataset to account for differences in clade nomenclature
         metadata = "results/{build}/filtered.tsv",
     output:
@@ -68,10 +68,10 @@ rule export:
         branch_lengths = "results/{build}/branch_lengths.json",
         traits = "results/{build}/traits.json",
         muts = "results/{build}/muts.json",
-        lat_longs = resolve_config_path(config['export']['lat_longs'], defaults_dir=f"{workflow.basedir}/../phylogenetic/defaults/"),
+        lat_longs = resolve_config_path(config['export']['lat_longs']),
         colors = "results/{build}/colors.tsv",
         auspice_config = resolve_config_path(config['export']['auspice_config']),
-        description = resolve_config_path(config['export']['description'], defaults_dir=f"{workflow.basedir}/../phylogenetic/defaults/"),
+        description = resolve_config_path(config['export']['description']),
     output:
         auspice_json = "auspice/mumps_{build}.json",
     log:
