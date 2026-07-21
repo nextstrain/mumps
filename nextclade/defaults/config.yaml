@@ -48,14 +48,14 @@ traits:
 
 colors:
   # Note: Reusing files from the phylogenetic workflow
-  color_schemes: "color_schemes.tsv"
-  color_orderings: "color_orderings.tsv"
+  color_schemes: "phylogenetic/defaults/color_schemes.tsv"
+  color_orderings: "phylogenetic/defaults/color_orderings.tsv"
 
 export:
   auspice_config: "{build}/auspice_config.json"
   # Note: Reusing files from the phylogenetic workflow
-  lat_longs: "lat_longs.tsv"
-  description: "description.md"
+  lat_longs: "phylogenetic/defaults/lat_longs.tsv"
+  description: "phylogenetic/defaults/description.md"
 
 assemble_dataset:
   reference: "{build}/reference.fasta"
